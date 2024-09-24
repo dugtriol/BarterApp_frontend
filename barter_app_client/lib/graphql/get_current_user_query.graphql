@@ -1,0 +1,10 @@
+query Current {
+    User {
+        id
+        name
+        email
+        phone
+        city
+        mode
+    }
+}

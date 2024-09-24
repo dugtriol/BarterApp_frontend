@@ -1,0 +1,14 @@
+mutation newUser($input: CreateUserInput) {
+  Register(input: $input) {
+    authToken {
+      accessToken
+      expiredAt
+    }
+    user {
+      id
+      email
+      name
+      password
+    }
+  }
+}

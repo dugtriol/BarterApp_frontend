@@ -1,1 +1,0 @@
-# BarterApp_frontend
