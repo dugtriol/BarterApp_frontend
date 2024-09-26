@@ -10,7 +10,7 @@ class BarterApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      initialRoute: mainNavigation.initialRoute(false),
+      initialRoute: mainNavigation.initialRoute(appModel.isAuth),
       routes: mainNavigation.routes,
     );
   }

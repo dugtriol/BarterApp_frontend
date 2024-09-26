@@ -53,8 +53,10 @@ class SignInModel extends ChangeNotifier {
     }
 
     await tokenModel.saveToken(jwtToken);
+    await _apiClient.initAuthClient();
 
-    final user = await _apiClient.getCurrentUser();
+    var user = await _apiClient.getCurrentUser();
+    userModel.setUser(user);
     print('SignInModel - auth - user: $user');
     // userModel.setUser(await user);
 

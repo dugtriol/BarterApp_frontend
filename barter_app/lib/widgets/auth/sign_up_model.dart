@@ -50,6 +50,7 @@ class SignUpModel extends ChangeNotifier {
       _errorMessage = 'Неправильный логин или пароль';
       print(e);
     }
+    // await _apiClient.initAuthClient();
 
     _isSignUpProgress = false;
     if (_errorMessage != null || jwtToken == null) {

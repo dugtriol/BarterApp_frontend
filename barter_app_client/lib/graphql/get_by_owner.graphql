@@ -1,0 +1,13 @@
+query GetByOwner {
+  TransactionsByOwner {
+    id
+    owner
+    buyer
+    product_id_owner
+    product_id_buyer
+    created_at
+    shipping
+    address
+    status
+  }
+}

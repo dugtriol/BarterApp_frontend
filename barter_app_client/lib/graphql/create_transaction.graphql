@@ -1,0 +1,3 @@
+mutation CreateTransaction($input: TransactionCreateInput) {
+  CreateTransaction(input: $input) 
+}

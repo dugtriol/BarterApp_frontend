@@ -1,0 +1,3 @@
+mutation LikeProduct($id: ID!) {
+  Like(product_id: $id) 
+}

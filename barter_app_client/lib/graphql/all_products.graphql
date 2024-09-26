@@ -1,0 +1,14 @@
+query AllProducts {
+  Products {
+    id
+    name
+    description
+    category
+    createdBy {
+      id
+      name
+    }
+    status
+    createdAt
+  }
+}

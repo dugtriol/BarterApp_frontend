@@ -1,0 +1,14 @@
+query ByCategoryAvailable($category: ProductCategory) {
+  GetByCategoryAvailable(category: $category) {
+    id
+    name
+    description
+    category
+    createdBy {
+      id
+      name
+    }
+    status
+    createdAt
+  }
+}

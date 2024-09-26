@@ -1,0 +1,3 @@
+mutation UpdateDeclined($id: ID!) {
+  TransactionUpdateDeclined(transaction_id: $id)
+}

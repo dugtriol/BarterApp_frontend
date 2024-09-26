@@ -1,0 +1,6 @@
+mutation InitProduct($input: CreateProductInput) {
+  CreateProduct(input: $input) {
+    id
+    createdAt
+  }
+}

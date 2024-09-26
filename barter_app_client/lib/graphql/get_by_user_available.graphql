@@ -1,0 +1,13 @@
+query ByUserAvailable {
+  GetByUserAvailableProducts {
+    id
+    name
+    description
+    createdBy {
+      id
+      name
+    }
+    status
+    createdAt
+  }
+}

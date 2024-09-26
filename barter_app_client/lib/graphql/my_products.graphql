@@ -1,0 +1,15 @@
+query MyProducts {
+    User {
+        postedProducts {
+            id
+            name
+            description
+            category
+            image
+            status
+            createdBy {
+                name
+            }
+        }
+    }
+}

@@ -2,16 +2,20 @@ import 'package:barter_app/widgets/auth/sign_in_model.dart';
 import 'package:barter_app/widgets/auth/sign_in_screen.dart';
 import 'package:barter_app/widgets/auth/sign_up_model.dart';
 import 'package:barter_app/widgets/auth/sign_up_widget.dart';
+import 'package:barter_app/widgets/main_screen/main_screen.dart';
+import 'package:barter_app/widgets/my_products/my_product_page/product_page.dart';
+import 'package:barter_app/widgets/my_products/my_products_screen.dart';
+
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
 abstract class MainNavigationRoutes {
   static const auth = '/auth';
   static const mainScreen = '/home';
-  static const calendar = '/home/calendar';
+  // static const calendar = '/home/calendar';
   static const signUp = '/auth/signup';
-  static const taskList = '/home/task_list';
-  static const taskForm = '/home/task_list/task_create';
+  static const myProducts = '/my_products';
+  // static const productPage = '/product_item';
 }
 
 class MainNavigation {
@@ -27,5 +31,8 @@ class MainNavigation {
           child: const SignUpWidget(),
         ),
     MainNavigationRoutes.mainScreen: (context) => const MainScreen(),
+    MainNavigationRoutes.myProducts: (context) => const MyProductsWidget(),
+    // MainNavigationRoutes.productPage: (context) =>
+    //     MyProductPage(product: GMyProductsData_User_postedProducts()),
   };
 }

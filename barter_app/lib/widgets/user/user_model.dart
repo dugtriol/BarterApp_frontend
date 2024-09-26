@@ -1,5 +1,6 @@
-import 'package:barter_app/client/api_client.dart';
+// import 'package:barter_app/client/api_client.dart';
 import 'package:barter_app/entity/user.dart';
+import 'package:barter_app_client/graphql/__generated__/schema.schema.gql.dart';
 import 'package:flutter/material.dart';
 
 class UserModel extends ChangeNotifier {
@@ -8,23 +9,30 @@ class UserModel extends ChangeNotifier {
     super.dispose();
   }
 
-  final _apiClient = ApiClient();
-  User? _user;
+  //   static final Token _instance = Token._internal();
+  // static const FlutterSecureStorage storage = FlutterSecureStorage();
+
+  // factory Token() {
+  //   return _instance;
+  // }
+
+  // Token._internal();
+
+  // final _apiClient = ApiClient();
+
+  static User? _user;
 
   User? get user => _user;
 
-  String? get mode {
-    if (_user!.mode.toString().isEmpty || _user!.mode.toString() == null) {
-      return "Нет данных";
-    }
-    return _user!.mode?.name;
+  GUserMode? get mode {
+    return _user!.mode;
   }
 
   String get id {
     if (_user?.id == null) {
       return "Нет данных";
     }
-    return _user!.id!;
+    return _user!.id;
   }
 
   String get name {
@@ -52,7 +60,7 @@ class UserModel extends ChangeNotifier {
     if (_user?.phone == null) {
       return 'Нет данных';
     }
-    return _user!.city!;
+    return _user!.phone!;
   }
 
   void setUser(User user) {

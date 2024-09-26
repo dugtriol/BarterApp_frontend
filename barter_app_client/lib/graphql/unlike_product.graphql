@@ -1,0 +1,3 @@
+mutation UnlikeProduct($id: ID!) {
+  Unlike(product_id: $id)
+}

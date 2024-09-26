@@ -1,0 +1,3 @@
+mutation UpdateDone($id: ID!) {
+  TransactionUpdateDone(transaction_id: $id)
+}

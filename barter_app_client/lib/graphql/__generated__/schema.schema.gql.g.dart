@@ -10,6 +10,12 @@ const GProductCategory _$gProductCategoryHOME =
     const GProductCategory._('HOME');
 const GProductCategory _$gProductCategoryCLOTHES =
     const GProductCategory._('CLOTHES');
+const GProductCategory _$gProductCategoryCHILDREN =
+    const GProductCategory._('CHILDREN');
+const GProductCategory _$gProductCategorySPORT =
+    const GProductCategory._('SPORT');
+const GProductCategory _$gProductCategoryOTHER =
+    const GProductCategory._('OTHER');
 
 GProductCategory _$gProductCategoryValueOf(String name) {
   switch (name) {
@@ -17,6 +23,12 @@ GProductCategory _$gProductCategoryValueOf(String name) {
       return _$gProductCategoryHOME;
     case 'CLOTHES':
       return _$gProductCategoryCLOTHES;
+    case 'CHILDREN':
+      return _$gProductCategoryCHILDREN;
+    case 'SPORT':
+      return _$gProductCategorySPORT;
+    case 'OTHER':
+      return _$gProductCategoryOTHER;
     default:
       throw new ArgumentError(name);
   }
@@ -26,18 +38,26 @@ final BuiltSet<GProductCategory> _$gProductCategoryValues =
     new BuiltSet<GProductCategory>(const <GProductCategory>[
   _$gProductCategoryHOME,
   _$gProductCategoryCLOTHES,
+  _$gProductCategoryCHILDREN,
+  _$gProductCategorySPORT,
+  _$gProductCategoryOTHER,
 ]);
 
-const GProductStatus _$gProductStatusCREATED =
-    const GProductStatus._('CREATED');
-const GProductStatus _$gProductStatusSOLD = const GProductStatus._('SOLD');
+const GProductStatus _$gProductStatusAVAILABLE =
+    const GProductStatus._('AVAILABLE');
+const GProductStatus _$gProductStatusEXCHANGING =
+    const GProductStatus._('EXCHANGING');
+const GProductStatus _$gProductStatusEXCHANGED =
+    const GProductStatus._('EXCHANGED');
 
 GProductStatus _$gProductStatusValueOf(String name) {
   switch (name) {
-    case 'CREATED':
-      return _$gProductStatusCREATED;
-    case 'SOLD':
-      return _$gProductStatusSOLD;
+    case 'AVAILABLE':
+      return _$gProductStatusAVAILABLE;
+    case 'EXCHANGING':
+      return _$gProductStatusEXCHANGING;
+    case 'EXCHANGED':
+      return _$gProductStatusEXCHANGED;
     default:
       throw new ArgumentError(name);
   }
@@ -45,8 +65,68 @@ GProductStatus _$gProductStatusValueOf(String name) {
 
 final BuiltSet<GProductStatus> _$gProductStatusValues =
     new BuiltSet<GProductStatus>(const <GProductStatus>[
-  _$gProductStatusCREATED,
-  _$gProductStatusSOLD,
+  _$gProductStatusAVAILABLE,
+  _$gProductStatusEXCHANGING,
+  _$gProductStatusEXCHANGED,
+]);
+
+const GTransactionShipping _$gTransactionShippingMEETUP =
+    const GTransactionShipping._('MEETUP');
+const GTransactionShipping _$gTransactionShippingMAIL =
+    const GTransactionShipping._('MAIL');
+const GTransactionShipping _$gTransactionShippingCOURIER =
+    const GTransactionShipping._('COURIER');
+
+GTransactionShipping _$gTransactionShippingValueOf(String name) {
+  switch (name) {
+    case 'MEETUP':
+      return _$gTransactionShippingMEETUP;
+    case 'MAIL':
+      return _$gTransactionShippingMAIL;
+    case 'COURIER':
+      return _$gTransactionShippingCOURIER;
+    default:
+      throw new ArgumentError(name);
+  }
+}
+
+final BuiltSet<GTransactionShipping> _$gTransactionShippingValues =
+    new BuiltSet<GTransactionShipping>(const <GTransactionShipping>[
+  _$gTransactionShippingMEETUP,
+  _$gTransactionShippingMAIL,
+  _$gTransactionShippingCOURIER,
+]);
+
+const GTransactionStatus _$gTransactionStatusCREATED =
+    const GTransactionStatus._('CREATED');
+const GTransactionStatus _$gTransactionStatusONGOING =
+    const GTransactionStatus._('ONGOING');
+const GTransactionStatus _$gTransactionStatusDONE =
+    const GTransactionStatus._('DONE');
+const GTransactionStatus _$gTransactionStatusDECLINED =
+    const GTransactionStatus._('DECLINED');
+
+GTransactionStatus _$gTransactionStatusValueOf(String name) {
+  switch (name) {
+    case 'CREATED':
+      return _$gTransactionStatusCREATED;
+    case 'ONGOING':
+      return _$gTransactionStatusONGOING;
+    case 'DONE':
+      return _$gTransactionStatusDONE;
+    case 'DECLINED':
+      return _$gTransactionStatusDECLINED;
+    default:
+      throw new ArgumentError(name);
+  }
+}
+
+final BuiltSet<GTransactionStatus> _$gTransactionStatusValues =
+    new BuiltSet<GTransactionStatus>(const <GTransactionStatus>[
+  _$gTransactionStatusCREATED,
+  _$gTransactionStatusONGOING,
+  _$gTransactionStatusDONE,
+  _$gTransactionStatusDECLINED,
 ]);
 
 const GUserMode _$gUserModeCLIENT = const GUserMode._('CLIENT');
@@ -75,6 +155,14 @@ Serializer<GProductCategory> _$gProductCategorySerializer =
     new _$GProductCategorySerializer();
 Serializer<GProductStatus> _$gProductStatusSerializer =
     new _$GProductStatusSerializer();
+Serializer<GTransactionShipping> _$gTransactionShippingSerializer =
+    new _$GTransactionShippingSerializer();
+Serializer<GTransactionStatus> _$gTransactionStatusSerializer =
+    new _$GTransactionStatusSerializer();
+Serializer<GTransactionCreateInput> _$gTransactionCreateInputSerializer =
+    new _$GTransactionCreateInputSerializer();
+Serializer<GChangeStatusInput> _$gChangeStatusInputSerializer =
+    new _$GChangeStatusInputSerializer();
 Serializer<GLoginInput> _$gLoginInputSerializer = new _$GLoginInputSerializer();
 Serializer<GCreateUserInput> _$gCreateUserInputSerializer =
     new _$GCreateUserInputSerializer();
@@ -181,6 +269,167 @@ class _$GProductStatusSerializer
   GProductStatus deserialize(Serializers serializers, Object serialized,
           {FullType specifiedType = FullType.unspecified}) =>
       GProductStatus.valueOf(serialized as String);
+}
+
+class _$GTransactionShippingSerializer
+    implements PrimitiveSerializer<GTransactionShipping> {
+  @override
+  final Iterable<Type> types = const <Type>[GTransactionShipping];
+  @override
+  final String wireName = 'GTransactionShipping';
+
+  @override
+  Object serialize(Serializers serializers, GTransactionShipping object,
+          {FullType specifiedType = FullType.unspecified}) =>
+      object.name;
+
+  @override
+  GTransactionShipping deserialize(Serializers serializers, Object serialized,
+          {FullType specifiedType = FullType.unspecified}) =>
+      GTransactionShipping.valueOf(serialized as String);
+}
+
+class _$GTransactionStatusSerializer
+    implements PrimitiveSerializer<GTransactionStatus> {
+  @override
+  final Iterable<Type> types = const <Type>[GTransactionStatus];
+  @override
+  final String wireName = 'GTransactionStatus';
+
+  @override
+  Object serialize(Serializers serializers, GTransactionStatus object,
+          {FullType specifiedType = FullType.unspecified}) =>
+      object.name;
+
+  @override
+  GTransactionStatus deserialize(Serializers serializers, Object serialized,
+          {FullType specifiedType = FullType.unspecified}) =>
+      GTransactionStatus.valueOf(serialized as String);
+}
+
+class _$GTransactionCreateInputSerializer
+    implements StructuredSerializer<GTransactionCreateInput> {
+  @override
+  final Iterable<Type> types = const [
+    GTransactionCreateInput,
+    _$GTransactionCreateInput
+  ];
+  @override
+  final String wireName = 'GTransactionCreateInput';
+
+  @override
+  Iterable<Object?> serialize(
+      Serializers serializers, GTransactionCreateInput object,
+      {FullType specifiedType = FullType.unspecified}) {
+    final result = <Object?>[
+      'owner',
+      serializers.serialize(object.owner,
+          specifiedType: const FullType(String)),
+      'product_id_owner',
+      serializers.serialize(object.product_id_owner,
+          specifiedType: const FullType(String)),
+      'product_id_buyer',
+      serializers.serialize(object.product_id_buyer,
+          specifiedType: const FullType(String)),
+      'shipping',
+      serializers.serialize(object.shipping,
+          specifiedType: const FullType(GTransactionShipping)),
+      'address',
+      serializers.serialize(object.address,
+          specifiedType: const FullType(String)),
+    ];
+
+    return result;
+  }
+
+  @override
+  GTransactionCreateInput deserialize(
+      Serializers serializers, Iterable<Object?> serialized,
+      {FullType specifiedType = FullType.unspecified}) {
+    final result = new GTransactionCreateInputBuilder();
+
+    final iterator = serialized.iterator;
+    while (iterator.moveNext()) {
+      final key = iterator.current! as String;
+      iterator.moveNext();
+      final Object? value = iterator.current;
+      switch (key) {
+        case 'owner':
+          result.owner = serializers.deserialize(value,
+              specifiedType: const FullType(String))! as String;
+          break;
+        case 'product_id_owner':
+          result.product_id_owner = serializers.deserialize(value,
+              specifiedType: const FullType(String))! as String;
+          break;
+        case 'product_id_buyer':
+          result.product_id_buyer = serializers.deserialize(value,
+              specifiedType: const FullType(String))! as String;
+          break;
+        case 'shipping':
+          result.shipping = serializers.deserialize(value,
+                  specifiedType: const FullType(GTransactionShipping))!
+              as GTransactionShipping;
+          break;
+        case 'address':
+          result.address = serializers.deserialize(value,
+              specifiedType: const FullType(String))! as String;
+          break;
+      }
+    }
+
+    return result.build();
+  }
+}
+
+class _$GChangeStatusInputSerializer
+    implements StructuredSerializer<GChangeStatusInput> {
+  @override
+  final Iterable<Type> types = const [GChangeStatusInput, _$GChangeStatusInput];
+  @override
+  final String wireName = 'GChangeStatusInput';
+
+  @override
+  Iterable<Object?> serialize(
+      Serializers serializers, GChangeStatusInput object,
+      {FullType specifiedType = FullType.unspecified}) {
+    final result = <Object?>[
+      'id',
+      serializers.serialize(object.id, specifiedType: const FullType(String)),
+      'status',
+      serializers.serialize(object.status,
+          specifiedType: const FullType(GTransactionStatus)),
+    ];
+
+    return result;
+  }
+
+  @override
+  GChangeStatusInput deserialize(
+      Serializers serializers, Iterable<Object?> serialized,
+      {FullType specifiedType = FullType.unspecified}) {
+    final result = new GChangeStatusInputBuilder();
+
+    final iterator = serialized.iterator;
+    while (iterator.moveNext()) {
+      final key = iterator.current! as String;
+      iterator.moveNext();
+      final Object? value = iterator.current;
+      switch (key) {
+        case 'id':
+          result.id = serializers.deserialize(value,
+              specifiedType: const FullType(String))! as String;
+          break;
+        case 'status':
+          result.status = serializers.deserialize(value,
+                  specifiedType: const FullType(GTransactionStatus))!
+              as GTransactionStatus;
+          break;
+      }
+    }
+
+    return result.build();
+  }
 }
 
 class _$GLoginInputSerializer implements StructuredSerializer<GLoginInput> {
@@ -322,168 +571,6 @@ class _$GUserModeSerializer implements PrimitiveSerializer<GUserMode> {
       GUserMode.valueOf(serialized as String);
 }
 
-class _$GTime extends GTime {
-  @override
-  final String value;
-
-  factory _$GTime([void Function(GTimeBuilder)? updates]) =>
-      (new GTimeBuilder()..update(updates))._build();
-
-  _$GTime._({required this.value}) : super._() {
-    BuiltValueNullFieldError.checkNotNull(value, r'GTime', 'value');
-  }
-
-  @override
-  GTime rebuild(void Function(GTimeBuilder) updates) =>
-      (toBuilder()..update(updates)).build();
-
-  @override
-  GTimeBuilder toBuilder() => new GTimeBuilder()..replace(this);
-
-  @override
-  bool operator ==(Object other) {
-    if (identical(other, this)) return true;
-    return other is GTime && value == other.value;
-  }
-
-  @override
-  int get hashCode {
-    var _$hash = 0;
-    _$hash = $jc(_$hash, value.hashCode);
-    _$hash = $jf(_$hash);
-    return _$hash;
-  }
-
-  @override
-  String toString() {
-    return (newBuiltValueToStringHelper(r'GTime')..add('value', value))
-        .toString();
-  }
-}
-
-class GTimeBuilder implements Builder<GTime, GTimeBuilder> {
-  _$GTime? _$v;
-
-  String? _value;
-  String? get value => _$this._value;
-  set value(String? value) => _$this._value = value;
-
-  GTimeBuilder();
-
-  GTimeBuilder get _$this {
-    final $v = _$v;
-    if ($v != null) {
-      _value = $v.value;
-      _$v = null;
-    }
-    return this;
-  }
-
-  @override
-  void replace(GTime other) {
-    ArgumentError.checkNotNull(other, 'other');
-    _$v = other as _$GTime;
-  }
-
-  @override
-  void update(void Function(GTimeBuilder)? updates) {
-    if (updates != null) updates(this);
-  }
-
-  @override
-  GTime build() => _build();
-
-  _$GTime _build() {
-    final _$result = _$v ??
-        new _$GTime._(
-            value: BuiltValueNullFieldError.checkNotNull(
-                value, r'GTime', 'value'));
-    replace(_$result);
-    return _$result;
-  }
-}
-
-class _$GDateTime extends GDateTime {
-  @override
-  final String value;
-
-  factory _$GDateTime([void Function(GDateTimeBuilder)? updates]) =>
-      (new GDateTimeBuilder()..update(updates))._build();
-
-  _$GDateTime._({required this.value}) : super._() {
-    BuiltValueNullFieldError.checkNotNull(value, r'GDateTime', 'value');
-  }
-
-  @override
-  GDateTime rebuild(void Function(GDateTimeBuilder) updates) =>
-      (toBuilder()..update(updates)).build();
-
-  @override
-  GDateTimeBuilder toBuilder() => new GDateTimeBuilder()..replace(this);
-
-  @override
-  bool operator ==(Object other) {
-    if (identical(other, this)) return true;
-    return other is GDateTime && value == other.value;
-  }
-
-  @override
-  int get hashCode {
-    var _$hash = 0;
-    _$hash = $jc(_$hash, value.hashCode);
-    _$hash = $jf(_$hash);
-    return _$hash;
-  }
-
-  @override
-  String toString() {
-    return (newBuiltValueToStringHelper(r'GDateTime')..add('value', value))
-        .toString();
-  }
-}
-
-class GDateTimeBuilder implements Builder<GDateTime, GDateTimeBuilder> {
-  _$GDateTime? _$v;
-
-  String? _value;
-  String? get value => _$this._value;
-  set value(String? value) => _$this._value = value;
-
-  GDateTimeBuilder();
-
-  GDateTimeBuilder get _$this {
-    final $v = _$v;
-    if ($v != null) {
-      _value = $v.value;
-      _$v = null;
-    }
-    return this;
-  }
-
-  @override
-  void replace(GDateTime other) {
-    ArgumentError.checkNotNull(other, 'other');
-    _$v = other as _$GDateTime;
-  }
-
-  @override
-  void update(void Function(GDateTimeBuilder)? updates) {
-    if (updates != null) updates(this);
-  }
-
-  @override
-  GDateTime build() => _build();
-
-  _$GDateTime _build() {
-    final _$result = _$v ??
-        new _$GDateTime._(
-            value: BuiltValueNullFieldError.checkNotNull(
-                value, r'GDateTime', 'value'));
-    replace(_$result);
-    return _$result;
-  }
-}
-
 class _$GCreateProductInput extends GCreateProductInput {
   @override
   final GProductCategory category;
@@ -613,6 +700,345 @@ class GCreateProductInputBuilder
                 description, r'GCreateProductInput', 'description'),
             image: BuiltValueNullFieldError.checkNotNull(
                 image, r'GCreateProductInput', 'image'));
+    replace(_$result);
+    return _$result;
+  }
+}
+
+class _$GDateTime extends GDateTime {
+  @override
+  final String value;
+
+  factory _$GDateTime([void Function(GDateTimeBuilder)? updates]) =>
+      (new GDateTimeBuilder()..update(updates))._build();
+
+  _$GDateTime._({required this.value}) : super._() {
+    BuiltValueNullFieldError.checkNotNull(value, r'GDateTime', 'value');
+  }
+
+  @override
+  GDateTime rebuild(void Function(GDateTimeBuilder) updates) =>
+      (toBuilder()..update(updates)).build();
+
+  @override
+  GDateTimeBuilder toBuilder() => new GDateTimeBuilder()..replace(this);
+
+  @override
+  bool operator ==(Object other) {
+    if (identical(other, this)) return true;
+    return other is GDateTime && value == other.value;
+  }
+
+  @override
+  int get hashCode {
+    var _$hash = 0;
+    _$hash = $jc(_$hash, value.hashCode);
+    _$hash = $jf(_$hash);
+    return _$hash;
+  }
+
+  @override
+  String toString() {
+    return (newBuiltValueToStringHelper(r'GDateTime')..add('value', value))
+        .toString();
+  }
+}
+
+class GDateTimeBuilder implements Builder<GDateTime, GDateTimeBuilder> {
+  _$GDateTime? _$v;
+
+  String? _value;
+  String? get value => _$this._value;
+  set value(String? value) => _$this._value = value;
+
+  GDateTimeBuilder();
+
+  GDateTimeBuilder get _$this {
+    final $v = _$v;
+    if ($v != null) {
+      _value = $v.value;
+      _$v = null;
+    }
+    return this;
+  }
+
+  @override
+  void replace(GDateTime other) {
+    ArgumentError.checkNotNull(other, 'other');
+    _$v = other as _$GDateTime;
+  }
+
+  @override
+  void update(void Function(GDateTimeBuilder)? updates) {
+    if (updates != null) updates(this);
+  }
+
+  @override
+  GDateTime build() => _build();
+
+  _$GDateTime _build() {
+    final _$result = _$v ??
+        new _$GDateTime._(
+            value: BuiltValueNullFieldError.checkNotNull(
+                value, r'GDateTime', 'value'));
+    replace(_$result);
+    return _$result;
+  }
+}
+
+class _$GTransactionCreateInput extends GTransactionCreateInput {
+  @override
+  final String owner;
+  @override
+  final String product_id_owner;
+  @override
+  final String product_id_buyer;
+  @override
+  final GTransactionShipping shipping;
+  @override
+  final String address;
+
+  factory _$GTransactionCreateInput(
+          [void Function(GTransactionCreateInputBuilder)? updates]) =>
+      (new GTransactionCreateInputBuilder()..update(updates))._build();
+
+  _$GTransactionCreateInput._(
+      {required this.owner,
+      required this.product_id_owner,
+      required this.product_id_buyer,
+      required this.shipping,
+      required this.address})
+      : super._() {
+    BuiltValueNullFieldError.checkNotNull(
+        owner, r'GTransactionCreateInput', 'owner');
+    BuiltValueNullFieldError.checkNotNull(
+        product_id_owner, r'GTransactionCreateInput', 'product_id_owner');
+    BuiltValueNullFieldError.checkNotNull(
+        product_id_buyer, r'GTransactionCreateInput', 'product_id_buyer');
+    BuiltValueNullFieldError.checkNotNull(
+        shipping, r'GTransactionCreateInput', 'shipping');
+    BuiltValueNullFieldError.checkNotNull(
+        address, r'GTransactionCreateInput', 'address');
+  }
+
+  @override
+  GTransactionCreateInput rebuild(
+          void Function(GTransactionCreateInputBuilder) updates) =>
+      (toBuilder()..update(updates)).build();
+
+  @override
+  GTransactionCreateInputBuilder toBuilder() =>
+      new GTransactionCreateInputBuilder()..replace(this);
+
+  @override
+  bool operator ==(Object other) {
+    if (identical(other, this)) return true;
+    return other is GTransactionCreateInput &&
+        owner == other.owner &&
+        product_id_owner == other.product_id_owner &&
+        product_id_buyer == other.product_id_buyer &&
+        shipping == other.shipping &&
+        address == other.address;
+  }
+
+  @override
+  int get hashCode {
+    var _$hash = 0;
+    _$hash = $jc(_$hash, owner.hashCode);
+    _$hash = $jc(_$hash, product_id_owner.hashCode);
+    _$hash = $jc(_$hash, product_id_buyer.hashCode);
+    _$hash = $jc(_$hash, shipping.hashCode);
+    _$hash = $jc(_$hash, address.hashCode);
+    _$hash = $jf(_$hash);
+    return _$hash;
+  }
+
+  @override
+  String toString() {
+    return (newBuiltValueToStringHelper(r'GTransactionCreateInput')
+          ..add('owner', owner)
+          ..add('product_id_owner', product_id_owner)
+          ..add('product_id_buyer', product_id_buyer)
+          ..add('shipping', shipping)
+          ..add('address', address))
+        .toString();
+  }
+}
+
+class GTransactionCreateInputBuilder
+    implements
+        Builder<GTransactionCreateInput, GTransactionCreateInputBuilder> {
+  _$GTransactionCreateInput? _$v;
+
+  String? _owner;
+  String? get owner => _$this._owner;
+  set owner(String? owner) => _$this._owner = owner;
+
+  String? _product_id_owner;
+  String? get product_id_owner => _$this._product_id_owner;
+  set product_id_owner(String? product_id_owner) =>
+      _$this._product_id_owner = product_id_owner;
+
+  String? _product_id_buyer;
+  String? get product_id_buyer => _$this._product_id_buyer;
+  set product_id_buyer(String? product_id_buyer) =>
+      _$this._product_id_buyer = product_id_buyer;
+
+  GTransactionShipping? _shipping;
+  GTransactionShipping? get shipping => _$this._shipping;
+  set shipping(GTransactionShipping? shipping) => _$this._shipping = shipping;
+
+  String? _address;
+  String? get address => _$this._address;
+  set address(String? address) => _$this._address = address;
+
+  GTransactionCreateInputBuilder();
+
+  GTransactionCreateInputBuilder get _$this {
+    final $v = _$v;
+    if ($v != null) {
+      _owner = $v.owner;
+      _product_id_owner = $v.product_id_owner;
+      _product_id_buyer = $v.product_id_buyer;
+      _shipping = $v.shipping;
+      _address = $v.address;
+      _$v = null;
+    }
+    return this;
+  }
+
+  @override
+  void replace(GTransactionCreateInput other) {
+    ArgumentError.checkNotNull(other, 'other');
+    _$v = other as _$GTransactionCreateInput;
+  }
+
+  @override
+  void update(void Function(GTransactionCreateInputBuilder)? updates) {
+    if (updates != null) updates(this);
+  }
+
+  @override
+  GTransactionCreateInput build() => _build();
+
+  _$GTransactionCreateInput _build() {
+    final _$result = _$v ??
+        new _$GTransactionCreateInput._(
+            owner: BuiltValueNullFieldError.checkNotNull(
+                owner, r'GTransactionCreateInput', 'owner'),
+            product_id_owner: BuiltValueNullFieldError.checkNotNull(
+                product_id_owner,
+                r'GTransactionCreateInput',
+                'product_id_owner'),
+            product_id_buyer: BuiltValueNullFieldError.checkNotNull(
+                product_id_buyer,
+                r'GTransactionCreateInput',
+                'product_id_buyer'),
+            shipping: BuiltValueNullFieldError.checkNotNull(
+                shipping, r'GTransactionCreateInput', 'shipping'),
+            address: BuiltValueNullFieldError.checkNotNull(
+                address, r'GTransactionCreateInput', 'address'));
+    replace(_$result);
+    return _$result;
+  }
+}
+
+class _$GChangeStatusInput extends GChangeStatusInput {
+  @override
+  final String id;
+  @override
+  final GTransactionStatus status;
+
+  factory _$GChangeStatusInput(
+          [void Function(GChangeStatusInputBuilder)? updates]) =>
+      (new GChangeStatusInputBuilder()..update(updates))._build();
+
+  _$GChangeStatusInput._({required this.id, required this.status}) : super._() {
+    BuiltValueNullFieldError.checkNotNull(id, r'GChangeStatusInput', 'id');
+    BuiltValueNullFieldError.checkNotNull(
+        status, r'GChangeStatusInput', 'status');
+  }
+
+  @override
+  GChangeStatusInput rebuild(
+          void Function(GChangeStatusInputBuilder) updates) =>
+      (toBuilder()..update(updates)).build();
+
+  @override
+  GChangeStatusInputBuilder toBuilder() =>
+      new GChangeStatusInputBuilder()..replace(this);
+
+  @override
+  bool operator ==(Object other) {
+    if (identical(other, this)) return true;
+    return other is GChangeStatusInput &&
+        id == other.id &&
+        status == other.status;
+  }
+
+  @override
+  int get hashCode {
+    var _$hash = 0;
+    _$hash = $jc(_$hash, id.hashCode);
+    _$hash = $jc(_$hash, status.hashCode);
+    _$hash = $jf(_$hash);
+    return _$hash;
+  }
+
+  @override
+  String toString() {
+    return (newBuiltValueToStringHelper(r'GChangeStatusInput')
+          ..add('id', id)
+          ..add('status', status))
+        .toString();
+  }
+}
+
+class GChangeStatusInputBuilder
+    implements Builder<GChangeStatusInput, GChangeStatusInputBuilder> {
+  _$GChangeStatusInput? _$v;
+
+  String? _id;
+  String? get id => _$this._id;
+  set id(String? id) => _$this._id = id;
+
+  GTransactionStatus? _status;
+  GTransactionStatus? get status => _$this._status;
+  set status(GTransactionStatus? status) => _$this._status = status;
+
+  GChangeStatusInputBuilder();
+
+  GChangeStatusInputBuilder get _$this {
+    final $v = _$v;
+    if ($v != null) {
+      _id = $v.id;
+      _status = $v.status;
+      _$v = null;
+    }
+    return this;
+  }
+
+  @override
+  void replace(GChangeStatusInput other) {
+    ArgumentError.checkNotNull(other, 'other');
+    _$v = other as _$GChangeStatusInput;
+  }
+
+  @override
+  void update(void Function(GChangeStatusInputBuilder)? updates) {
+    if (updates != null) updates(this);
+  }
+
+  @override
+  GChangeStatusInput build() => _build();
+
+  _$GChangeStatusInput _build() {
+    final _$result = _$v ??
+        new _$GChangeStatusInput._(
+            id: BuiltValueNullFieldError.checkNotNull(
+                id, r'GChangeStatusInput', 'id'),
+            status: BuiltValueNullFieldError.checkNotNull(
+                status, r'GChangeStatusInput', 'status'));
     replace(_$result);
     return _$result;
   }
