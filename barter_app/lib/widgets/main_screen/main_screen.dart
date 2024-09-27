@@ -1,5 +1,7 @@
 import 'package:barter_app/widgets/all_products/all_products_model.dart';
 import 'package:barter_app/widgets/all_products/all_products_screen.dart';
+import 'package:barter_app/widgets/my_barters/my_group_barters_widget.dart';
+import 'package:barter_app/widgets/my_group_products/my_group_products_widget.dart';
 import 'package:barter_app/widgets/my_products/my_product_model.dart';
 import 'package:barter_app/widgets/my_products/my_products_screen.dart';
 import 'package:barter_app/widgets/profile/profile_screen.dart';
@@ -36,10 +38,12 @@ class _MainScreenState extends State<MainScreen> {
             create: (context) => AllProductsModel(),
             child: AllProductsScreen(),
           ),
-          ChangeNotifierProvider(
-            create: (context) => MyProductModel(),
-            child: MyProductsWidget(),
-          ),
+          // ChangeNotifierProvider(
+          //   create: (context) => MyProductModel(),
+          //   child: MyProductsWidget(),
+          // ),
+          MyGroupProductsWidget(),
+          MyGroupBarters(),
           ProfileScreenWidget(),
         ],
       ),
@@ -52,6 +56,10 @@ class _MainScreenState extends State<MainScreen> {
           BottomNavigationBarItem(
             icon: Icon(Icons.store),
             label: "Мои товары",
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(Icons.change_circle),
+            label: "Обмены",
           ),
           BottomNavigationBarItem(
             icon: Icon(Icons.person),

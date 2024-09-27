@@ -9,6 +9,8 @@ import 'package:barter_app_client/graphql/__generated__/create_product.data.gql.
 import 'package:barter_app_client/graphql/__generated__/create_product.req.gql.dart';
 import 'package:barter_app_client/graphql/__generated__/create_transaction.req.gql.dart';
 import 'package:barter_app_client/graphql/__generated__/current_user.req.gql.dart';
+import 'package:barter_app_client/graphql/__generated__/get_archive.data.gql.dart';
+import 'package:barter_app_client/graphql/__generated__/get_archive.req.gql.dart';
 import 'package:barter_app_client/graphql/__generated__/get_by_buyer.data.gql.dart';
 import 'package:barter_app_client/graphql/__generated__/get_by_buyer.req.gql.dart';
 import 'package:barter_app_client/graphql/__generated__/get_by_category_available.data.gql.dart';
@@ -17,6 +19,12 @@ import 'package:barter_app_client/graphql/__generated__/get_by_owner.data.gql.da
 import 'package:barter_app_client/graphql/__generated__/get_by_owner.req.gql.dart';
 import 'package:barter_app_client/graphql/__generated__/get_by_user_available.data.gql.dart';
 import 'package:barter_app_client/graphql/__generated__/get_by_user_available.req.gql.dart';
+import 'package:barter_app_client/graphql/__generated__/get_created_transactions.data.gql.dart';
+import 'package:barter_app_client/graphql/__generated__/get_created_transactions.req.gql.dart';
+import 'package:barter_app_client/graphql/__generated__/get_ongoing.data.gql.dart';
+import 'package:barter_app_client/graphql/__generated__/get_ongoing.req.gql.dart';
+import 'package:barter_app_client/graphql/__generated__/get_product.data.gql.dart';
+import 'package:barter_app_client/graphql/__generated__/get_product.req.gql.dart';
 import 'package:barter_app_client/graphql/__generated__/like_product.req.gql.dart';
 
 import 'package:barter_app_client/graphql/__generated__/login_user.req.gql.dart';
@@ -84,6 +92,7 @@ class ApiClient {
   }
 
   Future<User> getCurrentUser() async {
+    await initAuthClient();
     var req = GCurrentReq();
     var stream = client.request(req);
 
@@ -156,6 +165,7 @@ class ApiClient {
   }
 
   Future<List<GAllProductsData_Products>> allProducts() async {
+    await initAuthClient();
     print('api - allProducts');
     var req = GAllProductsReq();
     var stream = client.request(req);
@@ -164,30 +174,33 @@ class ApiClient {
     List<GAllProductsData_Products>? res = [];
     if (event.data != null) {
       res = event.data?.Products?.asList();
-      print('List<GAllProductsData_Products> $res');
+      // print('List<GAllProductsData_Products> $res');
     }
     return res!;
   }
 
   Future<GInitProductData_CreateProduct> createProduct({
     required String name,
-    required String category,
+    required GProductCategory category,
     required String description,
     required String image,
   }) async {
+    await initAuthClient();
     print('api - createProduct');
     var req = GInitProductReq((b) => b
       ..vars.input.name = name
-      ..vars.input.category = GProductCategory.valueOf(category)
+      ..vars.input.category = category
       ..vars.input.description = description
       ..vars.input.image = image);
     var stream = client.request(req);
     var event = await stream.first;
 
     GInitProductData_CreateProduct? res;
+    // print('event.data: ${event}');
     if (event.data != null) {
       res = event.data?.CreateProduct;
-      print('GInitProductData_CreateProduct $res');
+      // print('GInitProductData_CreateProduct ${res}');
+      // print('event.data: ${event.data}');
     }
     return res!;
   }
@@ -199,6 +212,7 @@ class ApiClient {
     required GTransactionShipping shipping,
     required String address,
   }) async {
+    await initAuthClient();
     print('api - createTransaction');
     var req = GCreateTransactionReq((b) => b
       ..vars.input.owner = owner
@@ -219,6 +233,7 @@ class ApiClient {
 
   Future<List<GGetByBuyerData_TransactionByBuyer>>
       getTransactionByBuyer() async {
+    await initAuthClient();
     print('api - getTransactionByBuyer');
     var req = GGetByBuyerReq();
     var stream = client.request(req);
@@ -234,11 +249,12 @@ class ApiClient {
 
   Future<List<GGetByOwnerData_TransactionsByOwner>>
       getTransactionByOwner() async {
+    await initAuthClient();
     print('api - getTransactionByOwner');
     var req = GGetByOwnerReq();
     var stream = client.request(req);
     var event = await stream.first;
-
+    // print('api - getTransactionByOwner - event.data ${event.data}');
     List<GGetByOwnerData_TransactionsByOwner>? res = [];
     if (event.data != null) {
       res = event.data?.TransactionsByOwner?.toList();
@@ -258,13 +274,14 @@ class ApiClient {
     List<GByCategoryAvailableData_GetByCategoryAvailable>? res = [];
     if (event.data != null) {
       res = event.data?.GetByCategoryAvailable?.toList();
-      print('api - getByCategoryAvailable $res');
+      // print('api - getByCategoryAvailable $res');
     }
     return res!;
   }
 
   Future<List<GByUserAvailableData_GetByUserAvailableProducts>>
       getByUserAvailable() async {
+    await initAuthClient();
     print('api - getByUserAvailable');
     var req = GByUserAvailableReq();
     var stream = client.request(req);
@@ -281,6 +298,7 @@ class ApiClient {
   Future<String> likeProduct({
     required String id,
   }) async {
+    await initAuthClient();
     print('api - likeProduct');
     var req = GLikeProductReq((b) => b..vars.id = id);
     var stream = client.request(req);
@@ -297,6 +315,7 @@ class ApiClient {
   Future<bool> unlikeProduct({
     required String id,
   }) async {
+    await initAuthClient();
     print('api - unlikeProduct');
     var req = GUnlikeProductReq((b) => b..vars.id = id);
     var stream = client.request(req);
@@ -313,6 +332,7 @@ class ApiClient {
   Future<bool> updateTransactionDeclined({
     required String id,
   }) async {
+    await initAuthClient();
     print('api - updateTransactionDeclined');
     var req = GUpdateDeclinedReq((b) => b..vars.id = id);
     var stream = client.request(req);
@@ -329,6 +349,7 @@ class ApiClient {
   Future<bool> updateTransactionDone({
     required String id,
   }) async {
+    await initAuthClient();
     print('api - updateTransactionDone');
     var req = GUpdateDoneReq((b) => b..vars.id = id);
     var stream = client.request(req);
@@ -345,6 +366,7 @@ class ApiClient {
   Future<bool> updateTransactionOngoing({
     required String id,
   }) async {
+    await initAuthClient();
     print('api - updateTransactionOngoing');
     var req = GUpdateOngoingReq((b) => b..vars.id = id);
     var stream = client.request(req);
@@ -353,6 +375,66 @@ class ApiClient {
     bool? res;
     if (event.data != null) {
       res = event.data?.TransactionUpdateOngoing;
+      print('output $res');
+    }
+    return res!;
+  }
+
+  Future<List<GGetCreatedData_GetCreated>> getTransactionCreated() async {
+    await initAuthClient();
+    print('api - getTransactionCeated');
+    var req = GGetCreatedReq();
+    var stream = client.request(req);
+    var event = await stream.first;
+    // print('api - getTransactionByOwner - event.data ${event.data}');
+    List<GGetCreatedData_GetCreated>? res = [];
+    if (event.data != null) {
+      res = event.data?.GetCreated?.toList();
+      print('output $res');
+    }
+    return res!;
+  }
+
+  Future<List<GGetOngoingData_GetOngoing>> getTransactionOngoing() async {
+    await initAuthClient();
+    print('api - getTransactionOngoing');
+    var req = GGetOngoingReq();
+    var stream = client.request(req);
+    var event = await stream.first;
+    // print('api - getTransactionByOwner - event.data ${event.data}');
+    List<GGetOngoingData_GetOngoing>? res = [];
+    if (event.data != null) {
+      res = event.data?.GetOngoing?.toList();
+      print('output $res');
+    }
+    return res!;
+  }
+
+  Future<List<GGetArchiveData_GetArchive>> getTransactionArchive() async {
+    await initAuthClient();
+    print('api - getTransactionArchive');
+    var req = GGetArchiveReq();
+    var stream = client.request(req);
+    var event = await stream.first;
+    // print('api - getTransactionByOwner - event.data ${event.data}');
+    List<GGetArchiveData_GetArchive>? res = [];
+    if (event.data != null) {
+      res = event.data?.GetArchive?.toList();
+      print('output $res');
+    }
+    return res!;
+  }
+
+  Future<GGetProductData_Product> getProduct({required String id}) async {
+    await initAuthClient();
+    print('api - getTransactionArchive');
+    var req = GGetProductReq((b) => b..vars.id = id);
+    var stream = client.request(req);
+    var event = await stream.first;
+    // print('api - getTransactionByOwner - event.data ${event.data}');
+    GGetProductData_Product? res;
+    if (event.data != null) {
+      res = event.data?.Product;
       print('output $res');
     }
     return res!;

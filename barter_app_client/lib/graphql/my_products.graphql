@@ -8,6 +8,7 @@ query MyProducts {
             image
             status
             createdBy {
+                id
                 name
             }
         }

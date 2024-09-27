@@ -1,4 +1,5 @@
 import 'package:barter_app/auth%20/auth_token.dart';
+import 'package:barter_app/navigation/main_navigation.dart';
 import 'package:barter_app/widgets/app_bar/home_app_bar.dart';
 import 'package:barter_app/widgets/user/user_model.dart';
 import 'package:flutter/material.dart';
@@ -11,6 +12,7 @@ class ProfileScreenWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     final modelUser = context.read<UserModel>();
     return Scaffold(
+      appBar: AppBar(title: HomeAppBar()),
       body: Container(
         child: GestureDetector(
           onTap: () {
@@ -18,7 +20,6 @@ class ProfileScreenWidget extends StatelessWidget {
           },
           child: ListView(
             children: [
-              HomeAppBar(),
               Container(
                 padding: const EdgeInsets.only(left: 15, right: 15, top: 60),
                 child: Column(
@@ -40,8 +41,8 @@ class ProfileScreenWidget extends StatelessWidget {
                     } catch (e) {
                       print(e);
                     }
-                    // Navigator.of(context)
-                    //     .pushReplacementNamed(MainNavigationRoutes.auth);
+                    Navigator.of(context).pushNamedAndRemoveUntil(
+                        MainNavigationRoutes.auth, (route) => false);
                   },
                   child: const Text(
                     'Выйти из аккаунта',
@@ -76,7 +77,7 @@ class ProfileScreenWidget extends StatelessWidget {
           hintText: placeholder,
           hintStyle: const TextStyle(
             fontSize: 16,
-            fontWeight: FontWeight.bold,
+            fontWeight: FontWeight.normal,
             color: Colors.black,
           ),
         ),

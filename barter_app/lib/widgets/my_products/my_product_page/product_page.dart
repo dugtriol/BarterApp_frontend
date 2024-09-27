@@ -1,8 +1,10 @@
 import 'package:barter_app/widgets/my_products/my_product_page/product_app_bar.dart';
 import 'package:barter_app/widgets/my_products/my_product_page/product_bottom_bar.dart';
+import 'package:barter_app/widgets/user/user_model.dart';
 import 'package:barter_app_client/graphql/__generated__/my_products.data.gql.dart';
 
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 class MyProductPage extends StatelessWidget {
   GMyProductsData_User_postedProducts product;
@@ -10,6 +12,7 @@ class MyProductPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    var userModel = context.read<UserModel>();
     return Scaffold(
       body: ListView(
         children: [
@@ -87,7 +90,10 @@ class MyProductPage extends StatelessWidget {
               ),
             ),
           ),
-          ProductBottomBar(),
+          product.createdBy.id != userModel.id
+              ? ProductBottomBar(
+                  owner: product.createdBy.id, product_id_owner: product.id)
+              : Container(),
         ],
       ),
     );

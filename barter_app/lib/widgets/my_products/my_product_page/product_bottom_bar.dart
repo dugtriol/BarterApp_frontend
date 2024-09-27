@@ -1,7 +1,13 @@
+import 'package:barter_app/widgets/transaction/create/create_transaction_widget.dart';
+import 'package:barter_app/widgets/transaction/create/transaction_create_model.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 class ProductBottomBar extends StatelessWidget {
-  const ProductBottomBar({super.key});
+  String owner;
+  String product_id_owner;
+  ProductBottomBar(
+      {super.key, required this.owner, required this.product_id_owner});
 
   @override
   Widget build(BuildContext context) {
@@ -31,7 +37,15 @@ class ProductBottomBar extends StatelessWidget {
                   style: TextStyle(fontSize: 15),
                 )),
             ElevatedButton.icon(
-                onPressed: () {},
+                onPressed: () {
+                  Navigator.of(context).push(MaterialPageRoute<void>(
+                      builder: (context) => ChangeNotifierProvider(
+                            create: (context) => TransactionCreateModel(),
+                            child: CreateTransactionWidget(
+                                owner: owner,
+                                product_id_owner: product_id_owner),
+                          )));
+                },
                 icon: Icon(Icons.change_circle),
                 label: Text(
                   "Обменяться",
@@ -43,3 +57,12 @@ class ProductBottomBar extends StatelessWidget {
     );
   }
 }
+
+              // heroTag: "btn3",
+              // child: const Icon(Icons.add_task),
+              // onPressed: () {
+              //   Navigator.of(context).push(MaterialPageRoute<void>(
+              //       builder: (context) => ChangeNotifierProvider(
+              //             create: (context) => CreateProductModel(),
+              //             child: CreateProductWidget(),
+              //           )));

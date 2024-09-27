@@ -28,6 +28,12 @@ import 'package:barter_app_client/graphql/__generated__/current_user.req.gql.dar
     show GCurrentReq;
 import 'package:barter_app_client/graphql/__generated__/current_user.var.gql.dart'
     show GCurrentVars;
+import 'package:barter_app_client/graphql/__generated__/get_archive.data.gql.dart'
+    show GGetArchiveData, GGetArchiveData_GetArchive;
+import 'package:barter_app_client/graphql/__generated__/get_archive.req.gql.dart'
+    show GGetArchiveReq;
+import 'package:barter_app_client/graphql/__generated__/get_archive.var.gql.dart'
+    show GGetArchiveVars;
 import 'package:barter_app_client/graphql/__generated__/get_by_buyer.data.gql.dart'
     show GGetByBuyerData, GGetByBuyerData_TransactionByBuyer;
 import 'package:barter_app_client/graphql/__generated__/get_by_buyer.req.gql.dart'
@@ -58,6 +64,27 @@ import 'package:barter_app_client/graphql/__generated__/get_by_user_available.re
     show GByUserAvailableReq;
 import 'package:barter_app_client/graphql/__generated__/get_by_user_available.var.gql.dart'
     show GByUserAvailableVars;
+import 'package:barter_app_client/graphql/__generated__/get_created_transactions.data.gql.dart'
+    show GGetCreatedData, GGetCreatedData_GetCreated;
+import 'package:barter_app_client/graphql/__generated__/get_created_transactions.req.gql.dart'
+    show GGetCreatedReq;
+import 'package:barter_app_client/graphql/__generated__/get_created_transactions.var.gql.dart'
+    show GGetCreatedVars;
+import 'package:barter_app_client/graphql/__generated__/get_ongoing.data.gql.dart'
+    show GGetOngoingData, GGetOngoingData_GetOngoing;
+import 'package:barter_app_client/graphql/__generated__/get_ongoing.req.gql.dart'
+    show GGetOngoingReq;
+import 'package:barter_app_client/graphql/__generated__/get_ongoing.var.gql.dart'
+    show GGetOngoingVars;
+import 'package:barter_app_client/graphql/__generated__/get_product.data.gql.dart'
+    show
+        GGetProductData,
+        GGetProductData_Product,
+        GGetProductData_Product_createdBy;
+import 'package:barter_app_client/graphql/__generated__/get_product.req.gql.dart'
+    show GGetProductReq;
+import 'package:barter_app_client/graphql/__generated__/get_product.var.gql.dart'
+    show GGetProductVars;
 import 'package:barter_app_client/graphql/__generated__/like_product.data.gql.dart'
     show GLikeProductData;
 import 'package:barter_app_client/graphql/__generated__/like_product.req.gql.dart'
@@ -166,6 +193,10 @@ final SerializersBuilder _serializersBuilder = _$serializers.toBuilder()
   GCurrentReq,
   GCurrentVars,
   GDateTime,
+  GGetArchiveData,
+  GGetArchiveData_GetArchive,
+  GGetArchiveReq,
+  GGetArchiveVars,
   GGetByBuyerData,
   GGetByBuyerData_TransactionByBuyer,
   GGetByBuyerReq,
@@ -174,6 +205,19 @@ final SerializersBuilder _serializersBuilder = _$serializers.toBuilder()
   GGetByOwnerData_TransactionsByOwner,
   GGetByOwnerReq,
   GGetByOwnerVars,
+  GGetCreatedData,
+  GGetCreatedData_GetCreated,
+  GGetCreatedReq,
+  GGetCreatedVars,
+  GGetOngoingData,
+  GGetOngoingData_GetOngoing,
+  GGetOngoingReq,
+  GGetOngoingVars,
+  GGetProductData,
+  GGetProductData_Product,
+  GGetProductData_Product_createdBy,
+  GGetProductReq,
+  GGetProductVars,
   GInitProductData,
   GInitProductData_CreateProduct,
   GInitProductReq,

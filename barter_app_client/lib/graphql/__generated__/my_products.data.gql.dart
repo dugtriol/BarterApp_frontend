@@ -124,6 +124,7 @@ abstract class GMyProductsData_User_postedProducts_createdBy
 
   @BuiltValueField(wireName: '__typename')
   String get G__typename;
+  String get id;
   String get name;
   static Serializer<GMyProductsData_User_postedProducts_createdBy>
       get serializer => _$gMyProductsDataUserPostedProductsCreatedBySerializer;

@@ -1,4 +1,6 @@
 import 'package:barter_app/widgets/app_bar/home_app_bar.dart';
+import 'package:barter_app/widgets/my_products/create_product/create_product_model.dart';
+import 'package:barter_app/widgets/my_products/create_product/create_product_widget.dart';
 import 'package:barter_app/widgets/my_products/my_product_model.dart';
 import 'package:barter_app/widgets/my_products/product_items.dart';
 import 'package:flutter/material.dart';
@@ -24,7 +26,6 @@ class MyProductsWidget extends StatelessWidget {
           return Scaffold(
             body: ListView(
               children: [
-                HomeAppBar(),
                 MyProductItems(),
               ],
             ),

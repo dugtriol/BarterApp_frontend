@@ -1,6 +1,7 @@
 import 'package:barter_app/widgets/all_products/all_products_model.dart';
 import 'package:barter_app/widgets/my_products/my_product_page/product_app_bar.dart';
 import 'package:barter_app/widgets/my_products/my_product_page/product_bottom_bar.dart';
+import 'package:barter_app/widgets/user/user_model.dart';
 import 'package:barter_app_client/graphql/__generated__/get_by_category_available.data.gql.dart';
 import 'package:barter_app_client/graphql/__generated__/my_products.data.gql.dart';
 
@@ -14,6 +15,7 @@ class AllProductPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     // var modelAllProducts = context.read<AllProductsModel>();
+    var userModel = context.read<UserModel>();
     return Scaffold(
       body: ListView(
         children: [
@@ -91,7 +93,10 @@ class AllProductPage extends StatelessWidget {
               ),
             ),
           ),
-          ProductBottomBar(),
+          product.createdBy.id != userModel.id
+              ? ProductBottomBar(
+                  owner: product.createdBy.id, product_id_owner: product.id)
+              : Container(),
         ],
       ),
     );

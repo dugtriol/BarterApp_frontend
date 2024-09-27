@@ -34,13 +34,13 @@ class AllProductsScreen extends StatelessWidget {
                 child: Text('Error: ${snapshot.error}')); // Handle errors
           }
           return Scaffold(
+            appBar: AppBar(title: HomeAppBar()),
             body: RefreshIndicator(
               onRefresh: () => _refreshProducts(context),
               child: ListView(
                 children: [
-                  HomeAppBar(),
                   Container(
-                    padding: EdgeInsets.only(left: 10),
+                    padding: EdgeInsets.only(left: 10, top: 15),
                     child: list != null
                         ? DropdownMenu<String>(
                             label: const Text("Категории"),
