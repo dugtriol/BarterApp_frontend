@@ -1,17 +1,19 @@
-import 'package:barter_app/widgets/all_products/all_product_page.dart';
+import 'package:barter_app/navigation/main_navigation.dart';
 import 'package:barter_app/widgets/all_products/all_products_model.dart';
+import 'package:barter_app/widgets/my_products/my_product_model.dart';
+import 'package:barter_app/widgets/my_products/my_product_page/my_product_page.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
-class AllProductItems extends StatelessWidget {
-  const AllProductItems({super.key});
+class MyProductItems extends StatelessWidget {
+  const MyProductItems({super.key});
 
   @override
   Widget build(BuildContext context) {
-    final modelAllProducts = context.read<AllProductsModel>();
+    final modelMyProducts = context.read<MyProductModel>();
 
     return FutureBuilder(
-      future: modelAllProducts.getByCategory(),
+      future: modelMyProducts.getMyProducts(),
       builder: (context, snapshot) {
         if (snapshot.connectionState == ConnectionState.waiting) {
           return const Center(child: CircularProgressIndicator());
@@ -19,8 +21,8 @@ class AllProductItems extends StatelessWidget {
           return Center(child: Text('Error: ${snapshot.error}'));
         }
 
-        if (modelAllProducts.data?.isEmpty ?? true) {
-          return Center(child: Text('No products found.'));
+        if (modelMyProducts.data?.isEmpty ?? true) {
+          return const Center(child: Text('No products found.'));
         }
 
         return GridView.builder(
@@ -29,13 +31,13 @@ class AllProductItems extends StatelessWidget {
           padding: const EdgeInsets.all(8.0),
           gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
             crossAxisCount: 2,
-            childAspectRatio: 0.7,
+            childAspectRatio: 0.68,
             crossAxisSpacing: 8.0,
             mainAxisSpacing: 8.0,
           ),
-          itemCount: modelAllProducts.len,
+          itemCount: modelMyProducts.len,
           itemBuilder: (context, i) {
-            final product = modelAllProducts.data![i];
+            final product = modelMyProducts.data![i];
             return Card(
               elevation: 4,
               shape: RoundedRectangleBorder(
@@ -45,7 +47,7 @@ class AllProductItems extends StatelessWidget {
                 onTap: () {
                   Navigator.of(context).push(
                     MaterialPageRoute<void>(
-                      builder: (context) => AllProductPage(product: product),
+                      builder: (context) => MyProductPage(product: product),
                     ),
                   );
                 },
@@ -53,7 +55,7 @@ class AllProductItems extends StatelessWidget {
                   children: [
                     ClipRRect(
                       borderRadius:
-                          BorderRadius.vertical(top: Radius.circular(12)),
+                          const BorderRadius.vertical(top: Radius.circular(12)),
                       child: Image.network(
                         product.image,
                         height: 120,
@@ -96,7 +98,7 @@ class AllProductItems extends StatelessWidget {
                             ],
                           ),
                           Text(
-                            returnCategoryString(product.category),
+                            product.category.name,
                             style: const TextStyle(
                                 fontSize: 14, color: Colors.grey),
                           ),
@@ -106,14 +108,14 @@ class AllProductItems extends StatelessWidget {
                             maxLines: 2,
                             overflow: TextOverflow.ellipsis,
                           ),
-                          SizedBox(height: 4),
+                          const SizedBox(height: 4),
                           Text(
-                            'Владелец: ${product.createdBy.name}',
+                            '${returnStatusString(product.status)}',
                             style: const TextStyle(
                                 fontSize: 12, color: Colors.grey),
                           ),
                           Text(
-                            'Статус: ${returnStatusString(product.status)}',
+                            '${formatDate(product.createdAt)}', // Предположим, у вас есть поле createdAt
                             style: const TextStyle(
                                 fontSize: 12, color: Colors.grey),
                           ),

@@ -115,6 +115,9 @@ class _$GByCategoryAvailableData_GetByCategoryAvailableSerializer
       'createdAt',
       serializers.serialize(object.createdAt,
           specifiedType: const FullType(_i2.GDateTime)),
+      'image',
+      serializers.serialize(object.image,
+          specifiedType: const FullType(String)),
     ];
 
     return result;
@@ -167,6 +170,10 @@ class _$GByCategoryAvailableData_GetByCategoryAvailableSerializer
         case 'createdAt':
           result.createdAt.replace(serializers.deserialize(value,
               specifiedType: const FullType(_i2.GDateTime))! as _i2.GDateTime);
+          break;
+        case 'image':
+          result.image = serializers.deserialize(value,
+              specifiedType: const FullType(String))! as String;
           break;
       }
     }
@@ -379,6 +386,8 @@ class _$GByCategoryAvailableData_GetByCategoryAvailable
   final _i2.GProductStatus status;
   @override
   final _i2.GDateTime createdAt;
+  @override
+  final String image;
 
   factory _$GByCategoryAvailableData_GetByCategoryAvailable(
           [void Function(
@@ -396,7 +405,8 @@ class _$GByCategoryAvailableData_GetByCategoryAvailable
       required this.category,
       required this.createdBy,
       required this.status,
-      required this.createdAt})
+      required this.createdAt,
+      required this.image})
       : super._() {
     BuiltValueNullFieldError.checkNotNull(G__typename,
         r'GByCategoryAvailableData_GetByCategoryAvailable', 'G__typename');
@@ -414,6 +424,8 @@ class _$GByCategoryAvailableData_GetByCategoryAvailable
         status, r'GByCategoryAvailableData_GetByCategoryAvailable', 'status');
     BuiltValueNullFieldError.checkNotNull(createdAt,
         r'GByCategoryAvailableData_GetByCategoryAvailable', 'createdAt');
+    BuiltValueNullFieldError.checkNotNull(
+        image, r'GByCategoryAvailableData_GetByCategoryAvailable', 'image');
   }
 
   @override
@@ -438,7 +450,8 @@ class _$GByCategoryAvailableData_GetByCategoryAvailable
         category == other.category &&
         createdBy == other.createdBy &&
         status == other.status &&
-        createdAt == other.createdAt;
+        createdAt == other.createdAt &&
+        image == other.image;
   }
 
   @override
@@ -452,6 +465,7 @@ class _$GByCategoryAvailableData_GetByCategoryAvailable
     _$hash = $jc(_$hash, createdBy.hashCode);
     _$hash = $jc(_$hash, status.hashCode);
     _$hash = $jc(_$hash, createdAt.hashCode);
+    _$hash = $jc(_$hash, image.hashCode);
     _$hash = $jf(_$hash);
     return _$hash;
   }
@@ -467,7 +481,8 @@ class _$GByCategoryAvailableData_GetByCategoryAvailable
           ..add('category', category)
           ..add('createdBy', createdBy)
           ..add('status', status)
-          ..add('createdAt', createdAt))
+          ..add('createdAt', createdAt)
+          ..add('image', image))
         .toString();
   }
 }
@@ -517,6 +532,10 @@ class GByCategoryAvailableData_GetByCategoryAvailableBuilder
   set createdAt(_i2.GDateTimeBuilder? createdAt) =>
       _$this._createdAt = createdAt;
 
+  String? _image;
+  String? get image => _$this._image;
+  set image(String? image) => _$this._image = image;
+
   GByCategoryAvailableData_GetByCategoryAvailableBuilder() {
     GByCategoryAvailableData_GetByCategoryAvailable._initializeBuilder(this);
   }
@@ -532,6 +551,7 @@ class GByCategoryAvailableData_GetByCategoryAvailableBuilder
       _createdBy = $v.createdBy.toBuilder();
       _status = $v.status;
       _createdAt = $v.createdAt.toBuilder();
+      _image = $v.image;
       _$v = null;
     }
     return this;
@@ -559,23 +579,21 @@ class GByCategoryAvailableData_GetByCategoryAvailableBuilder
       _$result = _$v ??
           new _$GByCategoryAvailableData_GetByCategoryAvailable._(
               G__typename: BuiltValueNullFieldError.checkNotNull(
-                  G__typename,
-                  r'GByCategoryAvailableData_GetByCategoryAvailable',
-                  'G__typename'),
+                  G__typename, r'GByCategoryAvailableData_GetByCategoryAvailable', 'G__typename'),
               id: BuiltValueNullFieldError.checkNotNull(
                   id, r'GByCategoryAvailableData_GetByCategoryAvailable', 'id'),
               name: BuiltValueNullFieldError.checkNotNull(
                   name, r'GByCategoryAvailableData_GetByCategoryAvailable', 'name'),
               description: BuiltValueNullFieldError.checkNotNull(
-                  description,
-                  r'GByCategoryAvailableData_GetByCategoryAvailable',
-                  'description'),
+                  description, r'GByCategoryAvailableData_GetByCategoryAvailable', 'description'),
               category: BuiltValueNullFieldError.checkNotNull(
                   category, r'GByCategoryAvailableData_GetByCategoryAvailable', 'category'),
               createdBy: createdBy.build(),
               status: BuiltValueNullFieldError.checkNotNull(
                   status, r'GByCategoryAvailableData_GetByCategoryAvailable', 'status'),
-              createdAt: createdAt.build());
+              createdAt: createdAt.build(),
+              image: BuiltValueNullFieldError.checkNotNull(
+                  image, r'GByCategoryAvailableData_GetByCategoryAvailable', 'image'));
     } catch (_) {
       late String _$failedField;
       try {

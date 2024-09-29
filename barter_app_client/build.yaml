@@ -5,7 +5,67 @@ targets:
         enabled: true
         options:
           schema: barter_app_client|lib/graphql/schema.graphql
+          type_overrides:
+            Upload:
+              name: MultipartFile
+              import: 'package:http/http.dart'
+      # gql_build|req_builder:
+      #   enabled: true
+      #   options:
+      #     schema: barter_app_client|lib/graphql/schema.graphql
+      #     type_overrides:
+      #       Upload:
+      #         name: MultipartFile
+      #         import: 'package:http/http.dart'
       ferry_generator|serializer_builder:
         enabled: true
         options:
           schema: barter_app_client|lib/graphql/schema.graphql
+          custom_serializers:
+            - import: 'package:barter_app_client/src/upload_serializer.dart'
+              name: UploadSerializer
+
+# targets:
+#   $default:
+#     builders:
+#       gql_build|schema_builder:
+#         enabled: true
+#         options:
+#           schema: barter_app_client|lib/schema.graphql
+#           type_overrides:
+#             Upload:
+#               name: MultipartFile
+#               import: 'package:http/http.dart'
+#       gql_build|ast_builder:
+#         enabled: true
+#       gql_build|data_builder:
+#         enabled: true
+#         options:
+#           schema: barter_app_client|lib/schema.graphql
+#           type_overrides:
+#             Upload:
+#               name: MultipartFile
+#               import: 'package:http/http.dart'
+#       gql_build|var_builder:
+#         enabled: true
+#         options:
+#           schema: barter_app_client|lib/schema.graphql
+#           type_overrides:
+#             Upload:
+#               name: MultipartFile
+#               import: 'package:http/http.dart'
+#       ferry_generator|req_builder:
+#         enabled: true
+#         options:
+#           schema: barter_app_client|lib/schema.graphql
+#           type_overrides:
+#             Upload:
+#               name: MultipartFile
+#               import: 'package:http/http.dart'
+#       gql_build|serializer_builder:
+#         enabled: true
+#         options:
+#           schema: barter_app_client|lib/schema.graphql
+#           custom_serializers:
+#             - import: 'package:barter_app_client/src/upload_serializer.dart'
+#               name: UploadSerializer

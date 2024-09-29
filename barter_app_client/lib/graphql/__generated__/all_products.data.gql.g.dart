@@ -101,6 +101,9 @@ class _$GAllProductsData_ProductsSerializer
       'createdBy',
       serializers.serialize(object.createdBy,
           specifiedType: const FullType(GAllProductsData_Products_createdBy)),
+      'image',
+      serializers.serialize(object.image,
+          specifiedType: const FullType(String)),
       'status',
       serializers.serialize(object.status,
           specifiedType: const FullType(_i2.GProductStatus)),
@@ -150,6 +153,10 @@ class _$GAllProductsData_ProductsSerializer
                   specifiedType:
                       const FullType(GAllProductsData_Products_createdBy))!
               as GAllProductsData_Products_createdBy);
+          break;
+        case 'image':
+          result.image = serializers.deserialize(value,
+              specifiedType: const FullType(String))! as String;
           break;
         case 'status':
           result.status = serializers.deserialize(value,
@@ -354,6 +361,8 @@ class _$GAllProductsData_Products extends GAllProductsData_Products {
   @override
   final GAllProductsData_Products_createdBy createdBy;
   @override
+  final String image;
+  @override
   final _i2.GProductStatus status;
   @override
   final _i2.GDateTime createdAt;
@@ -369,6 +378,7 @@ class _$GAllProductsData_Products extends GAllProductsData_Products {
       required this.description,
       required this.category,
       required this.createdBy,
+      required this.image,
       required this.status,
       required this.createdAt})
       : super._() {
@@ -384,6 +394,8 @@ class _$GAllProductsData_Products extends GAllProductsData_Products {
         category, r'GAllProductsData_Products', 'category');
     BuiltValueNullFieldError.checkNotNull(
         createdBy, r'GAllProductsData_Products', 'createdBy');
+    BuiltValueNullFieldError.checkNotNull(
+        image, r'GAllProductsData_Products', 'image');
     BuiltValueNullFieldError.checkNotNull(
         status, r'GAllProductsData_Products', 'status');
     BuiltValueNullFieldError.checkNotNull(
@@ -409,6 +421,7 @@ class _$GAllProductsData_Products extends GAllProductsData_Products {
         description == other.description &&
         category == other.category &&
         createdBy == other.createdBy &&
+        image == other.image &&
         status == other.status &&
         createdAt == other.createdAt;
   }
@@ -422,6 +435,7 @@ class _$GAllProductsData_Products extends GAllProductsData_Products {
     _$hash = $jc(_$hash, description.hashCode);
     _$hash = $jc(_$hash, category.hashCode);
     _$hash = $jc(_$hash, createdBy.hashCode);
+    _$hash = $jc(_$hash, image.hashCode);
     _$hash = $jc(_$hash, status.hashCode);
     _$hash = $jc(_$hash, createdAt.hashCode);
     _$hash = $jf(_$hash);
@@ -437,6 +451,7 @@ class _$GAllProductsData_Products extends GAllProductsData_Products {
           ..add('description', description)
           ..add('category', category)
           ..add('createdBy', createdBy)
+          ..add('image', image)
           ..add('status', status)
           ..add('createdAt', createdAt))
         .toString();
@@ -474,6 +489,10 @@ class GAllProductsData_ProductsBuilder
   set createdBy(GAllProductsData_Products_createdByBuilder? createdBy) =>
       _$this._createdBy = createdBy;
 
+  String? _image;
+  String? get image => _$this._image;
+  set image(String? image) => _$this._image = image;
+
   _i2.GProductStatus? _status;
   _i2.GProductStatus? get status => _$this._status;
   set status(_i2.GProductStatus? status) => _$this._status = status;
@@ -497,6 +516,7 @@ class GAllProductsData_ProductsBuilder
       _description = $v.description;
       _category = $v.category;
       _createdBy = $v.createdBy.toBuilder();
+      _image = $v.image;
       _status = $v.status;
       _createdAt = $v.createdAt.toBuilder();
       _$v = null;
@@ -534,6 +554,8 @@ class GAllProductsData_ProductsBuilder
               category: BuiltValueNullFieldError.checkNotNull(
                   category, r'GAllProductsData_Products', 'category'),
               createdBy: createdBy.build(),
+              image: BuiltValueNullFieldError.checkNotNull(
+                  image, r'GAllProductsData_Products', 'image'),
               status: BuiltValueNullFieldError.checkNotNull(
                   status, r'GAllProductsData_Products', 'status'),
               createdAt: createdAt.build());

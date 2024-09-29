@@ -9,5 +9,6 @@ query ByUserAvailable {
     }
     status
     createdAt
+    image
   }
 }

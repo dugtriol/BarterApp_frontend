@@ -28,6 +28,12 @@ import 'package:barter_app_client/graphql/__generated__/current_user.req.gql.dar
     show GCurrentReq;
 import 'package:barter_app_client/graphql/__generated__/current_user.var.gql.dart'
     show GCurrentVars;
+import 'package:barter_app_client/graphql/__generated__/find_like.data.gql.dart'
+    show GfindLikeData, GfindLikeData_FindLike;
+import 'package:barter_app_client/graphql/__generated__/find_like.req.gql.dart'
+    show GfindLikeReq;
+import 'package:barter_app_client/graphql/__generated__/find_like.var.gql.dart'
+    show GfindLikeVars;
 import 'package:barter_app_client/graphql/__generated__/get_archive.data.gql.dart'
     show GGetArchiveData, GGetArchiveData_GetArchive;
 import 'package:barter_app_client/graphql/__generated__/get_archive.req.gql.dart'
@@ -129,6 +135,7 @@ import 'package:barter_app_client/graphql/__generated__/schema.schema.gql.dart'
         GTransactionCreateInput,
         GTransactionShipping,
         GTransactionStatus,
+        GUploadFile,
         GUserMode;
 import 'package:barter_app_client/graphql/__generated__/unlike_product.data.gql.dart'
     show GUnlikeProductData;
@@ -154,6 +161,8 @@ import 'package:barter_app_client/graphql/__generated__/update_status_ongoing.re
     show GUpdateOngoingReq;
 import 'package:barter_app_client/graphql/__generated__/update_status_ongoing.var.gql.dart'
     show GUpdateOngoingVars;
+import 'package:barter_app_client/src/upload_serializer.dart'
+    show UploadSerializer;
 import 'package:built_collection/built_collection.dart';
 import 'package:built_value/serializer.dart';
 import 'package:built_value/standard_json_plugin.dart' show StandardJsonPlugin;
@@ -165,6 +174,7 @@ part 'serializers.gql.g.dart';
 
 final SerializersBuilder _serializersBuilder = _$serializers.toBuilder()
   ..add(OperationSerializer())
+  ..add(UploadSerializer())
   ..addPlugin(StandardJsonPlugin());
 @SerializersFor([
   GAllProductsData,
@@ -254,7 +264,12 @@ final SerializersBuilder _serializersBuilder = _$serializers.toBuilder()
   GUpdateOngoingData,
   GUpdateOngoingReq,
   GUpdateOngoingVars,
+  GUploadFile,
   GUserMode,
+  GfindLikeData,
+  GfindLikeData_FindLike,
+  GfindLikeReq,
+  GfindLikeVars,
   GnewUserData,
   GnewUserData_Register,
   GnewUserData_Register_authToken,

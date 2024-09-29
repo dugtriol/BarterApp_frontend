@@ -11,7 +11,6 @@ class AllProductsScreen extends StatelessWidget {
 
   Future<void> _refreshProducts(BuildContext context) async {
     final modelAllProducts = context.read<AllProductsModel>();
-    // Call the refresh method from your model or provider
     await modelAllProducts.getByCategory();
   }
 
@@ -19,9 +18,11 @@ class AllProductsScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     final modelAllProducts = context.read<AllProductsModel>();
     var list = modelAllProducts.categories
-        .map((e) => modelAllProducts.returnTypeString(e))
+        .map((e) => returnCategoryString(e))
         .toList();
     String dropdownValue = list.first;
+    String searchQuery = '';
+
     return FutureBuilder<void>(
         future: modelAllProducts.getByCategory(), // Fetch data asynchronously
         builder: (context, snapshot) {
@@ -39,6 +40,18 @@ class AllProductsScreen extends StatelessWidget {
               onRefresh: () => _refreshProducts(context),
               child: ListView(
                 children: [
+                  Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: TextField(
+                      onChanged: (value) {
+                        searchQuery = value; // Update search query
+                      },
+                      decoration: InputDecoration(
+                        labelText: 'Search',
+                        border: OutlineInputBorder(),
+                      ),
+                    ),
+                  ),
                   Container(
                     padding: EdgeInsets.only(left: 10, top: 15),
                     child: list != null

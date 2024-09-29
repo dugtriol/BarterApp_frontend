@@ -92,6 +92,7 @@ abstract class GMyProductsData_User_postedProducts
   String get image;
   _i2.GProductStatus get status;
   GMyProductsData_User_postedProducts_createdBy get createdBy;
+  _i2.GDateTime get createdAt;
   static Serializer<GMyProductsData_User_postedProducts> get serializer =>
       _$gMyProductsDataUserPostedProductsSerializer;
 

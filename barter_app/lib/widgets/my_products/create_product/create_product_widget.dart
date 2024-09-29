@@ -1,6 +1,8 @@
 import 'package:barter_app/widgets/my_products/create_product/create_product_app_bar.dart';
 import 'package:barter_app/widgets/my_products/create_product/create_product_model.dart';
 import 'package:flutter/material.dart';
+import 'package:image_picker/image_picker.dart';
+import 'package:path/path.dart';
 import 'package:provider/provider.dart';
 
 class CreateProductWidget extends StatelessWidget {
@@ -8,7 +10,7 @@ class CreateProductWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    var model = context.read<CreateProductModel>();
+    var model = context.watch<CreateProductModel>();
     var list = model.categories.map((e) => model.returnTypeString(e)).toList();
     String dropdownValue = list.first;
     return Scaffold(
@@ -19,7 +21,7 @@ class CreateProductWidget extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
               Container(
-                height: 100,
+                height: 50,
               ),
               SizedBox(
                 width: 300,
@@ -67,17 +69,38 @@ class CreateProductWidget extends StatelessWidget {
                     : const SizedBox.shrink(),
               ),
               Container(
+                padding: EdgeInsets.only(top: 10),
+                child: OutlinedButton(
+                  onPressed: () async {
+                    await model.pickImageWithPermission();
+                  },
+                  child: const Text("Выбрать фото"),
+                ),
+              ),
+              model.selectedImage != null
+                  ? Container(
+                      padding: const EdgeInsets.symmetric(
+                          horizontal: 50, vertical: 10),
+                      child: Text(
+                        getShortFileName(basename(model.selectedImage!.path)),
+                        overflow: TextOverflow.ellipsis,
+                        softWrap: false,
+                      ),
+                    )
+                  : const Text("Пожалуйста, выберите фото"),
+              Container(
                 height: 32,
               ),
               OutlinedButton(
                 onPressed: () async {
                   bool ok = await model.createProduct();
-                  if (ok) {
-                    Navigator.of(context).pop();
-                    model.clear();
-                  } else {
-                    print('Заполните все поля');
-                  }
+                  Navigator.of(context).pop();
+                  // if (ok) {
+                  //   Navigator.of(context).pop();
+                  //   model.clear();
+                  // } else {
+                  //   print('Заполните все поля');
+                  // }
                 },
                 child: const Text("Сохранить"),
               )
@@ -86,6 +109,14 @@ class CreateProductWidget extends StatelessWidget {
         ],
       ),
     );
+  }
+
+  String getShortFileName(String fileName, {int maxLength = 20}) {
+    if (fileName.length <= maxLength) return fileName;
+    String start = fileName.substring(0, 10); // первые 8 символов
+    String end =
+        fileName.substring(fileName.length - 12); // последние 8 символов
+    return '$start...$end'; // склеиваем с многоточием посередине
   }
 }
 

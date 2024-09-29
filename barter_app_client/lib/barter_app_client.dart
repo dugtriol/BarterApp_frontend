@@ -1,3 +1,4 @@
+import "package:barter_app_client/src/upload_serializer.dart";
 import "package:ferry/ferry.dart";
 import "package:gql_http_link/gql_http_link.dart";
 

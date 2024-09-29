@@ -1,13 +1,9 @@
-query AllProducts {
-  Products {
+query findLike($searchString: String!) {
+  FindLike(data: $searchString) {
     id
     name
     description
     category
-    createdBy {
-      id
-      name
-    }
     image
     status
     createdAt

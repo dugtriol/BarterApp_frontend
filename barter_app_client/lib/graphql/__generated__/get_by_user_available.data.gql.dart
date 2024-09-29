@@ -64,6 +64,7 @@ abstract class GByUserAvailableData_GetByUserAvailableProducts
   GByUserAvailableData_GetByUserAvailableProducts_createdBy get createdBy;
   _i2.GProductStatus get status;
   _i2.GDateTime get createdAt;
+  String get image;
   static Serializer<GByUserAvailableData_GetByUserAvailableProducts>
       get serializer =>
           _$gByUserAvailableDataGetByUserAvailableProductsSerializer;

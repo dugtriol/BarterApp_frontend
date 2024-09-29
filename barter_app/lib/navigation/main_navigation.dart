@@ -3,7 +3,7 @@ import 'package:barter_app/widgets/auth/sign_in_screen.dart';
 import 'package:barter_app/widgets/auth/sign_up_model.dart';
 import 'package:barter_app/widgets/auth/sign_up_widget.dart';
 import 'package:barter_app/widgets/main_screen/main_screen.dart';
-import 'package:barter_app/widgets/my_products/my_product_page/product_page.dart';
+import 'package:barter_app/widgets/my_products/my_product_page/my_product_page.dart';
 import 'package:barter_app/widgets/my_products/my_products_screen.dart';
 
 import 'package:flutter/material.dart';

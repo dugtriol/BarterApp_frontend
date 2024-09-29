@@ -9,6 +9,8 @@ import 'package:barter_app_client/graphql/__generated__/create_product.data.gql.
 import 'package:barter_app_client/graphql/__generated__/create_product.req.gql.dart';
 import 'package:barter_app_client/graphql/__generated__/create_transaction.req.gql.dart';
 import 'package:barter_app_client/graphql/__generated__/current_user.req.gql.dart';
+import 'package:barter_app_client/graphql/__generated__/find_like.data.gql.dart';
+import 'package:barter_app_client/graphql/__generated__/find_like.req.gql.dart';
 import 'package:barter_app_client/graphql/__generated__/get_archive.data.gql.dart';
 import 'package:barter_app_client/graphql/__generated__/get_archive.req.gql.dart';
 import 'package:barter_app_client/graphql/__generated__/get_by_buyer.data.gql.dart';
@@ -40,6 +42,7 @@ import 'package:barter_app_client/graphql/__generated__/update_status_ongoing.re
 import 'package:ferry/ferry.dart';
 import 'package:gql_http_link/gql_http_link.dart';
 import 'package:sprintf/sprintf.dart';
+import 'package:http/http.dart' show MultipartFile;
 
 class ApiClient {
   final link = "http://localhost:8080/query";
@@ -79,6 +82,7 @@ class ApiClient {
     );
     var stream = client.request(req);
     var event = await stream.first;
+
     if (event.data != null) {
       token = event.data?.Login.authToken.accessToken;
       try {
@@ -179,30 +183,28 @@ class ApiClient {
     return res!;
   }
 
-  Future<GInitProductData_CreateProduct> createProduct({
+  Future<void> createProduct({
     required String name,
     required GProductCategory category,
     required String description,
-    required String image,
+    required MultipartFile image,
   }) async {
     await initAuthClient();
     print('api - createProduct');
-    var req = GInitProductReq((b) => b
-      ..vars.input.name = name
-      ..vars.input.category = category
-      ..vars.input.description = description
-      ..vars.input.image = image);
+
+    // Prepare the request input
+    var inputBuilder = GCreateProductInputBuilder()
+      ..name = name
+      ..category = category
+      ..description = description
+      ..image = image; // Make sure image is correctly set
+
+    // Create the request
+    var req =
+        GInitProductReq((b) => b..vars.input.replace(inputBuilder.build()));
+    print('createProduct - req - $req');
     var stream = client.request(req);
     var event = await stream.first;
-
-    GInitProductData_CreateProduct? res;
-    // print('event.data: ${event}');
-    if (event.data != null) {
-      res = event.data?.CreateProduct;
-      // print('GInitProductData_CreateProduct ${res}');
-      // print('event.data: ${event.data}');
-    }
-    return res!;
   }
 
   Future<String> createTransaction({
@@ -438,5 +440,30 @@ class ApiClient {
       print('output $res');
     }
     return res!;
+  }
+
+  Future<List<GfindLikeData_FindLike>> findLike(String search) async {
+    await initAuthClient();
+    print('api - findLike');
+
+    // Подготовка запроса
+    var req = GfindLikeReq((b) => b..vars.searchString = search);
+
+    var stream = client.request(req);
+    var event = await stream.first;
+
+    List<GfindLikeData_FindLike?>? res = [];
+
+    // Проверка наличия данных
+    if (event.data != null) {
+      res = event.data?.FindLike?.toList();
+      print('output $res');
+    }
+
+    return res
+            ?.where((item) => item != null)
+            .cast<GfindLikeData_FindLike>()
+            .toList() ??
+        [];
   }
 }

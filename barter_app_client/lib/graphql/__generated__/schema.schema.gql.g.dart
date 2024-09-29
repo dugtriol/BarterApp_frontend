@@ -149,6 +149,7 @@ final BuiltSet<GUserMode> _$gUserModeValues =
   _$gUserModeADMIN,
 ]);
 
+Serializer<GUploadFile> _$gUploadFileSerializer = new _$GUploadFileSerializer();
 Serializer<GCreateProductInput> _$gCreateProductInputSerializer =
     new _$GCreateProductInputSerializer();
 Serializer<GProductCategory> _$gProductCategorySerializer =
@@ -167,6 +168,53 @@ Serializer<GLoginInput> _$gLoginInputSerializer = new _$GLoginInputSerializer();
 Serializer<GCreateUserInput> _$gCreateUserInputSerializer =
     new _$GCreateUserInputSerializer();
 Serializer<GUserMode> _$gUserModeSerializer = new _$GUserModeSerializer();
+
+class _$GUploadFileSerializer implements StructuredSerializer<GUploadFile> {
+  @override
+  final Iterable<Type> types = const [GUploadFile, _$GUploadFile];
+  @override
+  final String wireName = 'GUploadFile';
+
+  @override
+  Iterable<Object?> serialize(Serializers serializers, GUploadFile object,
+      {FullType specifiedType = FullType.unspecified}) {
+    final result = <Object?>[
+      'id',
+      serializers.serialize(object.id, specifiedType: const FullType(int)),
+      'file',
+      serializers.serialize(object.file,
+          specifiedType: const FullType(_i1.MultipartFile)),
+    ];
+
+    return result;
+  }
+
+  @override
+  GUploadFile deserialize(Serializers serializers, Iterable<Object?> serialized,
+      {FullType specifiedType = FullType.unspecified}) {
+    final result = new GUploadFileBuilder();
+
+    final iterator = serialized.iterator;
+    while (iterator.moveNext()) {
+      final key = iterator.current! as String;
+      iterator.moveNext();
+      final Object? value = iterator.current;
+      switch (key) {
+        case 'id':
+          result.id = serializers.deserialize(value,
+              specifiedType: const FullType(int))! as int;
+          break;
+        case 'file':
+          result.file = serializers.deserialize(value,
+                  specifiedType: const FullType(_i1.MultipartFile))!
+              as _i1.MultipartFile;
+          break;
+      }
+    }
+
+    return result.build();
+  }
+}
 
 class _$GCreateProductInputSerializer
     implements StructuredSerializer<GCreateProductInput> {
@@ -193,7 +241,7 @@ class _$GCreateProductInputSerializer
           specifiedType: const FullType(String)),
       'image',
       serializers.serialize(object.image,
-          specifiedType: const FullType(String)),
+          specifiedType: const FullType(_i1.MultipartFile)),
     ];
 
     return result;
@@ -226,7 +274,8 @@ class _$GCreateProductInputSerializer
           break;
         case 'image':
           result.image = serializers.deserialize(value,
-              specifiedType: const FullType(String))! as String;
+                  specifiedType: const FullType(_i1.MultipartFile))!
+              as _i1.MultipartFile;
           break;
       }
     }
@@ -571,6 +620,99 @@ class _$GUserModeSerializer implements PrimitiveSerializer<GUserMode> {
       GUserMode.valueOf(serialized as String);
 }
 
+class _$GUploadFile extends GUploadFile {
+  @override
+  final int id;
+  @override
+  final _i1.MultipartFile file;
+
+  factory _$GUploadFile([void Function(GUploadFileBuilder)? updates]) =>
+      (new GUploadFileBuilder()..update(updates))._build();
+
+  _$GUploadFile._({required this.id, required this.file}) : super._() {
+    BuiltValueNullFieldError.checkNotNull(id, r'GUploadFile', 'id');
+    BuiltValueNullFieldError.checkNotNull(file, r'GUploadFile', 'file');
+  }
+
+  @override
+  GUploadFile rebuild(void Function(GUploadFileBuilder) updates) =>
+      (toBuilder()..update(updates)).build();
+
+  @override
+  GUploadFileBuilder toBuilder() => new GUploadFileBuilder()..replace(this);
+
+  @override
+  bool operator ==(Object other) {
+    if (identical(other, this)) return true;
+    return other is GUploadFile && id == other.id && file == other.file;
+  }
+
+  @override
+  int get hashCode {
+    var _$hash = 0;
+    _$hash = $jc(_$hash, id.hashCode);
+    _$hash = $jc(_$hash, file.hashCode);
+    _$hash = $jf(_$hash);
+    return _$hash;
+  }
+
+  @override
+  String toString() {
+    return (newBuiltValueToStringHelper(r'GUploadFile')
+          ..add('id', id)
+          ..add('file', file))
+        .toString();
+  }
+}
+
+class GUploadFileBuilder implements Builder<GUploadFile, GUploadFileBuilder> {
+  _$GUploadFile? _$v;
+
+  int? _id;
+  int? get id => _$this._id;
+  set id(int? id) => _$this._id = id;
+
+  _i1.MultipartFile? _file;
+  _i1.MultipartFile? get file => _$this._file;
+  set file(_i1.MultipartFile? file) => _$this._file = file;
+
+  GUploadFileBuilder();
+
+  GUploadFileBuilder get _$this {
+    final $v = _$v;
+    if ($v != null) {
+      _id = $v.id;
+      _file = $v.file;
+      _$v = null;
+    }
+    return this;
+  }
+
+  @override
+  void replace(GUploadFile other) {
+    ArgumentError.checkNotNull(other, 'other');
+    _$v = other as _$GUploadFile;
+  }
+
+  @override
+  void update(void Function(GUploadFileBuilder)? updates) {
+    if (updates != null) updates(this);
+  }
+
+  @override
+  GUploadFile build() => _build();
+
+  _$GUploadFile _build() {
+    final _$result = _$v ??
+        new _$GUploadFile._(
+            id: BuiltValueNullFieldError.checkNotNull(id, r'GUploadFile', 'id'),
+            file: BuiltValueNullFieldError.checkNotNull(
+                file, r'GUploadFile', 'file'));
+    replace(_$result);
+    return _$result;
+  }
+}
+
 class _$GCreateProductInput extends GCreateProductInput {
   @override
   final GProductCategory category;
@@ -579,7 +721,7 @@ class _$GCreateProductInput extends GCreateProductInput {
   @override
   final String description;
   @override
-  final String image;
+  final _i1.MultipartFile image;
 
   factory _$GCreateProductInput(
           [void Function(GCreateProductInputBuilder)? updates]) =>
@@ -657,9 +799,9 @@ class GCreateProductInputBuilder
   String? get description => _$this._description;
   set description(String? description) => _$this._description = description;
 
-  String? _image;
-  String? get image => _$this._image;
-  set image(String? image) => _$this._image = image;
+  _i1.MultipartFile? _image;
+  _i1.MultipartFile? get image => _$this._image;
+  set image(_i1.MultipartFile? image) => _$this._image = image;
 
   GCreateProductInputBuilder();
 

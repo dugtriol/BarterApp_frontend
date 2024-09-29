@@ -161,6 +161,9 @@ class _$GMyProductsData_User_postedProductsSerializer
       serializers.serialize(object.createdBy,
           specifiedType:
               const FullType(GMyProductsData_User_postedProducts_createdBy)),
+      'createdAt',
+      serializers.serialize(object.createdAt,
+          specifiedType: const FullType(_i2.GDateTime)),
     ];
 
     return result;
@@ -213,6 +216,10 @@ class _$GMyProductsData_User_postedProductsSerializer
                   specifiedType: const FullType(
                       GMyProductsData_User_postedProducts_createdBy))!
               as GMyProductsData_User_postedProducts_createdBy);
+          break;
+        case 'createdAt':
+          result.createdAt.replace(serializers.deserialize(value,
+              specifiedType: const FullType(_i2.GDateTime))! as _i2.GDateTime);
           break;
       }
     }
@@ -535,6 +542,8 @@ class _$GMyProductsData_User_postedProducts
   final _i2.GProductStatus status;
   @override
   final GMyProductsData_User_postedProducts_createdBy createdBy;
+  @override
+  final _i2.GDateTime createdAt;
 
   factory _$GMyProductsData_User_postedProducts(
           [void Function(GMyProductsData_User_postedProductsBuilder)?
@@ -550,7 +559,8 @@ class _$GMyProductsData_User_postedProducts
       required this.category,
       required this.image,
       required this.status,
-      required this.createdBy})
+      required this.createdBy,
+      required this.createdAt})
       : super._() {
     BuiltValueNullFieldError.checkNotNull(
         G__typename, r'GMyProductsData_User_postedProducts', 'G__typename');
@@ -568,6 +578,8 @@ class _$GMyProductsData_User_postedProducts
         status, r'GMyProductsData_User_postedProducts', 'status');
     BuiltValueNullFieldError.checkNotNull(
         createdBy, r'GMyProductsData_User_postedProducts', 'createdBy');
+    BuiltValueNullFieldError.checkNotNull(
+        createdAt, r'GMyProductsData_User_postedProducts', 'createdAt');
   }
 
   @override
@@ -590,7 +602,8 @@ class _$GMyProductsData_User_postedProducts
         category == other.category &&
         image == other.image &&
         status == other.status &&
-        createdBy == other.createdBy;
+        createdBy == other.createdBy &&
+        createdAt == other.createdAt;
   }
 
   @override
@@ -604,6 +617,7 @@ class _$GMyProductsData_User_postedProducts
     _$hash = $jc(_$hash, image.hashCode);
     _$hash = $jc(_$hash, status.hashCode);
     _$hash = $jc(_$hash, createdBy.hashCode);
+    _$hash = $jc(_$hash, createdAt.hashCode);
     _$hash = $jf(_$hash);
     return _$hash;
   }
@@ -618,7 +632,8 @@ class _$GMyProductsData_User_postedProducts
           ..add('category', category)
           ..add('image', image)
           ..add('status', status)
-          ..add('createdBy', createdBy))
+          ..add('createdBy', createdBy)
+          ..add('createdAt', createdAt))
         .toString();
   }
 }
@@ -665,6 +680,12 @@ class GMyProductsData_User_postedProductsBuilder
           GMyProductsData_User_postedProducts_createdByBuilder? createdBy) =>
       _$this._createdBy = createdBy;
 
+  _i2.GDateTimeBuilder? _createdAt;
+  _i2.GDateTimeBuilder get createdAt =>
+      _$this._createdAt ??= new _i2.GDateTimeBuilder();
+  set createdAt(_i2.GDateTimeBuilder? createdAt) =>
+      _$this._createdAt = createdAt;
+
   GMyProductsData_User_postedProductsBuilder() {
     GMyProductsData_User_postedProducts._initializeBuilder(this);
   }
@@ -680,6 +701,7 @@ class GMyProductsData_User_postedProductsBuilder
       _image = $v.image;
       _status = $v.status;
       _createdBy = $v.createdBy.toBuilder();
+      _createdAt = $v.createdAt.toBuilder();
       _$v = null;
     }
     return this;
@@ -719,12 +741,15 @@ class GMyProductsData_User_postedProductsBuilder
                   image, r'GMyProductsData_User_postedProducts', 'image'),
               status: BuiltValueNullFieldError.checkNotNull(
                   status, r'GMyProductsData_User_postedProducts', 'status'),
-              createdBy: createdBy.build());
+              createdBy: createdBy.build(),
+              createdAt: createdAt.build());
     } catch (_) {
       late String _$failedField;
       try {
         _$failedField = 'createdBy';
         createdBy.build();
+        _$failedField = 'createdAt';
+        createdAt.build();
       } catch (e) {
         throw new BuiltValueNestedFieldError(
             r'GMyProductsData_User_postedProducts',

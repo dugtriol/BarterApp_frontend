@@ -9,11 +9,13 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
+  analyzer: ^5.13.0
   cupertino_icons: ^1.0.6
   flutter_hooks: ^0.20.5
   ferry: ^0.14.2+1
   gql_http_link: ^1.1.0
   ferry_generator: ^0.8.1
+  gql_build: ^0.8.0
 dev_dependencies:
   flutter_test:
     sdk: flutter

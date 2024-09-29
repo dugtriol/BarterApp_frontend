@@ -3,14 +3,36 @@
 
 // ignore_for_file: no_leading_underscores_for_library_prefixes
 import 'package:barter_app_client/graphql/__generated__/serializers.gql.dart'
-    as _i1;
+    as _i2;
 import 'package:built_collection/built_collection.dart';
 import 'package:built_value/built_value.dart';
 import 'package:built_value/serializer.dart';
 import 'package:gql_code_builder/src/serializers/default_scalar_serializer.dart'
-    as _i2;
+    as _i3;
+import 'package:http/http.dart' as _i1;
 
 part 'schema.schema.gql.g.dart';
+
+abstract class GUploadFile implements Built<GUploadFile, GUploadFileBuilder> {
+  GUploadFile._();
+
+  factory GUploadFile([Function(GUploadFileBuilder b) updates]) = _$GUploadFile;
+
+  int get id;
+  _i1.MultipartFile get file;
+  static Serializer<GUploadFile> get serializer => _$gUploadFileSerializer;
+
+  Map<String, dynamic> toJson() => (_i2.serializers.serializeWith(
+        GUploadFile.serializer,
+        this,
+      ) as Map<String, dynamic>);
+
+  static GUploadFile? fromJson(Map<String, dynamic> json) =>
+      _i2.serializers.deserializeWith(
+        GUploadFile.serializer,
+        json,
+      );
+}
 
 abstract class GCreateProductInput
     implements Built<GCreateProductInput, GCreateProductInputBuilder> {
@@ -22,17 +44,17 @@ abstract class GCreateProductInput
   GProductCategory get category;
   String get name;
   String get description;
-  String get image;
+  _i1.MultipartFile get image;
   static Serializer<GCreateProductInput> get serializer =>
       _$gCreateProductInputSerializer;
 
-  Map<String, dynamic> toJson() => (_i1.serializers.serializeWith(
+  Map<String, dynamic> toJson() => (_i2.serializers.serializeWith(
         GCreateProductInput.serializer,
         this,
       ) as Map<String, dynamic>);
 
   static GCreateProductInput? fromJson(Map<String, dynamic> json) =>
-      _i1.serializers.deserializeWith(
+      _i2.serializers.deserializeWith(
         GCreateProductInput.serializer,
         json,
       );
@@ -86,7 +108,7 @@ abstract class GDateTime implements Built<GDateTime, GDateTimeBuilder> {
   String get value;
   @BuiltValueSerializer(custom: true)
   static Serializer<GDateTime> get serializer =>
-      _i2.DefaultScalarSerializer<GDateTime>(
+      _i3.DefaultScalarSerializer<GDateTime>(
           (Object serialized) => GDateTime((serialized as String?)));
 }
 
@@ -145,13 +167,13 @@ abstract class GTransactionCreateInput
   static Serializer<GTransactionCreateInput> get serializer =>
       _$gTransactionCreateInputSerializer;
 
-  Map<String, dynamic> toJson() => (_i1.serializers.serializeWith(
+  Map<String, dynamic> toJson() => (_i2.serializers.serializeWith(
         GTransactionCreateInput.serializer,
         this,
       ) as Map<String, dynamic>);
 
   static GTransactionCreateInput? fromJson(Map<String, dynamic> json) =>
-      _i1.serializers.deserializeWith(
+      _i2.serializers.deserializeWith(
         GTransactionCreateInput.serializer,
         json,
       );
@@ -169,13 +191,13 @@ abstract class GChangeStatusInput
   static Serializer<GChangeStatusInput> get serializer =>
       _$gChangeStatusInputSerializer;
 
-  Map<String, dynamic> toJson() => (_i1.serializers.serializeWith(
+  Map<String, dynamic> toJson() => (_i2.serializers.serializeWith(
         GChangeStatusInput.serializer,
         this,
       ) as Map<String, dynamic>);
 
   static GChangeStatusInput? fromJson(Map<String, dynamic> json) =>
-      _i1.serializers.deserializeWith(
+      _i2.serializers.deserializeWith(
         GChangeStatusInput.serializer,
         json,
       );
@@ -190,13 +212,13 @@ abstract class GLoginInput implements Built<GLoginInput, GLoginInputBuilder> {
   String get email;
   static Serializer<GLoginInput> get serializer => _$gLoginInputSerializer;
 
-  Map<String, dynamic> toJson() => (_i1.serializers.serializeWith(
+  Map<String, dynamic> toJson() => (_i2.serializers.serializeWith(
         GLoginInput.serializer,
         this,
       ) as Map<String, dynamic>);
 
   static GLoginInput? fromJson(Map<String, dynamic> json) =>
-      _i1.serializers.deserializeWith(
+      _i2.serializers.deserializeWith(
         GLoginInput.serializer,
         json,
       );
@@ -218,13 +240,13 @@ abstract class GCreateUserInput
   static Serializer<GCreateUserInput> get serializer =>
       _$gCreateUserInputSerializer;
 
-  Map<String, dynamic> toJson() => (_i1.serializers.serializeWith(
+  Map<String, dynamic> toJson() => (_i2.serializers.serializeWith(
         GCreateUserInput.serializer,
         this,
       ) as Map<String, dynamic>);
 
   static GCreateUserInput? fromJson(Map<String, dynamic> json) =>
-      _i1.serializers.deserializeWith(
+      _i2.serializers.deserializeWith(
         GCreateUserInput.serializer,
         json,
       );

@@ -59,6 +59,7 @@ abstract class GGetProductData_Product
   GGetProductData_Product_createdBy get createdBy;
   _i2.GProductStatus get status;
   _i2.GDateTime get createdAt;
+  String get image;
   static Serializer<GGetProductData_Product> get serializer =>
       _$gGetProductDataProductSerializer;
 

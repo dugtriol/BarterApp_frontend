@@ -4,6 +4,40 @@
 // ignore_for_file: no_leading_underscores_for_library_prefixes
 import 'package:gql/ast.dart' as _i1;
 
+const Message = _i1.ObjectTypeDefinitionNode(
+  name: _i1.NameNode(value: 'Message'),
+  directives: [],
+  interfaces: [],
+  fields: [
+    _i1.FieldDefinitionNode(
+      name: _i1.NameNode(value: 'id'),
+      directives: [],
+      args: [],
+      type: _i1.NamedTypeNode(
+        name: _i1.NameNode(value: 'Int'),
+        isNonNull: true,
+      ),
+    ),
+    _i1.FieldDefinitionNode(
+      name: _i1.NameNode(value: 'user'),
+      directives: [],
+      args: [],
+      type: _i1.NamedTypeNode(
+        name: _i1.NameNode(value: 'String'),
+        isNonNull: true,
+      ),
+    ),
+    _i1.FieldDefinitionNode(
+      name: _i1.NameNode(value: 'content'),
+      directives: [],
+      args: [],
+      type: _i1.NamedTypeNode(
+        name: _i1.NameNode(value: 'String'),
+        isNonNull: true,
+      ),
+    ),
+  ],
+);
 const Favorites = _i1.ObjectTypeDefinitionNode(
   name: _i1.NameNode(value: 'Favorites'),
   directives: [],
@@ -35,6 +69,77 @@ const Favorites = _i1.ObjectTypeDefinitionNode(
         name: _i1.NameNode(value: 'ID'),
         isNonNull: true,
       ),
+    ),
+  ],
+);
+const Upload = _i1.ScalarTypeDefinitionNode(
+  name: _i1.NameNode(value: 'Upload'),
+  directives: [],
+);
+const File = _i1.ObjectTypeDefinitionNode(
+  name: _i1.NameNode(value: 'File'),
+  directives: [],
+  interfaces: [],
+  fields: [
+    _i1.FieldDefinitionNode(
+      name: _i1.NameNode(value: 'id'),
+      directives: [],
+      args: [],
+      type: _i1.NamedTypeNode(
+        name: _i1.NameNode(value: 'Int'),
+        isNonNull: true,
+      ),
+    ),
+    _i1.FieldDefinitionNode(
+      name: _i1.NameNode(value: 'name'),
+      directives: [],
+      args: [],
+      type: _i1.NamedTypeNode(
+        name: _i1.NameNode(value: 'String'),
+        isNonNull: true,
+      ),
+    ),
+    _i1.FieldDefinitionNode(
+      name: _i1.NameNode(value: 'content'),
+      directives: [],
+      args: [],
+      type: _i1.NamedTypeNode(
+        name: _i1.NameNode(value: 'String'),
+        isNonNull: true,
+      ),
+    ),
+    _i1.FieldDefinitionNode(
+      name: _i1.NameNode(value: 'contentType'),
+      directives: [],
+      args: [],
+      type: _i1.NamedTypeNode(
+        name: _i1.NameNode(value: 'String'),
+        isNonNull: true,
+      ),
+    ),
+  ],
+);
+const UploadFile = _i1.InputObjectTypeDefinitionNode(
+  name: _i1.NameNode(value: 'UploadFile'),
+  directives: [],
+  fields: [
+    _i1.InputValueDefinitionNode(
+      name: _i1.NameNode(value: 'id'),
+      directives: [],
+      type: _i1.NamedTypeNode(
+        name: _i1.NameNode(value: 'Int'),
+        isNonNull: true,
+      ),
+      defaultValue: null,
+    ),
+    _i1.InputValueDefinitionNode(
+      name: _i1.NameNode(value: 'file'),
+      directives: [],
+      type: _i1.NamedTypeNode(
+        name: _i1.NameNode(value: 'Upload'),
+        isNonNull: true,
+      ),
+      defaultValue: null,
     ),
   ],
 );
@@ -83,7 +188,12 @@ const Mutation = _i1.ObjectTypeDefinitionNode(
     ),
     _i1.FieldDefinitionNode(
       name: _i1.NameNode(value: 'CreateProduct'),
-      directives: [],
+      directives: [
+        _i1.DirectiveNode(
+          name: _i1.NameNode(value: 'auth'),
+          arguments: [],
+        )
+      ],
       args: [
         _i1.InputValueDefinitionNode(
           name: _i1.NameNode(value: 'input'),
@@ -102,7 +212,12 @@ const Mutation = _i1.ObjectTypeDefinitionNode(
     ),
     _i1.FieldDefinitionNode(
       name: _i1.NameNode(value: 'Like'),
-      directives: [],
+      directives: [
+        _i1.DirectiveNode(
+          name: _i1.NameNode(value: 'auth'),
+          arguments: [],
+        )
+      ],
       args: [
         _i1.InputValueDefinitionNode(
           name: _i1.NameNode(value: 'product_id'),
@@ -121,7 +236,12 @@ const Mutation = _i1.ObjectTypeDefinitionNode(
     ),
     _i1.FieldDefinitionNode(
       name: _i1.NameNode(value: 'Unlike'),
-      directives: [],
+      directives: [
+        _i1.DirectiveNode(
+          name: _i1.NameNode(value: 'auth'),
+          arguments: [],
+        )
+      ],
       args: [
         _i1.InputValueDefinitionNode(
           name: _i1.NameNode(value: 'product_id'),
@@ -140,7 +260,12 @@ const Mutation = _i1.ObjectTypeDefinitionNode(
     ),
     _i1.FieldDefinitionNode(
       name: _i1.NameNode(value: 'CreateTransaction'),
-      directives: [],
+      directives: [
+        _i1.DirectiveNode(
+          name: _i1.NameNode(value: 'auth'),
+          arguments: [],
+        )
+      ],
       args: [
         _i1.InputValueDefinitionNode(
           name: _i1.NameNode(value: 'input'),
@@ -159,7 +284,12 @@ const Mutation = _i1.ObjectTypeDefinitionNode(
     ),
     _i1.FieldDefinitionNode(
       name: _i1.NameNode(value: 'TransactionUpdateOngoing'),
-      directives: [],
+      directives: [
+        _i1.DirectiveNode(
+          name: _i1.NameNode(value: 'auth'),
+          arguments: [],
+        )
+      ],
       args: [
         _i1.InputValueDefinitionNode(
           name: _i1.NameNode(value: 'transaction_id'),
@@ -178,7 +308,12 @@ const Mutation = _i1.ObjectTypeDefinitionNode(
     ),
     _i1.FieldDefinitionNode(
       name: _i1.NameNode(value: 'TransactionUpdateDeclined'),
-      directives: [],
+      directives: [
+        _i1.DirectiveNode(
+          name: _i1.NameNode(value: 'auth'),
+          arguments: [],
+        )
+      ],
       args: [
         _i1.InputValueDefinitionNode(
           name: _i1.NameNode(value: 'transaction_id'),
@@ -197,7 +332,12 @@ const Mutation = _i1.ObjectTypeDefinitionNode(
     ),
     _i1.FieldDefinitionNode(
       name: _i1.NameNode(value: 'TransactionUpdateDone'),
-      directives: [],
+      directives: [
+        _i1.DirectiveNode(
+          name: _i1.NameNode(value: 'auth'),
+          arguments: [],
+        )
+      ],
       args: [
         _i1.InputValueDefinitionNode(
           name: _i1.NameNode(value: 'transaction_id'),
@@ -211,6 +351,63 @@ const Mutation = _i1.ObjectTypeDefinitionNode(
       ],
       type: _i1.NamedTypeNode(
         name: _i1.NameNode(value: 'Boolean'),
+        isNonNull: true,
+      ),
+    ),
+    _i1.FieldDefinitionNode(
+      name: _i1.NameNode(value: 'postMessage'),
+      directives: [
+        _i1.DirectiveNode(
+          name: _i1.NameNode(value: 'auth'),
+          arguments: [],
+        )
+      ],
+      args: [
+        _i1.InputValueDefinitionNode(
+          name: _i1.NameNode(value: 'user'),
+          directives: [],
+          type: _i1.NamedTypeNode(
+            name: _i1.NameNode(value: 'String'),
+            isNonNull: true,
+          ),
+          defaultValue: null,
+        ),
+        _i1.InputValueDefinitionNode(
+          name: _i1.NameNode(value: 'content'),
+          directives: [],
+          type: _i1.NamedTypeNode(
+            name: _i1.NameNode(value: 'String'),
+            isNonNull: true,
+          ),
+          defaultValue: null,
+        ),
+      ],
+      type: _i1.NamedTypeNode(
+        name: _i1.NameNode(value: 'Int'),
+        isNonNull: true,
+      ),
+    ),
+    _i1.FieldDefinitionNode(
+      name: _i1.NameNode(value: 'singleUpload'),
+      directives: [
+        _i1.DirectiveNode(
+          name: _i1.NameNode(value: 'auth'),
+          arguments: [],
+        )
+      ],
+      args: [
+        _i1.InputValueDefinitionNode(
+          name: _i1.NameNode(value: 'file'),
+          directives: [],
+          type: _i1.NamedTypeNode(
+            name: _i1.NameNode(value: 'Upload'),
+            isNonNull: true,
+          ),
+          defaultValue: null,
+        )
+      ],
+      type: _i1.NamedTypeNode(
+        name: _i1.NameNode(value: 'String'),
         isNonNull: true,
       ),
     ),
@@ -330,7 +527,7 @@ const CreateProductInput = _i1.InputObjectTypeDefinitionNode(
       name: _i1.NameNode(value: 'image'),
       directives: [],
       type: _i1.NamedTypeNode(
-        name: _i1.NameNode(value: 'String'),
+        name: _i1.NameNode(value: 'Upload'),
         isNonNull: true,
       ),
       defaultValue: null,
@@ -388,7 +585,12 @@ const Query = _i1.ObjectTypeDefinitionNode(
   fields: [
     _i1.FieldDefinitionNode(
       name: _i1.NameNode(value: 'Products'),
-      directives: [],
+      directives: [
+        _i1.DirectiveNode(
+          name: _i1.NameNode(value: 'auth'),
+          arguments: [],
+        )
+      ],
       args: [
         _i1.InputValueDefinitionNode(
           name: _i1.NameNode(value: 'first'),
@@ -419,7 +621,12 @@ const Query = _i1.ObjectTypeDefinitionNode(
     ),
     _i1.FieldDefinitionNode(
       name: _i1.NameNode(value: 'ProductsByCategory'),
-      directives: [],
+      directives: [
+        _i1.DirectiveNode(
+          name: _i1.NameNode(value: 'auth'),
+          arguments: [],
+        )
+      ],
       args: [
         _i1.InputValueDefinitionNode(
           name: _i1.NameNode(value: 'category'),
@@ -459,7 +666,12 @@ const Query = _i1.ObjectTypeDefinitionNode(
     ),
     _i1.FieldDefinitionNode(
       name: _i1.NameNode(value: 'User'),
-      directives: [],
+      directives: [
+        _i1.DirectiveNode(
+          name: _i1.NameNode(value: 'auth'),
+          arguments: [],
+        )
+      ],
       args: [],
       type: _i1.NamedTypeNode(
         name: _i1.NameNode(value: 'User'),
@@ -468,7 +680,12 @@ const Query = _i1.ObjectTypeDefinitionNode(
     ),
     _i1.FieldDefinitionNode(
       name: _i1.NameNode(value: 'Product'),
-      directives: [],
+      directives: [
+        _i1.DirectiveNode(
+          name: _i1.NameNode(value: 'auth'),
+          arguments: [],
+        )
+      ],
       args: [
         _i1.InputValueDefinitionNode(
           name: _i1.NameNode(value: 'id'),
@@ -487,7 +704,12 @@ const Query = _i1.ObjectTypeDefinitionNode(
     ),
     _i1.FieldDefinitionNode(
       name: _i1.NameNode(value: 'Categories'),
-      directives: [],
+      directives: [
+        _i1.DirectiveNode(
+          name: _i1.NameNode(value: 'auth'),
+          arguments: [],
+        )
+      ],
       args: [],
       type: _i1.ListTypeNode(
         type: _i1.NamedTypeNode(
@@ -499,7 +721,12 @@ const Query = _i1.ObjectTypeDefinitionNode(
     ),
     _i1.FieldDefinitionNode(
       name: _i1.NameNode(value: 'FindLike'),
-      directives: [],
+      directives: [
+        _i1.DirectiveNode(
+          name: _i1.NameNode(value: 'auth'),
+          arguments: [],
+        )
+      ],
       args: [
         _i1.InputValueDefinitionNode(
           name: _i1.NameNode(value: 'data'),
@@ -521,7 +748,12 @@ const Query = _i1.ObjectTypeDefinitionNode(
     ),
     _i1.FieldDefinitionNode(
       name: _i1.NameNode(value: 'TransactionsByOwner'),
-      directives: [],
+      directives: [
+        _i1.DirectiveNode(
+          name: _i1.NameNode(value: 'auth'),
+          arguments: [],
+        )
+      ],
       args: [],
       type: _i1.ListTypeNode(
         type: _i1.NamedTypeNode(
@@ -533,7 +765,12 @@ const Query = _i1.ObjectTypeDefinitionNode(
     ),
     _i1.FieldDefinitionNode(
       name: _i1.NameNode(value: 'TransactionByBuyer'),
-      directives: [],
+      directives: [
+        _i1.DirectiveNode(
+          name: _i1.NameNode(value: 'auth'),
+          arguments: [],
+        )
+      ],
       args: [],
       type: _i1.ListTypeNode(
         type: _i1.NamedTypeNode(
@@ -545,7 +782,12 @@ const Query = _i1.ObjectTypeDefinitionNode(
     ),
     _i1.FieldDefinitionNode(
       name: _i1.NameNode(value: 'GetByUserAvailableProducts'),
-      directives: [],
+      directives: [
+        _i1.DirectiveNode(
+          name: _i1.NameNode(value: 'auth'),
+          arguments: [],
+        )
+      ],
       args: [],
       type: _i1.ListTypeNode(
         type: _i1.NamedTypeNode(
@@ -557,7 +799,12 @@ const Query = _i1.ObjectTypeDefinitionNode(
     ),
     _i1.FieldDefinitionNode(
       name: _i1.NameNode(value: 'GetByCategoryAvailable'),
-      directives: [],
+      directives: [
+        _i1.DirectiveNode(
+          name: _i1.NameNode(value: 'auth'),
+          arguments: [],
+        )
+      ],
       args: [
         _i1.InputValueDefinitionNode(
           name: _i1.NameNode(value: 'category'),
@@ -579,7 +826,12 @@ const Query = _i1.ObjectTypeDefinitionNode(
     ),
     _i1.FieldDefinitionNode(
       name: _i1.NameNode(value: 'GetOngoing'),
-      directives: [],
+      directives: [
+        _i1.DirectiveNode(
+          name: _i1.NameNode(value: 'auth'),
+          arguments: [],
+        )
+      ],
       args: [],
       type: _i1.ListTypeNode(
         type: _i1.NamedTypeNode(
@@ -591,7 +843,12 @@ const Query = _i1.ObjectTypeDefinitionNode(
     ),
     _i1.FieldDefinitionNode(
       name: _i1.NameNode(value: 'GetCreated'),
-      directives: [],
+      directives: [
+        _i1.DirectiveNode(
+          name: _i1.NameNode(value: 'auth'),
+          arguments: [],
+        )
+      ],
       args: [],
       type: _i1.ListTypeNode(
         type: _i1.NamedTypeNode(
@@ -603,11 +860,33 @@ const Query = _i1.ObjectTypeDefinitionNode(
     ),
     _i1.FieldDefinitionNode(
       name: _i1.NameNode(value: 'GetArchive'),
-      directives: [],
+      directives: [
+        _i1.DirectiveNode(
+          name: _i1.NameNode(value: 'auth'),
+          arguments: [],
+        )
+      ],
       args: [],
       type: _i1.ListTypeNode(
         type: _i1.NamedTypeNode(
           name: _i1.NameNode(value: 'Transaction'),
+          isNonNull: true,
+        ),
+        isNonNull: false,
+      ),
+    ),
+    _i1.FieldDefinitionNode(
+      name: _i1.NameNode(value: 'messages'),
+      directives: [
+        _i1.DirectiveNode(
+          name: _i1.NameNode(value: 'auth'),
+          arguments: [],
+        )
+      ],
+      args: [],
+      type: _i1.ListTypeNode(
+        type: _i1.NamedTypeNode(
+          name: _i1.NameNode(value: 'Message'),
           isNonNull: true,
         ),
         isNonNull: false,
@@ -618,6 +897,12 @@ const Query = _i1.ObjectTypeDefinitionNode(
 const DateTime = _i1.ScalarTypeDefinitionNode(
   name: _i1.NameNode(value: 'DateTime'),
   directives: [],
+);
+const auth = _i1.DirectiveDefinitionNode(
+  name: _i1.NameNode(value: 'auth'),
+  args: [],
+  locations: [_i1.DirectiveLocation.fieldDefinition],
+  repeatable: false,
 );
 const schema = _i1.SchemaDefinitionNode(
   directives: [],
@@ -636,6 +921,32 @@ const schema = _i1.SchemaDefinitionNode(
         isNonNull: false,
       ),
     ),
+    _i1.OperationTypeDefinitionNode(
+      operation: _i1.OperationType.subscription,
+      type: _i1.NamedTypeNode(
+        name: _i1.NameNode(value: 'Subscription'),
+        isNonNull: false,
+      ),
+    ),
+  ],
+);
+const Subscription = _i1.ObjectTypeDefinitionNode(
+  name: _i1.NameNode(value: 'Subscription'),
+  directives: [],
+  interfaces: [],
+  fields: [
+    _i1.FieldDefinitionNode(
+      name: _i1.NameNode(value: 'messages'),
+      directives: [],
+      args: [],
+      type: _i1.ListTypeNode(
+        type: _i1.NamedTypeNode(
+          name: _i1.NameNode(value: 'Message'),
+          isNonNull: true,
+        ),
+        isNonNull: false,
+      ),
+    )
   ],
 );
 const Transaction = _i1.ObjectTypeDefinitionNode(
@@ -1097,7 +1408,11 @@ const UserMode = _i1.EnumTypeDefinitionNode(
   ],
 );
 const document = _i1.DocumentNode(definitions: [
+  Message,
   Favorites,
+  Upload,
+  File,
+  UploadFile,
   Mutation,
   Product,
   CreateProductInput,
@@ -1105,7 +1420,9 @@ const document = _i1.DocumentNode(definitions: [
   ProductStatus,
   Query,
   DateTime,
+  auth,
   schema,
+  Subscription,
   Transaction,
   TransactionShipping,
   TransactionStatus,

@@ -59,6 +59,7 @@ abstract class GAllProductsData_Products
   String get description;
   _i2.GProductCategory get category;
   GAllProductsData_Products_createdBy get createdBy;
+  String get image;
   _i2.GProductStatus get status;
   _i2.GDateTime get createdAt;
   static Serializer<GAllProductsData_Products> get serializer =>

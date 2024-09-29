@@ -101,6 +101,9 @@ class _$GGetProductData_ProductSerializer
       'createdAt',
       serializers.serialize(object.createdAt,
           specifiedType: const FullType(_i2.GDateTime)),
+      'image',
+      serializers.serialize(object.image,
+          specifiedType: const FullType(String)),
     ];
 
     return result;
@@ -153,6 +156,10 @@ class _$GGetProductData_ProductSerializer
         case 'createdAt':
           result.createdAt.replace(serializers.deserialize(value,
               specifiedType: const FullType(_i2.GDateTime))! as _i2.GDateTime);
+          break;
+        case 'image':
+          result.image = serializers.deserialize(value,
+              specifiedType: const FullType(String))! as String;
           break;
       }
     }
@@ -353,6 +360,8 @@ class _$GGetProductData_Product extends GGetProductData_Product {
   final _i2.GProductStatus status;
   @override
   final _i2.GDateTime createdAt;
+  @override
+  final String image;
 
   factory _$GGetProductData_Product(
           [void Function(GGetProductData_ProductBuilder)? updates]) =>
@@ -366,7 +375,8 @@ class _$GGetProductData_Product extends GGetProductData_Product {
       required this.category,
       required this.createdBy,
       required this.status,
-      required this.createdAt})
+      required this.createdAt,
+      required this.image})
       : super._() {
     BuiltValueNullFieldError.checkNotNull(
         G__typename, r'GGetProductData_Product', 'G__typename');
@@ -383,6 +393,8 @@ class _$GGetProductData_Product extends GGetProductData_Product {
         status, r'GGetProductData_Product', 'status');
     BuiltValueNullFieldError.checkNotNull(
         createdAt, r'GGetProductData_Product', 'createdAt');
+    BuiltValueNullFieldError.checkNotNull(
+        image, r'GGetProductData_Product', 'image');
   }
 
   @override
@@ -405,7 +417,8 @@ class _$GGetProductData_Product extends GGetProductData_Product {
         category == other.category &&
         createdBy == other.createdBy &&
         status == other.status &&
-        createdAt == other.createdAt;
+        createdAt == other.createdAt &&
+        image == other.image;
   }
 
   @override
@@ -419,6 +432,7 @@ class _$GGetProductData_Product extends GGetProductData_Product {
     _$hash = $jc(_$hash, createdBy.hashCode);
     _$hash = $jc(_$hash, status.hashCode);
     _$hash = $jc(_$hash, createdAt.hashCode);
+    _$hash = $jc(_$hash, image.hashCode);
     _$hash = $jf(_$hash);
     return _$hash;
   }
@@ -433,7 +447,8 @@ class _$GGetProductData_Product extends GGetProductData_Product {
           ..add('category', category)
           ..add('createdBy', createdBy)
           ..add('status', status)
-          ..add('createdAt', createdAt))
+          ..add('createdAt', createdAt)
+          ..add('image', image))
         .toString();
   }
 }
@@ -479,6 +494,10 @@ class GGetProductData_ProductBuilder
   set createdAt(_i2.GDateTimeBuilder? createdAt) =>
       _$this._createdAt = createdAt;
 
+  String? _image;
+  String? get image => _$this._image;
+  set image(String? image) => _$this._image = image;
+
   GGetProductData_ProductBuilder() {
     GGetProductData_Product._initializeBuilder(this);
   }
@@ -494,6 +513,7 @@ class GGetProductData_ProductBuilder
       _createdBy = $v.createdBy.toBuilder();
       _status = $v.status;
       _createdAt = $v.createdAt.toBuilder();
+      _image = $v.image;
       _$v = null;
     }
     return this;
@@ -531,7 +551,9 @@ class GGetProductData_ProductBuilder
               createdBy: createdBy.build(),
               status: BuiltValueNullFieldError.checkNotNull(
                   status, r'GGetProductData_Product', 'status'),
-              createdAt: createdAt.build());
+              createdAt: createdAt.build(),
+              image: BuiltValueNullFieldError.checkNotNull(
+                  image, r'GGetProductData_Product', 'image'));
     } catch (_) {
       late String _$failedField;
       try {

@@ -97,7 +97,12 @@ Serializers _$serializers = (new Serializers().toBuilder()
       ..add(GUpdateOngoingData.serializer)
       ..add(GUpdateOngoingReq.serializer)
       ..add(GUpdateOngoingVars.serializer)
+      ..add(GUploadFile.serializer)
       ..add(GUserMode.serializer)
+      ..add(GfindLikeData.serializer)
+      ..add(GfindLikeData_FindLike.serializer)
+      ..add(GfindLikeReq.serializer)
+      ..add(GfindLikeVars.serializer)
       ..add(GnewUserData.serializer)
       ..add(GnewUserData_Register.serializer)
       ..add(GnewUserData_Register_authToken.serializer)
@@ -143,7 +148,11 @@ Serializers _$serializers = (new Serializers().toBuilder()
       ..addBuilderFactory(
           const FullType(BuiltList,
               const [const FullType(GMyProductsData_User_postedProducts)]),
-          () => new ListBuilder<GMyProductsData_User_postedProducts>()))
+          () => new ListBuilder<GMyProductsData_User_postedProducts>())
+      ..addBuilderFactory(
+          const FullType(BuiltList,
+              const [const FullType.nullable(GfindLikeData_FindLike)]),
+          () => new ListBuilder<GfindLikeData_FindLike?>()))
     .build();
 
 // ignore_for_file: deprecated_member_use_from_same_package,type=lint

@@ -30,6 +30,7 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
+  intl: ^0.17.0
   cupertino_icons: ^1.0.6
   flutter_hooks: ^0.20.5
   ferry: ^0.14.2+1
@@ -40,6 +41,9 @@ dependencies:
   barter_app_client:
     path: ../barter_app_client
   sprintf:
+  image_picker: ^1.1.2
+  permission_handler: ^11.3.1
+  path: ^1.8.0
 dev_dependencies:
   flutter_test:
     sdk: flutter

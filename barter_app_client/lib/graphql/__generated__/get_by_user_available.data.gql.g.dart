@@ -113,6 +113,9 @@ class _$GByUserAvailableData_GetByUserAvailableProductsSerializer
       'createdAt',
       serializers.serialize(object.createdAt,
           specifiedType: const FullType(_i2.GDateTime)),
+      'image',
+      serializers.serialize(object.image,
+          specifiedType: const FullType(String)),
     ];
 
     return result;
@@ -160,6 +163,10 @@ class _$GByUserAvailableData_GetByUserAvailableProductsSerializer
         case 'createdAt':
           result.createdAt.replace(serializers.deserialize(value,
               specifiedType: const FullType(_i2.GDateTime))! as _i2.GDateTime);
+          break;
+        case 'image':
+          result.image = serializers.deserialize(value,
+              specifiedType: const FullType(String))! as String;
           break;
       }
     }
@@ -369,6 +376,8 @@ class _$GByUserAvailableData_GetByUserAvailableProducts
   final _i2.GProductStatus status;
   @override
   final _i2.GDateTime createdAt;
+  @override
+  final String image;
 
   factory _$GByUserAvailableData_GetByUserAvailableProducts(
           [void Function(
@@ -385,7 +394,8 @@ class _$GByUserAvailableData_GetByUserAvailableProducts
       required this.description,
       required this.createdBy,
       required this.status,
-      required this.createdAt})
+      required this.createdAt,
+      required this.image})
       : super._() {
     BuiltValueNullFieldError.checkNotNull(G__typename,
         r'GByUserAvailableData_GetByUserAvailableProducts', 'G__typename');
@@ -401,6 +411,8 @@ class _$GByUserAvailableData_GetByUserAvailableProducts
         status, r'GByUserAvailableData_GetByUserAvailableProducts', 'status');
     BuiltValueNullFieldError.checkNotNull(createdAt,
         r'GByUserAvailableData_GetByUserAvailableProducts', 'createdAt');
+    BuiltValueNullFieldError.checkNotNull(
+        image, r'GByUserAvailableData_GetByUserAvailableProducts', 'image');
   }
 
   @override
@@ -424,7 +436,8 @@ class _$GByUserAvailableData_GetByUserAvailableProducts
         description == other.description &&
         createdBy == other.createdBy &&
         status == other.status &&
-        createdAt == other.createdAt;
+        createdAt == other.createdAt &&
+        image == other.image;
   }
 
   @override
@@ -437,6 +450,7 @@ class _$GByUserAvailableData_GetByUserAvailableProducts
     _$hash = $jc(_$hash, createdBy.hashCode);
     _$hash = $jc(_$hash, status.hashCode);
     _$hash = $jc(_$hash, createdAt.hashCode);
+    _$hash = $jc(_$hash, image.hashCode);
     _$hash = $jf(_$hash);
     return _$hash;
   }
@@ -451,7 +465,8 @@ class _$GByUserAvailableData_GetByUserAvailableProducts
           ..add('description', description)
           ..add('createdBy', createdBy)
           ..add('status', status)
-          ..add('createdAt', createdAt))
+          ..add('createdAt', createdAt)
+          ..add('image', image))
         .toString();
   }
 }
@@ -497,6 +512,10 @@ class GByUserAvailableData_GetByUserAvailableProductsBuilder
   set createdAt(_i2.GDateTimeBuilder? createdAt) =>
       _$this._createdAt = createdAt;
 
+  String? _image;
+  String? get image => _$this._image;
+  set image(String? image) => _$this._image = image;
+
   GByUserAvailableData_GetByUserAvailableProductsBuilder() {
     GByUserAvailableData_GetByUserAvailableProducts._initializeBuilder(this);
   }
@@ -511,6 +530,7 @@ class GByUserAvailableData_GetByUserAvailableProductsBuilder
       _createdBy = $v.createdBy.toBuilder();
       _status = $v.status;
       _createdAt = $v.createdAt.toBuilder();
+      _image = $v.image;
       _$v = null;
     }
     return this;
@@ -543,16 +563,18 @@ class GByUserAvailableData_GetByUserAvailableProductsBuilder
                   'G__typename'),
               id: BuiltValueNullFieldError.checkNotNull(
                   id, r'GByUserAvailableData_GetByUserAvailableProducts', 'id'),
-              name: BuiltValueNullFieldError.checkNotNull(name,
-                  r'GByUserAvailableData_GetByUserAvailableProducts', 'name'),
+              name: BuiltValueNullFieldError.checkNotNull(
+                  name, r'GByUserAvailableData_GetByUserAvailableProducts', 'name'),
               description: BuiltValueNullFieldError.checkNotNull(
                   description,
                   r'GByUserAvailableData_GetByUserAvailableProducts',
                   'description'),
               createdBy: createdBy.build(),
-              status: BuiltValueNullFieldError.checkNotNull(status,
-                  r'GByUserAvailableData_GetByUserAvailableProducts', 'status'),
-              createdAt: createdAt.build());
+              status: BuiltValueNullFieldError.checkNotNull(
+                  status, r'GByUserAvailableData_GetByUserAvailableProducts', 'status'),
+              createdAt: createdAt.build(),
+              image: BuiltValueNullFieldError.checkNotNull(
+                  image, r'GByUserAvailableData_GetByUserAvailableProducts', 'image'));
     } catch (_) {
       late String _$failedField;
       try {

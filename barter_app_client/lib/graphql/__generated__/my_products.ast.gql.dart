@@ -86,6 +86,13 @@ const MyProducts = _i1.OperationDefinitionNode(
                 ),
               ]),
             ),
+            _i1.FieldNode(
+              name: _i1.NameNode(value: 'createdAt'),
+              alias: null,
+              arguments: [],
+              directives: [],
+              selectionSet: null,
+            ),
           ]),
         )
       ]),
