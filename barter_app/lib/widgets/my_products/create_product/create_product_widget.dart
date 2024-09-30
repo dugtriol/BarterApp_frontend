@@ -11,7 +11,7 @@ class CreateProductWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     var model = context.watch<CreateProductModel>();
-    var list = model.categories.map((e) => model.returnTypeString(e)).toList();
+    var list = model.categories.map((e) => returnTypeString(e)).toList();
     String dropdownValue = list.first;
     return Scaffold(
       body: ListView(

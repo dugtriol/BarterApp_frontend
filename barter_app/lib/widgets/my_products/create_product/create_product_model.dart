@@ -76,16 +76,6 @@ class CreateProductModel extends ChangeNotifier {
   }
 
   Future<void> pickFile() async {
-    // var picker = ImagePicker();
-    // final pickedFile = await picker.pickImage(source: ImageSource.camera);
-
-    // if (pickedFile != null) {
-    //   // Handle the picked file, emit bloc state
-    //   selectedImage = File(pickedFile.path);
-    //   notifyListeners();
-    // } else {
-    //   // No file was captured, emit bloc error state, or handle as you want
-    // }
     try {
       final image = await picker.pickImage(source: ImageSource.gallery);
       if (image == null) return;
@@ -99,60 +89,38 @@ class CreateProductModel extends ChangeNotifier {
       print("error: $error");
     }
   }
+}
 
-  // Future pickImageFromGallery() async {
-  //   // final returnedPhoto =
-  //   //     await ImagePicker().pickImage(source: ImageSource.gallery);
-  //   // selectedImage = File(returnedPhoto!.path);
-  //   try {
-  //     final returnedPhoto =
-  //         await ImagePicker().pickImage(source: ImageSource.gallery);
-
-  //     // Проверяем, что пользователь выбрал изображение
-  //     if (returnedPhoto != null) {
-  //       selectedImage = File(returnedPhoto.path);
-  //       notifyListeners(); // Уведомляем виджеты об изменении состояния
-  //     } else {
-  //       // Пользователь не выбрал изображение
-  //       print("Изображение не выбрано");
-  //     }
-  //   } catch (e) {
-  //     // Обработка ошибок
-  //     print("Ошибка при выборе изображения: $e");
-  //   }
-  // }
-
-  String returnTypeString(GProductCategory str) {
-    switch (str) {
-      case GProductCategory.HOME:
-        return 'Дом';
-      case GProductCategory.CHILDREN:
-        return 'Детям';
-      case GProductCategory.CLOTHES:
-        return 'Одежда';
-      case GProductCategory.SPORT:
-        return 'Спорт';
-      case GProductCategory.OTHER:
-        return 'Другое';
-      default:
-        return 'Другое';
-    }
+String returnTypeString(GProductCategory str) {
+  switch (str) {
+    case GProductCategory.HOME:
+      return 'Дом';
+    case GProductCategory.CHILDREN:
+      return 'Детям';
+    case GProductCategory.CLOTHES:
+      return 'Одежда';
+    case GProductCategory.SPORT:
+      return 'Спорт';
+    case GProductCategory.OTHER:
+      return 'Другое';
+    default:
+      return 'Другое';
   }
+}
 
-  GProductCategory returnCategoryType(String str) {
-    switch (str) {
-      case 'Дом':
-        return GProductCategory.HOME;
-      case 'Детям':
-        return GProductCategory.CHILDREN;
-      case 'Одежда':
-        return GProductCategory.CLOTHES;
-      case 'Спорт':
-        return GProductCategory.SPORT;
-      case 'Другое':
-        return GProductCategory.OTHER;
-      default:
-        return GProductCategory.OTHER;
-    }
+GProductCategory returnCategoryType(String str) {
+  switch (str) {
+    case 'Дом':
+      return GProductCategory.HOME;
+    case 'Детям':
+      return GProductCategory.CHILDREN;
+    case 'Одежда':
+      return GProductCategory.CLOTHES;
+    case 'Спорт':
+      return GProductCategory.SPORT;
+    case 'Другое':
+      return GProductCategory.OTHER;
+    default:
+      return GProductCategory.OTHER;
   }
 }

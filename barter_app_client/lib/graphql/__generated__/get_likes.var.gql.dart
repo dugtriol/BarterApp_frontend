@@ -7,26 +7,26 @@ import 'package:barter_app_client/graphql/__generated__/serializers.gql.dart'
 import 'package:built_value/built_value.dart';
 import 'package:built_value/serializer.dart';
 
-part 'find_like.var.gql.g.dart';
+part 'get_likes.var.gql.g.dart';
 
-abstract class GfindLikeVars
-    implements Built<GfindLikeVars, GfindLikeVarsBuilder> {
-  GfindLikeVars._();
+abstract class GusersLikesVars
+    implements Built<GusersLikesVars, GusersLikesVarsBuilder> {
+  GusersLikesVars._();
 
-  factory GfindLikeVars([Function(GfindLikeVarsBuilder b) updates]) =
-      _$GfindLikeVars;
+  factory GusersLikesVars([Function(GusersLikesVarsBuilder b) updates]) =
+      _$GusersLikesVars;
 
-  String get searchString;
-  static Serializer<GfindLikeVars> get serializer => _$gfindLikeVarsSerializer;
+  static Serializer<GusersLikesVars> get serializer =>
+      _$gusersLikesVarsSerializer;
 
   Map<String, dynamic> toJson() => (_i1.serializers.serializeWith(
-        GfindLikeVars.serializer,
+        GusersLikesVars.serializer,
         this,
       ) as Map<String, dynamic>);
 
-  static GfindLikeVars? fromJson(Map<String, dynamic> json) =>
+  static GusersLikesVars? fromJson(Map<String, dynamic> json) =>
       _i1.serializers.deserializeWith(
-        GfindLikeVars.serializer,
+        GusersLikesVars.serializer,
         json,
       );
 }

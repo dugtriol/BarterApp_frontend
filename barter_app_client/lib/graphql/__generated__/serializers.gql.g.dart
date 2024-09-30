@@ -36,6 +36,8 @@ Serializers _$serializers = (new Serializers().toBuilder()
       ..add(GCurrentReq.serializer)
       ..add(GCurrentVars.serializer)
       ..add(GDateTime.serializer)
+      ..add(GEditProductInput.serializer)
+      ..add(GEditProfileInput.serializer)
       ..add(GGetArchiveData.serializer)
       ..add(GGetArchiveData_GetArchive.serializer)
       ..add(GGetArchiveReq.serializer)
@@ -81,6 +83,7 @@ Serializers _$serializers = (new Serializers().toBuilder()
       ..add(GMyProductsReq.serializer)
       ..add(GMyProductsVars.serializer)
       ..add(GProductCategory.serializer)
+      ..add(GProductSort.serializer)
       ..add(GProductStatus.serializer)
       ..add(GTransactionCreateInput.serializer)
       ..add(GTransactionShipping.serializer)
@@ -99,16 +102,30 @@ Serializers _$serializers = (new Serializers().toBuilder()
       ..add(GUpdateOngoingVars.serializer)
       ..add(GUploadFile.serializer)
       ..add(GUserMode.serializer)
-      ..add(GfindLikeData.serializer)
-      ..add(GfindLikeData_FindLike.serializer)
-      ..add(GfindLikeReq.serializer)
-      ..add(GfindLikeVars.serializer)
+      ..add(GdeleteProductData.serializer)
+      ..add(GdeleteProductReq.serializer)
+      ..add(GdeleteProductVars.serializer)
+      ..add(GeditUserData.serializer)
+      ..add(GeditUserReq.serializer)
+      ..add(GeditUserVars.serializer)
+      ..add(GfavoriteProductsData.serializer)
+      ..add(GfavoriteProductsData_getFavoritesProducts.serializer)
+      ..add(GfavoriteProductsData_getFavoritesProducts_createdBy.serializer)
+      ..add(GfavoriteProductsReq.serializer)
+      ..add(GfavoriteProductsVars.serializer)
       ..add(GnewUserData.serializer)
       ..add(GnewUserData_Register.serializer)
       ..add(GnewUserData_Register_authToken.serializer)
       ..add(GnewUserData_Register_user.serializer)
       ..add(GnewUserReq.serializer)
       ..add(GnewUserVars.serializer)
+      ..add(GupdateProductData.serializer)
+      ..add(GupdateProductReq.serializer)
+      ..add(GupdateProductVars.serializer)
+      ..add(GusersLikesData.serializer)
+      ..add(GusersLikesData_getLikes.serializer)
+      ..add(GusersLikesReq.serializer)
+      ..add(GusersLikesVars.serializer)
       ..addBuilderFactory(
           const FullType(
               BuiltList, const [const FullType(GAllProductsData_Products)]),
@@ -150,9 +167,14 @@ Serializers _$serializers = (new Serializers().toBuilder()
               const [const FullType(GMyProductsData_User_postedProducts)]),
           () => new ListBuilder<GMyProductsData_User_postedProducts>())
       ..addBuilderFactory(
-          const FullType(BuiltList,
-              const [const FullType.nullable(GfindLikeData_FindLike)]),
-          () => new ListBuilder<GfindLikeData_FindLike?>()))
+          const FullType(BuiltList, const [
+            const FullType(GfavoriteProductsData_getFavoritesProducts)
+          ]),
+          () => new ListBuilder<GfavoriteProductsData_getFavoritesProducts>())
+      ..addBuilderFactory(
+          const FullType(
+              BuiltList, const [const FullType(GusersLikesData_getLikes)]),
+          () => new ListBuilder<GusersLikesData_getLikes>()))
     .build();
 
 // ignore_for_file: deprecated_member_use_from_same_package,type=lint

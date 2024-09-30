@@ -1,14 +1,17 @@
 import 'package:barter_app/widgets/all_products/all_products_model.dart';
+import 'package:barter_app/widgets/all_products/all_products_screen.dart';
+import 'package:barter_app/widgets/my_products/my_product_page/my_product_page.dart';
 import 'package:barter_app/widgets/my_products/my_product_page/product_app_bar.dart';
 import 'package:barter_app/widgets/user/user_model.dart';
 import 'package:barter_app/widgets/transaction/create/create_transaction_widget.dart';
 import 'package:barter_app/widgets/transaction/create/transaction_create_model.dart';
+import 'package:barter_app_client/graphql/__generated__/all_products.data.gql.dart';
 import 'package:barter_app_client/graphql/__generated__/get_by_category_available.data.gql.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
 class AllProductPage extends StatelessWidget {
-  final GByCategoryAvailableData_GetByCategoryAvailable product;
+  final GAllProductsData_Products product;
 
   AllProductPage({super.key, required this.product});
 
@@ -29,7 +32,7 @@ class AllProductPage extends StatelessWidget {
           ClipRRect(
             borderRadius: BorderRadius.circular(10),
             child: Image.network(
-              product.image,
+              buildImageURL(product.image),
               height: 300,
               width: double.infinity,
               fit: BoxFit.cover,
@@ -61,30 +64,16 @@ class AllProductPage extends StatelessWidget {
           const SizedBox(height: 16),
 
           // Product Details
-          _buildProductDetail("Идентификатор: ${product.id}"),
-          _buildProductDetail(
+          buildProductIdentifierWithCopyButton(product.id, context),
+          buildProductDetail(
               "Категория: ${returnCategoryString(product.category)}"),
-          _buildProductDetail("Владелец: ${product.createdBy.name}"),
-          _buildProductDetail("Статус: ${returnStatusString(product.status)}"),
+          buildProductDetail("Владелец: ${product.createdBy.name}"),
+          buildProductDetail("Статус: ${returnStatusString(product.status)}"),
           const SizedBox(height: 16),
 
           // Action Buttons for non-owners
           if (!isOwner) _buildActionButtons(context),
         ],
-      ),
-    );
-  }
-
-  // Helper method to build product detail rows
-  Widget _buildProductDetail(String text) {
-    return Padding(
-      padding: const EdgeInsets.only(top: 8),
-      child: Text(
-        text,
-        style: const TextStyle(
-          fontSize: 15,
-          color: Colors.black54,
-        ),
       ),
     );
   }
@@ -138,4 +127,17 @@ class AllProductPage extends StatelessWidget {
       ),
     );
   }
+}
+
+Widget buildProductDetail(String text) {
+  return Padding(
+    padding: const EdgeInsets.only(top: 8),
+    child: Text(
+      text,
+      style: const TextStyle(
+        fontSize: 15,
+        color: Colors.black54,
+      ),
+    ),
+  );
 }

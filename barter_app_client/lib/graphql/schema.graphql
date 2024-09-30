@@ -36,6 +36,9 @@ type Mutation {
     TransactionUpdateDone(transaction_id: ID!): Boolean! @auth
     postMessage(user: String!, content: String!): Int! @auth
     singleUpload(file: Upload!): String! @auth
+    editProduct(input: EditProductInput!): Boolean! @auth
+    deleteProduct(id: ID!): Boolean! @auth
+    editProfile(input: EditProfileInput!): Boolean! @auth
 }
 
 type Product {
@@ -57,6 +60,7 @@ input CreateProductInput {
 }
 
 enum ProductCategory {
+    DEFAULT
     HOME
     CLOTHES
     CHILDREN
@@ -70,13 +74,25 @@ enum ProductStatus {
     EXCHANGED
 }
 
+input EditProductInput {
+    id: ID!
+    category: ProductCategory!
+    name: String!
+    description: String!
+    image: Upload
+}
+
+enum ProductSort {
+    DEFAULT
+    DATE
+    DISTANCE
+}
+
 type Query {
-    Products(first: Int=10, start: Int=0): [Product!] @auth
-    ProductsByCategory(category: ProductCategory, first: Int=10, start: Int=0): [Product!]! @auth
+    Products(category: ProductCategory!=DEFAULT, search: String!="", sort: ProductSort!=DEFAULT, first: Int!=10, start: Int!=0): [Product!] @auth
     User: User! @auth
     Product(id: ID!): Product! @auth
     Categories: [ProductCategory] @auth
-    FindLike(data: String): [Product] @auth
     TransactionsByOwner: [Transaction!] @auth
     TransactionByBuyer: [Transaction!] @auth
     GetByUserAvailableProducts: [Product!] @auth
@@ -85,6 +101,8 @@ type Query {
     GetCreated: [Transaction!] @auth
     GetArchive: [Transaction!] @auth
     messages: [Message!] @auth
+    getLikes: [Favorites!] @auth
+    getFavoritesProducts: [Product!] @auth
 }
 
 scalar DateTime
@@ -183,4 +201,11 @@ type User {
 enum UserMode {
     CLIENT
     ADMIN
+}
+
+input EditProfileInput {
+    name: String!
+    email: String!
+    phone: String!
+    city: String!
 }

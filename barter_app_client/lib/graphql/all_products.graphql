@@ -1,9 +1,8 @@
-query AllProducts {
-  Products {
+query AllProducts($category: ProductCategory!, $search: String!, $sort: ProductSort!, $first: Int!=10, $start: Int!=0) {
+  Products(category: $category, search: $search, sort: $sort, first: $first, start: $start) {
     id
     name
     description
-    category
     createdBy {
       id
       name
@@ -11,5 +10,7 @@ query AllProducts {
     image
     status
     createdAt
+    description
+    category
   }
 }

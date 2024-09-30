@@ -411,6 +411,78 @@ const Mutation = _i1.ObjectTypeDefinitionNode(
         isNonNull: true,
       ),
     ),
+    _i1.FieldDefinitionNode(
+      name: _i1.NameNode(value: 'editProduct'),
+      directives: [
+        _i1.DirectiveNode(
+          name: _i1.NameNode(value: 'auth'),
+          arguments: [],
+        )
+      ],
+      args: [
+        _i1.InputValueDefinitionNode(
+          name: _i1.NameNode(value: 'input'),
+          directives: [],
+          type: _i1.NamedTypeNode(
+            name: _i1.NameNode(value: 'EditProductInput'),
+            isNonNull: true,
+          ),
+          defaultValue: null,
+        )
+      ],
+      type: _i1.NamedTypeNode(
+        name: _i1.NameNode(value: 'Boolean'),
+        isNonNull: true,
+      ),
+    ),
+    _i1.FieldDefinitionNode(
+      name: _i1.NameNode(value: 'deleteProduct'),
+      directives: [
+        _i1.DirectiveNode(
+          name: _i1.NameNode(value: 'auth'),
+          arguments: [],
+        )
+      ],
+      args: [
+        _i1.InputValueDefinitionNode(
+          name: _i1.NameNode(value: 'id'),
+          directives: [],
+          type: _i1.NamedTypeNode(
+            name: _i1.NameNode(value: 'ID'),
+            isNonNull: true,
+          ),
+          defaultValue: null,
+        )
+      ],
+      type: _i1.NamedTypeNode(
+        name: _i1.NameNode(value: 'Boolean'),
+        isNonNull: true,
+      ),
+    ),
+    _i1.FieldDefinitionNode(
+      name: _i1.NameNode(value: 'editProfile'),
+      directives: [
+        _i1.DirectiveNode(
+          name: _i1.NameNode(value: 'auth'),
+          arguments: [],
+        )
+      ],
+      args: [
+        _i1.InputValueDefinitionNode(
+          name: _i1.NameNode(value: 'input'),
+          directives: [],
+          type: _i1.NamedTypeNode(
+            name: _i1.NameNode(value: 'EditProfileInput'),
+            isNonNull: true,
+          ),
+          defaultValue: null,
+        )
+      ],
+      type: _i1.NamedTypeNode(
+        name: _i1.NameNode(value: 'Boolean'),
+        isNonNull: true,
+      ),
+    ),
   ],
 );
 const Product = _i1.ObjectTypeDefinitionNode(
@@ -539,6 +611,10 @@ const ProductCategory = _i1.EnumTypeDefinitionNode(
   directives: [],
   values: [
     _i1.EnumValueDefinitionNode(
+      name: _i1.NameNode(value: 'DEFAULT'),
+      directives: [],
+    ),
+    _i1.EnumValueDefinitionNode(
       name: _i1.NameNode(value: 'HOME'),
       directives: [],
     ),
@@ -578,6 +654,75 @@ const ProductStatus = _i1.EnumTypeDefinitionNode(
     ),
   ],
 );
+const EditProductInput = _i1.InputObjectTypeDefinitionNode(
+  name: _i1.NameNode(value: 'EditProductInput'),
+  directives: [],
+  fields: [
+    _i1.InputValueDefinitionNode(
+      name: _i1.NameNode(value: 'id'),
+      directives: [],
+      type: _i1.NamedTypeNode(
+        name: _i1.NameNode(value: 'ID'),
+        isNonNull: true,
+      ),
+      defaultValue: null,
+    ),
+    _i1.InputValueDefinitionNode(
+      name: _i1.NameNode(value: 'category'),
+      directives: [],
+      type: _i1.NamedTypeNode(
+        name: _i1.NameNode(value: 'ProductCategory'),
+        isNonNull: true,
+      ),
+      defaultValue: null,
+    ),
+    _i1.InputValueDefinitionNode(
+      name: _i1.NameNode(value: 'name'),
+      directives: [],
+      type: _i1.NamedTypeNode(
+        name: _i1.NameNode(value: 'String'),
+        isNonNull: true,
+      ),
+      defaultValue: null,
+    ),
+    _i1.InputValueDefinitionNode(
+      name: _i1.NameNode(value: 'description'),
+      directives: [],
+      type: _i1.NamedTypeNode(
+        name: _i1.NameNode(value: 'String'),
+        isNonNull: true,
+      ),
+      defaultValue: null,
+    ),
+    _i1.InputValueDefinitionNode(
+      name: _i1.NameNode(value: 'image'),
+      directives: [],
+      type: _i1.NamedTypeNode(
+        name: _i1.NameNode(value: 'Upload'),
+        isNonNull: false,
+      ),
+      defaultValue: null,
+    ),
+  ],
+);
+const ProductSort = _i1.EnumTypeDefinitionNode(
+  name: _i1.NameNode(value: 'ProductSort'),
+  directives: [],
+  values: [
+    _i1.EnumValueDefinitionNode(
+      name: _i1.NameNode(value: 'DEFAULT'),
+      directives: [],
+    ),
+    _i1.EnumValueDefinitionNode(
+      name: _i1.NameNode(value: 'DATE'),
+      directives: [],
+    ),
+    _i1.EnumValueDefinitionNode(
+      name: _i1.NameNode(value: 'DISTANCE'),
+      directives: [],
+    ),
+  ],
+);
 const Query = _i1.ObjectTypeDefinitionNode(
   name: _i1.NameNode(value: 'Query'),
   directives: [],
@@ -593,11 +738,41 @@ const Query = _i1.ObjectTypeDefinitionNode(
       ],
       args: [
         _i1.InputValueDefinitionNode(
+          name: _i1.NameNode(value: 'category'),
+          directives: [],
+          type: _i1.NamedTypeNode(
+            name: _i1.NameNode(value: 'ProductCategory'),
+            isNonNull: true,
+          ),
+          defaultValue: _i1.EnumValueNode(name: _i1.NameNode(value: 'DEFAULT')),
+        ),
+        _i1.InputValueDefinitionNode(
+          name: _i1.NameNode(value: 'search'),
+          directives: [],
+          type: _i1.NamedTypeNode(
+            name: _i1.NameNode(value: 'String'),
+            isNonNull: true,
+          ),
+          defaultValue: _i1.StringValueNode(
+            value: '',
+            isBlock: false,
+          ),
+        ),
+        _i1.InputValueDefinitionNode(
+          name: _i1.NameNode(value: 'sort'),
+          directives: [],
+          type: _i1.NamedTypeNode(
+            name: _i1.NameNode(value: 'ProductSort'),
+            isNonNull: true,
+          ),
+          defaultValue: _i1.EnumValueNode(name: _i1.NameNode(value: 'DEFAULT')),
+        ),
+        _i1.InputValueDefinitionNode(
           name: _i1.NameNode(value: 'first'),
           directives: [],
           type: _i1.NamedTypeNode(
             name: _i1.NameNode(value: 'Int'),
-            isNonNull: false,
+            isNonNull: true,
           ),
           defaultValue: _i1.IntValueNode(value: '10'),
         ),
@@ -606,7 +781,7 @@ const Query = _i1.ObjectTypeDefinitionNode(
           directives: [],
           type: _i1.NamedTypeNode(
             name: _i1.NameNode(value: 'Int'),
-            isNonNull: false,
+            isNonNull: true,
           ),
           defaultValue: _i1.IntValueNode(value: '0'),
         ),
@@ -617,51 +792,6 @@ const Query = _i1.ObjectTypeDefinitionNode(
           isNonNull: true,
         ),
         isNonNull: false,
-      ),
-    ),
-    _i1.FieldDefinitionNode(
-      name: _i1.NameNode(value: 'ProductsByCategory'),
-      directives: [
-        _i1.DirectiveNode(
-          name: _i1.NameNode(value: 'auth'),
-          arguments: [],
-        )
-      ],
-      args: [
-        _i1.InputValueDefinitionNode(
-          name: _i1.NameNode(value: 'category'),
-          directives: [],
-          type: _i1.NamedTypeNode(
-            name: _i1.NameNode(value: 'ProductCategory'),
-            isNonNull: false,
-          ),
-          defaultValue: null,
-        ),
-        _i1.InputValueDefinitionNode(
-          name: _i1.NameNode(value: 'first'),
-          directives: [],
-          type: _i1.NamedTypeNode(
-            name: _i1.NameNode(value: 'Int'),
-            isNonNull: false,
-          ),
-          defaultValue: _i1.IntValueNode(value: '10'),
-        ),
-        _i1.InputValueDefinitionNode(
-          name: _i1.NameNode(value: 'start'),
-          directives: [],
-          type: _i1.NamedTypeNode(
-            name: _i1.NameNode(value: 'Int'),
-            isNonNull: false,
-          ),
-          defaultValue: _i1.IntValueNode(value: '0'),
-        ),
-      ],
-      type: _i1.ListTypeNode(
-        type: _i1.NamedTypeNode(
-          name: _i1.NameNode(value: 'Product'),
-          isNonNull: true,
-        ),
-        isNonNull: true,
       ),
     ),
     _i1.FieldDefinitionNode(
@@ -714,33 +844,6 @@ const Query = _i1.ObjectTypeDefinitionNode(
       type: _i1.ListTypeNode(
         type: _i1.NamedTypeNode(
           name: _i1.NameNode(value: 'ProductCategory'),
-          isNonNull: false,
-        ),
-        isNonNull: false,
-      ),
-    ),
-    _i1.FieldDefinitionNode(
-      name: _i1.NameNode(value: 'FindLike'),
-      directives: [
-        _i1.DirectiveNode(
-          name: _i1.NameNode(value: 'auth'),
-          arguments: [],
-        )
-      ],
-      args: [
-        _i1.InputValueDefinitionNode(
-          name: _i1.NameNode(value: 'data'),
-          directives: [],
-          type: _i1.NamedTypeNode(
-            name: _i1.NameNode(value: 'String'),
-            isNonNull: false,
-          ),
-          defaultValue: null,
-        )
-      ],
-      type: _i1.ListTypeNode(
-        type: _i1.NamedTypeNode(
-          name: _i1.NameNode(value: 'Product'),
           isNonNull: false,
         ),
         isNonNull: false,
@@ -887,6 +990,40 @@ const Query = _i1.ObjectTypeDefinitionNode(
       type: _i1.ListTypeNode(
         type: _i1.NamedTypeNode(
           name: _i1.NameNode(value: 'Message'),
+          isNonNull: true,
+        ),
+        isNonNull: false,
+      ),
+    ),
+    _i1.FieldDefinitionNode(
+      name: _i1.NameNode(value: 'getLikes'),
+      directives: [
+        _i1.DirectiveNode(
+          name: _i1.NameNode(value: 'auth'),
+          arguments: [],
+        )
+      ],
+      args: [],
+      type: _i1.ListTypeNode(
+        type: _i1.NamedTypeNode(
+          name: _i1.NameNode(value: 'Favorites'),
+          isNonNull: true,
+        ),
+        isNonNull: false,
+      ),
+    ),
+    _i1.FieldDefinitionNode(
+      name: _i1.NameNode(value: 'getFavoritesProducts'),
+      directives: [
+        _i1.DirectiveNode(
+          name: _i1.NameNode(value: 'auth'),
+          arguments: [],
+        )
+      ],
+      args: [],
+      type: _i1.ListTypeNode(
+        type: _i1.NamedTypeNode(
+          name: _i1.NameNode(value: 'Product'),
           isNonNull: true,
         ),
         isNonNull: false,
@@ -1407,6 +1544,48 @@ const UserMode = _i1.EnumTypeDefinitionNode(
     ),
   ],
 );
+const EditProfileInput = _i1.InputObjectTypeDefinitionNode(
+  name: _i1.NameNode(value: 'EditProfileInput'),
+  directives: [],
+  fields: [
+    _i1.InputValueDefinitionNode(
+      name: _i1.NameNode(value: 'name'),
+      directives: [],
+      type: _i1.NamedTypeNode(
+        name: _i1.NameNode(value: 'String'),
+        isNonNull: true,
+      ),
+      defaultValue: null,
+    ),
+    _i1.InputValueDefinitionNode(
+      name: _i1.NameNode(value: 'email'),
+      directives: [],
+      type: _i1.NamedTypeNode(
+        name: _i1.NameNode(value: 'String'),
+        isNonNull: true,
+      ),
+      defaultValue: null,
+    ),
+    _i1.InputValueDefinitionNode(
+      name: _i1.NameNode(value: 'phone'),
+      directives: [],
+      type: _i1.NamedTypeNode(
+        name: _i1.NameNode(value: 'String'),
+        isNonNull: true,
+      ),
+      defaultValue: null,
+    ),
+    _i1.InputValueDefinitionNode(
+      name: _i1.NameNode(value: 'city'),
+      directives: [],
+      type: _i1.NamedTypeNode(
+        name: _i1.NameNode(value: 'String'),
+        isNonNull: true,
+      ),
+      defaultValue: null,
+    ),
+  ],
+);
 const document = _i1.DocumentNode(definitions: [
   Message,
   Favorites,
@@ -1418,6 +1597,8 @@ const document = _i1.DocumentNode(definitions: [
   CreateProductInput,
   ProductCategory,
   ProductStatus,
+  EditProductInput,
+  ProductSort,
   Query,
   DateTime,
   auth,
@@ -1435,4 +1616,5 @@ const document = _i1.DocumentNode(definitions: [
   CreateUserInput,
   User,
   UserMode,
+  EditProfileInput,
 ]);

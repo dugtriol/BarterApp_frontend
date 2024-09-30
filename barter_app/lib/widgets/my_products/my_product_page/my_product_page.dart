@@ -1,7 +1,11 @@
+import 'package:barter_app/widgets/all_products/all_product_page.dart';
 import 'package:barter_app/widgets/all_products/all_products_model.dart';
+import 'package:barter_app/widgets/all_products/all_products_screen.dart';
+import 'package:barter_app/widgets/my_products/edit_product/edit_product_model.dart';
 import 'package:barter_app/widgets/my_products/edit_product/edit_product_widget.dart';
+import 'package:barter_app/widgets/my_products/my_product_model.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart'; // Импортируем пакет для работы с буфером обмена
+import 'package:flutter/services.dart';
 import 'package:barter_app/widgets/my_products/my_product_page/product_app_bar.dart';
 import 'package:barter_app/widgets/my_products/my_product_page/product_bottom_bar.dart';
 import 'package:barter_app/widgets/user/user_model.dart';
@@ -16,6 +20,7 @@ class MyProductPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final userModel = context.read<UserModel>();
+    final model = context.read<MyProductModel>();
 
     return Scaffold(
       appBar: AppBar(
@@ -28,7 +33,7 @@ class MyProductPage extends StatelessWidget {
           ClipRRect(
             borderRadius: BorderRadius.circular(10),
             child: Image.network(
-              product.image,
+              buildImageURL(product.image),
               height: 300,
               width: double.infinity,
               fit: BoxFit.cover,
@@ -38,8 +43,6 @@ class MyProductPage extends StatelessWidget {
             ),
           ),
           const SizedBox(height: 16),
-
-          // Product Name
           Text(
             product.name,
             style: const TextStyle(
@@ -48,8 +51,6 @@ class MyProductPage extends StatelessWidget {
             ),
           ),
           const SizedBox(height: 8),
-
-          // Product Description
           Text(
             product.description,
             style: const TextStyle(
@@ -58,72 +59,24 @@ class MyProductPage extends StatelessWidget {
             ),
           ),
           const SizedBox(height: 16),
-
-          // Product Identifier with Copy Button
-
-          _buildProductIdentifierWithCopyButton(product.id, context),
-          _buildProductDetail(
+          buildProductIdentifierWithCopyButton(product.id, context),
+          buildProductDetail(
               "Категория: ${returnCategoryString(product.category)}"),
-          _buildProductDetail("Статус: ${returnStatusString(product.status)}"),
-          _buildProductDetail("Cоздано: ${formatDate(product.createdAt)}"),
+          buildProductDetail("Статус: \n${returnStatusString(product.status)}"),
+          buildProductDetail("Cоздано: \n${formatDate(product.createdAt)}"),
           const SizedBox(height: 16),
 
           // Action Buttons for owners
           if (product.createdBy.id == userModel.id)
-            _buildActionButtons(context),
+            _buildActionButtons(context, product.id),
         ],
-      ),
-    );
-  }
-
-  // Method to build product identifier row with a copy button
-  Widget _buildProductIdentifierWithCopyButton(
-      String text, BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.only(top: 8),
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-        children: [
-          Text(
-            text,
-            style: const TextStyle(
-              fontSize: 15,
-              color: Colors.black54,
-            ),
-          ),
-          IconButton(
-            icon: const Icon(Icons.copy),
-            onPressed: () {
-              // Копируем идентификатор в буфер обмена
-              final identifier = text; // Извлекаем идентификатор
-              Clipboard.setData(ClipboardData(text: identifier)).then((_) {
-                ScaffoldMessenger.of(context).showSnackBar(
-                  const SnackBar(content: Text("Идентификатор скопирован!")),
-                );
-              });
-            },
-          ),
-        ],
-      ),
-    );
-  }
-
-  // Helper method to build product detail rows
-  Widget _buildProductDetail(String text) {
-    return Padding(
-      padding: const EdgeInsets.only(top: 8),
-      child: Text(
-        text,
-        style: const TextStyle(
-          fontSize: 15,
-          color: Colors.black54,
-        ),
       ),
     );
   }
 
   // Build action buttons for edit and delete
-  Widget _buildActionButtons(BuildContext context) {
+  Widget _buildActionButtons(BuildContext context, String id) {
+    final model = context.read<MyProductModel>();
     return Padding(
       padding: const EdgeInsets.all(16.0),
       child: Row(
@@ -133,8 +86,12 @@ class MyProductPage extends StatelessWidget {
             onPressed: () {
               // Handle edit action
               Navigator.of(context).push(MaterialPageRoute<void>(
-                builder: (context) => EditProductPage(product: product),
-              ));
+                  builder: (context) => ChangeNotifierProvider(
+                        create: (context) => EditProductModel(),
+                        child: EditProductPage(
+                          product: product,
+                        ),
+                      )));
             },
             icon: const Icon(Icons.edit),
             label: const Text("Редактировать"),
@@ -148,9 +105,12 @@ class MyProductPage extends StatelessWidget {
             ),
           ),
           ElevatedButton.icon(
-            onPressed: () {
-              // Handle delete action
-              _confirmDelete(context);
+            onPressed: () async {
+              bool isDeleted = await _confirmDelete(context, id);
+              print("isDleted $isDeleted");
+              if (isDeleted == true) {
+                Navigator.of(context).pop();
+              }
             },
             icon: const Icon(Icons.delete),
             label: const Text("Удалить"),
@@ -168,9 +128,9 @@ class MyProductPage extends StatelessWidget {
     );
   }
 
-  // Method to confirm deletion
-  void _confirmDelete(BuildContext context) {
-    showDialog(
+  Future<bool> _confirmDelete(BuildContext context, String id) async {
+    final model = context.read<MyProductModel>();
+    return showDialog<bool>(
       context: context,
       builder: (context) {
         return AlertDialog(
@@ -179,21 +139,53 @@ class MyProductPage extends StatelessWidget {
           actions: [
             TextButton(
               onPressed: () {
-                Navigator.of(context).pop(); // Close dialog
+                Navigator.of(context)
+                    .pop(false); // Close dialog without deleting
               },
               child: const Text("Отмена"),
             ),
             TextButton(
-              onPressed: () {
-                // Handle actual deletion here
-                // For example, call a method to delete the product from the database
-                Navigator.of(context).pop(); // Close dialog
+              onPressed: () async {
+                await model.deleteProduct(id);
+                Navigator.of(context)
+                    .pop(true); // Close dialog and confirm deletion
               },
               child: const Text("Удалить"),
             ),
           ],
         );
       },
-    );
+    ).then((value) => value ?? false); // Return false if dialog is dismissed
   }
+}
+
+// Method to build product identifier row with a copy button
+Widget buildProductIdentifierWithCopyButton(String text, BuildContext context) {
+  return Padding(
+    padding: const EdgeInsets.only(top: 8),
+    child: Row(
+      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+      children: [
+        Text(
+          "Идентификатор: \n$text",
+          style: const TextStyle(
+            fontSize: 15,
+            color: Colors.black54,
+          ),
+        ),
+        IconButton(
+          icon: const Icon(Icons.copy),
+          onPressed: () {
+            // Копируем идентификатор в буфер обмена
+            final identifier = text; // Извлекаем идентификатор
+            Clipboard.setData(ClipboardData(text: identifier)).then((_) {
+              ScaffoldMessenger.of(context).showSnackBar(
+                const SnackBar(content: Text("Идентификатор скопирован!")),
+              );
+            });
+          },
+        ),
+      ],
+    ),
+  );
 }

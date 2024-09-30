@@ -9,14 +9,6 @@ targets:
             Upload:
               name: MultipartFile
               import: 'package:http/http.dart'
-      # gql_build|req_builder:
-      #   enabled: true
-      #   options:
-      #     schema: barter_app_client|lib/graphql/schema.graphql
-      #     type_overrides:
-      #       Upload:
-      #         name: MultipartFile
-      #         import: 'package:http/http.dart'
       ferry_generator|serializer_builder:
         enabled: true
         options:

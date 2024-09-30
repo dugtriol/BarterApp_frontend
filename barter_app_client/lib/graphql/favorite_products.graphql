@@ -1,0 +1,15 @@
+query favoriteProducts {
+  getFavoritesProducts {
+        id
+        name
+        description
+        category
+        image
+        status
+        createdBy {
+            id
+            name
+        }
+        createdAt
+  }
+}

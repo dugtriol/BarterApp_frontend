@@ -9,8 +9,10 @@ import 'package:barter_app_client/graphql/__generated__/create_product.data.gql.
 import 'package:barter_app_client/graphql/__generated__/create_product.req.gql.dart';
 import 'package:barter_app_client/graphql/__generated__/create_transaction.req.gql.dart';
 import 'package:barter_app_client/graphql/__generated__/current_user.req.gql.dart';
-import 'package:barter_app_client/graphql/__generated__/find_like.data.gql.dart';
-import 'package:barter_app_client/graphql/__generated__/find_like.req.gql.dart';
+import 'package:barter_app_client/graphql/__generated__/delete_product.req.gql.dart';
+import 'package:barter_app_client/graphql/__generated__/edit_profile.req.gql.dart';
+import 'package:barter_app_client/graphql/__generated__/favorite_products.data.gql.dart';
+import 'package:barter_app_client/graphql/__generated__/favorite_products.req.gql.dart';
 import 'package:barter_app_client/graphql/__generated__/get_archive.data.gql.dart';
 import 'package:barter_app_client/graphql/__generated__/get_archive.req.gql.dart';
 import 'package:barter_app_client/graphql/__generated__/get_by_buyer.data.gql.dart';
@@ -23,6 +25,8 @@ import 'package:barter_app_client/graphql/__generated__/get_by_user_available.da
 import 'package:barter_app_client/graphql/__generated__/get_by_user_available.req.gql.dart';
 import 'package:barter_app_client/graphql/__generated__/get_created_transactions.data.gql.dart';
 import 'package:barter_app_client/graphql/__generated__/get_created_transactions.req.gql.dart';
+import 'package:barter_app_client/graphql/__generated__/get_likes.data.gql.dart';
+import 'package:barter_app_client/graphql/__generated__/get_likes.req.gql.dart';
 import 'package:barter_app_client/graphql/__generated__/get_ongoing.data.gql.dart';
 import 'package:barter_app_client/graphql/__generated__/get_ongoing.req.gql.dart';
 import 'package:barter_app_client/graphql/__generated__/get_product.data.gql.dart';
@@ -36,6 +40,7 @@ import 'package:barter_app_client/graphql/__generated__/register.req.gql.dart';
 
 import 'package:barter_app_client/graphql/__generated__/schema.schema.gql.dart';
 import 'package:barter_app_client/graphql/__generated__/unlike_product.req.gql.dart';
+import 'package:barter_app_client/graphql/__generated__/update_product.req.gql.dart';
 import 'package:barter_app_client/graphql/__generated__/update_status_declined.req.gql.dart';
 import 'package:barter_app_client/graphql/__generated__/update_status_done.req.gql.dart';
 import 'package:barter_app_client/graphql/__generated__/update_status_ongoing.req.gql.dart';
@@ -442,28 +447,129 @@ class ApiClient {
     return res!;
   }
 
-  Future<List<GfindLikeData_FindLike>> findLike(String search) async {
+  Future<List<GAllProductsData_Products>> findLike(
+      String search, GProductCategory category, GProductSort sort) async {
     await initAuthClient();
     print('api - findLike');
 
     // Подготовка запроса
-    var req = GfindLikeReq((b) => b..vars.searchString = search);
-
+    var req = GAllProductsReq((b) => b
+      ..vars.category = category
+      ..vars.first = 20
+      ..vars.search = search
+      ..vars.sort = sort
+      ..vars.start = 0);
+    print(
+        'findlike req: $req, category: $category, search: $search, sort $sort');
     var stream = client.request(req);
     var event = await stream.first;
 
-    List<GfindLikeData_FindLike?>? res = [];
+    List<GAllProductsData_Products?>? res = [];
 
-    // Проверка наличия данных
     if (event.data != null) {
-      res = event.data?.FindLike?.toList();
+      res = event.data?.Products?.toList();
       print('output $res');
     }
 
     return res
             ?.where((item) => item != null)
-            .cast<GfindLikeData_FindLike>()
+            .cast<GAllProductsData_Products>()
             .toList() ??
         [];
+  }
+
+  Future<void> updateProduct(GProductCategory category, String description,
+      String product_id, String name, MultipartFile? image) async {
+    await initAuthClient();
+    print('api - updateProduct');
+
+    // Prepare the request input
+    var inputBuilder = GEditProductInputBuilder()
+      ..category = category
+      ..description = description
+      ..id = product_id
+      ..image = image
+      ..name = name;
+
+    // Create the request
+    var req =
+        GupdateProductReq((b) => b..vars.input.replace(inputBuilder.build()));
+    print('updateProduct - req - $req');
+    var stream = client.request(req);
+    var event = await stream.first;
+  }
+
+  Future<void> updateProfile(
+      String city, String email, String name, String phone) async {
+    await initAuthClient();
+    print('api - updateProfile');
+
+    // Prepare the request input
+    var inputBuilder = GEditProfileInputBuilder()
+      ..city = city
+      ..email = email
+      ..name = name
+      ..phone = phone;
+
+    // Create the request
+    var req = GeditUserReq((b) => b..vars.input.replace(inputBuilder.build()));
+    print('updateProduct - req - $req');
+    var stream = client.request(req);
+    var event = await stream.first;
+  }
+
+  Future<List<GusersLikesData_getLikes>> GetLikes() async {
+    await initAuthClient();
+    print('api - GetLikes');
+
+    var req = GusersLikesReq();
+    var stream = client.request(req);
+    var event = await stream.first;
+    List<GusersLikesData_getLikes?>? res = [];
+
+    if (event.data != null) {
+      res = event.data?.getLikes?.toList();
+      print('output $res');
+    }
+
+    return res
+            ?.where((item) => item != null)
+            .cast<GusersLikesData_getLikes>()
+            .toList() ??
+        [];
+  }
+
+  Future<List<GfavoriteProductsData_getFavoritesProducts>>
+      GetFavoriteProducts() async {
+    await initAuthClient();
+    print('api - GetFavoriteProducts');
+
+    var req = GfavoriteProductsReq();
+    var stream = client.request(req);
+    var event = await stream.first;
+    List<GfavoriteProductsData_getFavoritesProducts?>? res = [];
+
+    if (event.data != null) {
+      res = event.data?.getFavoritesProducts?.toList();
+      print('output $res');
+    }
+
+    return res
+            ?.where((item) => item != null)
+            .cast<GfavoriteProductsData_getFavoritesProducts>()
+            .toList() ??
+        [];
+  }
+
+  Future<bool> deleteProduct(String id) async {
+    await initAuthClient();
+    print('api - deleteProduct');
+
+    var req = GdeleteProductReq((b) => b..vars.id = id);
+    print('deleteProduct - req - $req');
+    var stream = client.request(req);
+    var event = await stream.first;
+    print('deleteProduct event $event');
+    return true;
   }
 }

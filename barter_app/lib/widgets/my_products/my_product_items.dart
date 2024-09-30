@@ -1,5 +1,6 @@
 import 'package:barter_app/navigation/main_navigation.dart';
 import 'package:barter_app/widgets/all_products/all_products_model.dart';
+import 'package:barter_app/widgets/all_products/all_products_screen.dart';
 import 'package:barter_app/widgets/my_products/my_product_model.dart';
 import 'package:barter_app/widgets/my_products/my_product_page/my_product_page.dart';
 import 'package:flutter/material.dart';
@@ -57,7 +58,7 @@ class MyProductItems extends StatelessWidget {
                       borderRadius:
                           const BorderRadius.vertical(top: Radius.circular(12)),
                       child: Image.network(
-                        product.image,
+                        buildImageURL(product.image),
                         height: 120,
                         width: double.infinity,
                         fit: BoxFit.cover,

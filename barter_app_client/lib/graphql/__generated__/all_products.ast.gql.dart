@@ -7,13 +7,80 @@ import 'package:gql/ast.dart' as _i1;
 const AllProducts = _i1.OperationDefinitionNode(
   type: _i1.OperationType.query,
   name: _i1.NameNode(value: 'AllProducts'),
-  variableDefinitions: [],
+  variableDefinitions: [
+    _i1.VariableDefinitionNode(
+      variable: _i1.VariableNode(name: _i1.NameNode(value: 'category')),
+      type: _i1.NamedTypeNode(
+        name: _i1.NameNode(value: 'ProductCategory'),
+        isNonNull: true,
+      ),
+      defaultValue: _i1.DefaultValueNode(value: null),
+      directives: [],
+    ),
+    _i1.VariableDefinitionNode(
+      variable: _i1.VariableNode(name: _i1.NameNode(value: 'search')),
+      type: _i1.NamedTypeNode(
+        name: _i1.NameNode(value: 'String'),
+        isNonNull: true,
+      ),
+      defaultValue: _i1.DefaultValueNode(value: null),
+      directives: [],
+    ),
+    _i1.VariableDefinitionNode(
+      variable: _i1.VariableNode(name: _i1.NameNode(value: 'sort')),
+      type: _i1.NamedTypeNode(
+        name: _i1.NameNode(value: 'ProductSort'),
+        isNonNull: true,
+      ),
+      defaultValue: _i1.DefaultValueNode(value: null),
+      directives: [],
+    ),
+    _i1.VariableDefinitionNode(
+      variable: _i1.VariableNode(name: _i1.NameNode(value: 'first')),
+      type: _i1.NamedTypeNode(
+        name: _i1.NameNode(value: 'Int'),
+        isNonNull: true,
+      ),
+      defaultValue: _i1.DefaultValueNode(value: _i1.IntValueNode(value: '10')),
+      directives: [],
+    ),
+    _i1.VariableDefinitionNode(
+      variable: _i1.VariableNode(name: _i1.NameNode(value: 'start')),
+      type: _i1.NamedTypeNode(
+        name: _i1.NameNode(value: 'Int'),
+        isNonNull: true,
+      ),
+      defaultValue: _i1.DefaultValueNode(value: _i1.IntValueNode(value: '0')),
+      directives: [],
+    ),
+  ],
   directives: [],
   selectionSet: _i1.SelectionSetNode(selections: [
     _i1.FieldNode(
       name: _i1.NameNode(value: 'Products'),
       alias: null,
-      arguments: [],
+      arguments: [
+        _i1.ArgumentNode(
+          name: _i1.NameNode(value: 'category'),
+          value: _i1.VariableNode(name: _i1.NameNode(value: 'category')),
+        ),
+        _i1.ArgumentNode(
+          name: _i1.NameNode(value: 'search'),
+          value: _i1.VariableNode(name: _i1.NameNode(value: 'search')),
+        ),
+        _i1.ArgumentNode(
+          name: _i1.NameNode(value: 'sort'),
+          value: _i1.VariableNode(name: _i1.NameNode(value: 'sort')),
+        ),
+        _i1.ArgumentNode(
+          name: _i1.NameNode(value: 'first'),
+          value: _i1.VariableNode(name: _i1.NameNode(value: 'first')),
+        ),
+        _i1.ArgumentNode(
+          name: _i1.NameNode(value: 'start'),
+          value: _i1.VariableNode(name: _i1.NameNode(value: 'start')),
+        ),
+      ],
       directives: [],
       selectionSet: _i1.SelectionSetNode(selections: [
         _i1.FieldNode(
@@ -32,13 +99,6 @@ const AllProducts = _i1.OperationDefinitionNode(
         ),
         _i1.FieldNode(
           name: _i1.NameNode(value: 'description'),
-          alias: null,
-          arguments: [],
-          directives: [],
-          selectionSet: null,
-        ),
-        _i1.FieldNode(
-          name: _i1.NameNode(value: 'category'),
           alias: null,
           arguments: [],
           directives: [],
@@ -82,6 +142,20 @@ const AllProducts = _i1.OperationDefinitionNode(
         ),
         _i1.FieldNode(
           name: _i1.NameNode(value: 'createdAt'),
+          alias: null,
+          arguments: [],
+          directives: [],
+          selectionSet: null,
+        ),
+        _i1.FieldNode(
+          name: _i1.NameNode(value: 'description'),
+          alias: null,
+          arguments: [],
+          directives: [],
+          selectionSet: null,
+        ),
+        _i1.FieldNode(
+          name: _i1.NameNode(value: 'category'),
           alias: null,
           arguments: [],
           directives: [],

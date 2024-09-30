@@ -16,4 +16,8 @@ class MyProductModel extends ChangeNotifier {
 
   List<GMyProductsData_User_postedProducts>? get data => _data;
   int? get len => _data?.length;
+
+  Future<void> deleteProduct(String id) async {
+    var ok = await _apiClient.deleteProduct(id);
+  }
 }

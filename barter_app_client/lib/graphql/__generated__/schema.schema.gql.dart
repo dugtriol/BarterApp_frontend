@@ -63,6 +63,8 @@ abstract class GCreateProductInput
 class GProductCategory extends EnumClass {
   const GProductCategory._(String name) : super(name);
 
+  static const GProductCategory DEFAULT = _$gProductCategoryDEFAULT;
+
   static const GProductCategory HOME = _$gProductCategoryHOME;
 
   static const GProductCategory CLOTHES = _$gProductCategoryCLOTHES;
@@ -97,6 +99,49 @@ class GProductStatus extends EnumClass {
   static BuiltSet<GProductStatus> get values => _$gProductStatusValues;
 
   static GProductStatus valueOf(String name) => _$gProductStatusValueOf(name);
+}
+
+abstract class GEditProductInput
+    implements Built<GEditProductInput, GEditProductInputBuilder> {
+  GEditProductInput._();
+
+  factory GEditProductInput([Function(GEditProductInputBuilder b) updates]) =
+      _$GEditProductInput;
+
+  String get id;
+  GProductCategory get category;
+  String get name;
+  String get description;
+  _i1.MultipartFile? get image;
+  static Serializer<GEditProductInput> get serializer =>
+      _$gEditProductInputSerializer;
+
+  Map<String, dynamic> toJson() => (_i2.serializers.serializeWith(
+        GEditProductInput.serializer,
+        this,
+      ) as Map<String, dynamic>);
+
+  static GEditProductInput? fromJson(Map<String, dynamic> json) =>
+      _i2.serializers.deserializeWith(
+        GEditProductInput.serializer,
+        json,
+      );
+}
+
+class GProductSort extends EnumClass {
+  const GProductSort._(String name) : super(name);
+
+  static const GProductSort DEFAULT = _$gProductSortDEFAULT;
+
+  static const GProductSort DATE = _$gProductSortDATE;
+
+  static const GProductSort DISTANCE = _$gProductSortDISTANCE;
+
+  static Serializer<GProductSort> get serializer => _$gProductSortSerializer;
+
+  static BuiltSet<GProductSort> get values => _$gProductSortValues;
+
+  static GProductSort valueOf(String name) => _$gProductSortValueOf(name);
 }
 
 abstract class GDateTime implements Built<GDateTime, GDateTimeBuilder> {
@@ -264,6 +309,32 @@ class GUserMode extends EnumClass {
   static BuiltSet<GUserMode> get values => _$gUserModeValues;
 
   static GUserMode valueOf(String name) => _$gUserModeValueOf(name);
+}
+
+abstract class GEditProfileInput
+    implements Built<GEditProfileInput, GEditProfileInputBuilder> {
+  GEditProfileInput._();
+
+  factory GEditProfileInput([Function(GEditProfileInputBuilder b) updates]) =
+      _$GEditProfileInput;
+
+  String get name;
+  String get email;
+  String get phone;
+  String get city;
+  static Serializer<GEditProfileInput> get serializer =>
+      _$gEditProfileInputSerializer;
+
+  Map<String, dynamic> toJson() => (_i2.serializers.serializeWith(
+        GEditProfileInput.serializer,
+        this,
+      ) as Map<String, dynamic>);
+
+  static GEditProfileInput? fromJson(Map<String, dynamic> json) =>
+      _i2.serializers.deserializeWith(
+        GEditProfileInput.serializer,
+        json,
+      );
 }
 
 const Map<String, Set<String>> possibleTypesMap = {};

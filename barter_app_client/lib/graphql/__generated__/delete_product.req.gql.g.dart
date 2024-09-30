@@ -1,27 +1,28 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
-part of 'find_like.req.gql.dart';
+part of 'delete_product.req.gql.dart';
 
 // **************************************************************************
 // BuiltValueGenerator
 // **************************************************************************
 
-Serializer<GfindLikeReq> _$gfindLikeReqSerializer =
-    new _$GfindLikeReqSerializer();
+Serializer<GdeleteProductReq> _$gdeleteProductReqSerializer =
+    new _$GdeleteProductReqSerializer();
 
-class _$GfindLikeReqSerializer implements StructuredSerializer<GfindLikeReq> {
+class _$GdeleteProductReqSerializer
+    implements StructuredSerializer<GdeleteProductReq> {
   @override
-  final Iterable<Type> types = const [GfindLikeReq, _$GfindLikeReq];
+  final Iterable<Type> types = const [GdeleteProductReq, _$GdeleteProductReq];
   @override
-  final String wireName = 'GfindLikeReq';
+  final String wireName = 'GdeleteProductReq';
 
   @override
-  Iterable<Object?> serialize(Serializers serializers, GfindLikeReq object,
+  Iterable<Object?> serialize(Serializers serializers, GdeleteProductReq object,
       {FullType specifiedType = FullType.unspecified}) {
     final result = <Object?>[
       'vars',
       serializers.serialize(object.vars,
-          specifiedType: const FullType(_i3.GfindLikeVars)),
+          specifiedType: const FullType(_i3.GdeleteProductVars)),
       'operation',
       serializers.serialize(object.operation,
           specifiedType: const FullType(_i4.Operation)),
@@ -42,7 +43,7 @@ class _$GfindLikeReqSerializer implements StructuredSerializer<GfindLikeReq> {
       result
         ..add('optimisticResponse')
         ..add(serializers.serialize(value,
-            specifiedType: const FullType(_i2.GfindLikeData)));
+            specifiedType: const FullType(_i2.GdeleteProductData)));
     }
     value = object.updateCacheHandlerKey;
     if (value != null) {
@@ -70,10 +71,10 @@ class _$GfindLikeReqSerializer implements StructuredSerializer<GfindLikeReq> {
   }
 
   @override
-  GfindLikeReq deserialize(
+  GdeleteProductReq deserialize(
       Serializers serializers, Iterable<Object?> serialized,
       {FullType specifiedType = FullType.unspecified}) {
-    final result = new GfindLikeReqBuilder();
+    final result = new GdeleteProductReqBuilder();
 
     final iterator = serialized.iterator;
     while (iterator.moveNext()) {
@@ -83,8 +84,8 @@ class _$GfindLikeReqSerializer implements StructuredSerializer<GfindLikeReq> {
       switch (key) {
         case 'vars':
           result.vars.replace(serializers.deserialize(value,
-                  specifiedType: const FullType(_i3.GfindLikeVars))!
-              as _i3.GfindLikeVars);
+                  specifiedType: const FullType(_i3.GdeleteProductVars))!
+              as _i3.GdeleteProductVars);
           break;
         case 'operation':
           result.operation = serializers.deserialize(value,
@@ -96,8 +97,8 @@ class _$GfindLikeReqSerializer implements StructuredSerializer<GfindLikeReq> {
           break;
         case 'optimisticResponse':
           result.optimisticResponse.replace(serializers.deserialize(value,
-                  specifiedType: const FullType(_i2.GfindLikeData))!
-              as _i2.GfindLikeData);
+                  specifiedType: const FullType(_i2.GdeleteProductData))!
+              as _i2.GdeleteProductData);
           break;
         case 'updateCacheHandlerKey':
           result.updateCacheHandlerKey = serializers.deserialize(value,
@@ -126,18 +127,18 @@ class _$GfindLikeReqSerializer implements StructuredSerializer<GfindLikeReq> {
   }
 }
 
-class _$GfindLikeReq extends GfindLikeReq {
+class _$GdeleteProductReq extends GdeleteProductReq {
   @override
-  final _i3.GfindLikeVars vars;
+  final _i3.GdeleteProductVars vars;
   @override
   final _i4.Operation operation;
   @override
   final String? requestId;
   @override
-  final _i2.GfindLikeData? Function(_i2.GfindLikeData?, _i2.GfindLikeData?)?
-      updateResult;
+  final _i2.GdeleteProductData? Function(
+      _i2.GdeleteProductData?, _i2.GdeleteProductData?)? updateResult;
   @override
-  final _i2.GfindLikeData? optimisticResponse;
+  final _i2.GdeleteProductData? optimisticResponse;
   @override
   final String? updateCacheHandlerKey;
   @override
@@ -147,10 +148,11 @@ class _$GfindLikeReq extends GfindLikeReq {
   @override
   final bool executeOnListen;
 
-  factory _$GfindLikeReq([void Function(GfindLikeReqBuilder)? updates]) =>
-      (new GfindLikeReqBuilder()..update(updates))._build();
+  factory _$GdeleteProductReq(
+          [void Function(GdeleteProductReqBuilder)? updates]) =>
+      (new GdeleteProductReqBuilder()..update(updates))._build();
 
-  _$GfindLikeReq._(
+  _$GdeleteProductReq._(
       {required this.vars,
       required this.operation,
       this.requestId,
@@ -161,25 +163,26 @@ class _$GfindLikeReq extends GfindLikeReq {
       this.fetchPolicy,
       required this.executeOnListen})
       : super._() {
-    BuiltValueNullFieldError.checkNotNull(vars, r'GfindLikeReq', 'vars');
+    BuiltValueNullFieldError.checkNotNull(vars, r'GdeleteProductReq', 'vars');
     BuiltValueNullFieldError.checkNotNull(
-        operation, r'GfindLikeReq', 'operation');
+        operation, r'GdeleteProductReq', 'operation');
     BuiltValueNullFieldError.checkNotNull(
-        executeOnListen, r'GfindLikeReq', 'executeOnListen');
+        executeOnListen, r'GdeleteProductReq', 'executeOnListen');
   }
 
   @override
-  GfindLikeReq rebuild(void Function(GfindLikeReqBuilder) updates) =>
+  GdeleteProductReq rebuild(void Function(GdeleteProductReqBuilder) updates) =>
       (toBuilder()..update(updates)).build();
 
   @override
-  GfindLikeReqBuilder toBuilder() => new GfindLikeReqBuilder()..replace(this);
+  GdeleteProductReqBuilder toBuilder() =>
+      new GdeleteProductReqBuilder()..replace(this);
 
   @override
   bool operator ==(Object other) {
     if (identical(other, this)) return true;
     final dynamic _$dynamicOther = other;
-    return other is GfindLikeReq &&
+    return other is GdeleteProductReq &&
         vars == other.vars &&
         operation == other.operation &&
         requestId == other.requestId &&
@@ -209,7 +212,7 @@ class _$GfindLikeReq extends GfindLikeReq {
 
   @override
   String toString() {
-    return (newBuiltValueToStringHelper(r'GfindLikeReq')
+    return (newBuiltValueToStringHelper(r'GdeleteProductReq')
           ..add('vars', vars)
           ..add('operation', operation)
           ..add('requestId', requestId)
@@ -223,14 +226,14 @@ class _$GfindLikeReq extends GfindLikeReq {
   }
 }
 
-class GfindLikeReqBuilder
-    implements Builder<GfindLikeReq, GfindLikeReqBuilder> {
-  _$GfindLikeReq? _$v;
+class GdeleteProductReqBuilder
+    implements Builder<GdeleteProductReq, GdeleteProductReqBuilder> {
+  _$GdeleteProductReq? _$v;
 
-  _i3.GfindLikeVarsBuilder? _vars;
-  _i3.GfindLikeVarsBuilder get vars =>
-      _$this._vars ??= new _i3.GfindLikeVarsBuilder();
-  set vars(_i3.GfindLikeVarsBuilder? vars) => _$this._vars = vars;
+  _i3.GdeleteProductVarsBuilder? _vars;
+  _i3.GdeleteProductVarsBuilder get vars =>
+      _$this._vars ??= new _i3.GdeleteProductVarsBuilder();
+  set vars(_i3.GdeleteProductVarsBuilder? vars) => _$this._vars = vars;
 
   _i4.Operation? _operation;
   _i4.Operation? get operation => _$this._operation;
@@ -240,19 +243,21 @@ class GfindLikeReqBuilder
   String? get requestId => _$this._requestId;
   set requestId(String? requestId) => _$this._requestId = requestId;
 
-  _i2.GfindLikeData? Function(_i2.GfindLikeData?, _i2.GfindLikeData?)?
-      _updateResult;
-  _i2.GfindLikeData? Function(_i2.GfindLikeData?, _i2.GfindLikeData?)?
+  _i2.GdeleteProductData? Function(
+      _i2.GdeleteProductData?, _i2.GdeleteProductData?)? _updateResult;
+  _i2.GdeleteProductData? Function(
+          _i2.GdeleteProductData?, _i2.GdeleteProductData?)?
       get updateResult => _$this._updateResult;
   set updateResult(
-          _i2.GfindLikeData? Function(_i2.GfindLikeData?, _i2.GfindLikeData?)?
+          _i2.GdeleteProductData? Function(
+                  _i2.GdeleteProductData?, _i2.GdeleteProductData?)?
               updateResult) =>
       _$this._updateResult = updateResult;
 
-  _i2.GfindLikeDataBuilder? _optimisticResponse;
-  _i2.GfindLikeDataBuilder get optimisticResponse =>
-      _$this._optimisticResponse ??= new _i2.GfindLikeDataBuilder();
-  set optimisticResponse(_i2.GfindLikeDataBuilder? optimisticResponse) =>
+  _i2.GdeleteProductDataBuilder? _optimisticResponse;
+  _i2.GdeleteProductDataBuilder get optimisticResponse =>
+      _$this._optimisticResponse ??= new _i2.GdeleteProductDataBuilder();
+  set optimisticResponse(_i2.GdeleteProductDataBuilder? optimisticResponse) =>
       _$this._optimisticResponse = optimisticResponse;
 
   String? _updateCacheHandlerKey;
@@ -277,11 +282,11 @@ class GfindLikeReqBuilder
   set executeOnListen(bool? executeOnListen) =>
       _$this._executeOnListen = executeOnListen;
 
-  GfindLikeReqBuilder() {
-    GfindLikeReq._initializeBuilder(this);
+  GdeleteProductReqBuilder() {
+    GdeleteProductReq._initializeBuilder(this);
   }
 
-  GfindLikeReqBuilder get _$this {
+  GdeleteProductReqBuilder get _$this {
     final $v = _$v;
     if ($v != null) {
       _vars = $v.vars.toBuilder();
@@ -299,27 +304,27 @@ class GfindLikeReqBuilder
   }
 
   @override
-  void replace(GfindLikeReq other) {
+  void replace(GdeleteProductReq other) {
     ArgumentError.checkNotNull(other, 'other');
-    _$v = other as _$GfindLikeReq;
+    _$v = other as _$GdeleteProductReq;
   }
 
   @override
-  void update(void Function(GfindLikeReqBuilder)? updates) {
+  void update(void Function(GdeleteProductReqBuilder)? updates) {
     if (updates != null) updates(this);
   }
 
   @override
-  GfindLikeReq build() => _build();
+  GdeleteProductReq build() => _build();
 
-  _$GfindLikeReq _build() {
-    _$GfindLikeReq _$result;
+  _$GdeleteProductReq _build() {
+    _$GdeleteProductReq _$result;
     try {
       _$result = _$v ??
-          new _$GfindLikeReq._(
+          new _$GdeleteProductReq._(
               vars: vars.build(),
               operation: BuiltValueNullFieldError.checkNotNull(
-                  operation, r'GfindLikeReq', 'operation'),
+                  operation, r'GdeleteProductReq', 'operation'),
               requestId: requestId,
               updateResult: updateResult,
               optimisticResponse: _optimisticResponse?.build(),
@@ -327,7 +332,7 @@ class GfindLikeReqBuilder
               updateCacheHandlerContext: updateCacheHandlerContext,
               fetchPolicy: fetchPolicy,
               executeOnListen: BuiltValueNullFieldError.checkNotNull(
-                  executeOnListen, r'GfindLikeReq', 'executeOnListen'));
+                  executeOnListen, r'GdeleteProductReq', 'executeOnListen'));
     } catch (_) {
       late String _$failedField;
       try {
@@ -338,7 +343,7 @@ class GfindLikeReqBuilder
         _optimisticResponse?.build();
       } catch (e) {
         throw new BuiltValueNestedFieldError(
-            r'GfindLikeReq', _$failedField, e.toString());
+            r'GdeleteProductReq', _$failedField, e.toString());
       }
       rethrow;
     }

@@ -1,0 +1,3 @@
+mutation editUser($input: EditProfileInput!) {
+  editProfile(profile: $input)
+}

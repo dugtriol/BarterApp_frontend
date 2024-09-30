@@ -28,12 +28,27 @@ import 'package:barter_app_client/graphql/__generated__/current_user.req.gql.dar
     show GCurrentReq;
 import 'package:barter_app_client/graphql/__generated__/current_user.var.gql.dart'
     show GCurrentVars;
-import 'package:barter_app_client/graphql/__generated__/find_like.data.gql.dart'
-    show GfindLikeData, GfindLikeData_FindLike;
-import 'package:barter_app_client/graphql/__generated__/find_like.req.gql.dart'
-    show GfindLikeReq;
-import 'package:barter_app_client/graphql/__generated__/find_like.var.gql.dart'
-    show GfindLikeVars;
+import 'package:barter_app_client/graphql/__generated__/delete_product.data.gql.dart'
+    show GdeleteProductData;
+import 'package:barter_app_client/graphql/__generated__/delete_product.req.gql.dart'
+    show GdeleteProductReq;
+import 'package:barter_app_client/graphql/__generated__/delete_product.var.gql.dart'
+    show GdeleteProductVars;
+import 'package:barter_app_client/graphql/__generated__/edit_profile.data.gql.dart'
+    show GeditUserData;
+import 'package:barter_app_client/graphql/__generated__/edit_profile.req.gql.dart'
+    show GeditUserReq;
+import 'package:barter_app_client/graphql/__generated__/edit_profile.var.gql.dart'
+    show GeditUserVars;
+import 'package:barter_app_client/graphql/__generated__/favorite_products.data.gql.dart'
+    show
+        GfavoriteProductsData,
+        GfavoriteProductsData_getFavoritesProducts,
+        GfavoriteProductsData_getFavoritesProducts_createdBy;
+import 'package:barter_app_client/graphql/__generated__/favorite_products.req.gql.dart'
+    show GfavoriteProductsReq;
+import 'package:barter_app_client/graphql/__generated__/favorite_products.var.gql.dart'
+    show GfavoriteProductsVars;
 import 'package:barter_app_client/graphql/__generated__/get_archive.data.gql.dart'
     show GGetArchiveData, GGetArchiveData_GetArchive;
 import 'package:barter_app_client/graphql/__generated__/get_archive.req.gql.dart'
@@ -76,6 +91,12 @@ import 'package:barter_app_client/graphql/__generated__/get_created_transactions
     show GGetCreatedReq;
 import 'package:barter_app_client/graphql/__generated__/get_created_transactions.var.gql.dart'
     show GGetCreatedVars;
+import 'package:barter_app_client/graphql/__generated__/get_likes.data.gql.dart'
+    show GusersLikesData, GusersLikesData_getLikes;
+import 'package:barter_app_client/graphql/__generated__/get_likes.req.gql.dart'
+    show GusersLikesReq;
+import 'package:barter_app_client/graphql/__generated__/get_likes.var.gql.dart'
+    show GusersLikesVars;
 import 'package:barter_app_client/graphql/__generated__/get_ongoing.data.gql.dart'
     show GGetOngoingData, GGetOngoingData_GetOngoing;
 import 'package:barter_app_client/graphql/__generated__/get_ongoing.req.gql.dart'
@@ -129,8 +150,11 @@ import 'package:barter_app_client/graphql/__generated__/schema.schema.gql.dart'
         GCreateProductInput,
         GCreateUserInput,
         GDateTime,
+        GEditProductInput,
+        GEditProfileInput,
         GLoginInput,
         GProductCategory,
+        GProductSort,
         GProductStatus,
         GTransactionCreateInput,
         GTransactionShipping,
@@ -143,6 +167,12 @@ import 'package:barter_app_client/graphql/__generated__/unlike_product.req.gql.d
     show GUnlikeProductReq;
 import 'package:barter_app_client/graphql/__generated__/unlike_product.var.gql.dart'
     show GUnlikeProductVars;
+import 'package:barter_app_client/graphql/__generated__/update_product.data.gql.dart'
+    show GupdateProductData;
+import 'package:barter_app_client/graphql/__generated__/update_product.req.gql.dart'
+    show GupdateProductReq;
+import 'package:barter_app_client/graphql/__generated__/update_product.var.gql.dart'
+    show GupdateProductVars;
 import 'package:barter_app_client/graphql/__generated__/update_status_declined.data.gql.dart'
     show GUpdateDeclinedData;
 import 'package:barter_app_client/graphql/__generated__/update_status_declined.req.gql.dart'
@@ -203,6 +233,8 @@ final SerializersBuilder _serializersBuilder = _$serializers.toBuilder()
   GCurrentReq,
   GCurrentVars,
   GDateTime,
+  GEditProductInput,
+  GEditProfileInput,
   GGetArchiveData,
   GGetArchiveData_GetArchive,
   GGetArchiveReq,
@@ -248,6 +280,7 @@ final SerializersBuilder _serializersBuilder = _$serializers.toBuilder()
   GMyProductsReq,
   GMyProductsVars,
   GProductCategory,
+  GProductSort,
   GProductStatus,
   GTransactionCreateInput,
   GTransactionShipping,
@@ -266,15 +299,29 @@ final SerializersBuilder _serializersBuilder = _$serializers.toBuilder()
   GUpdateOngoingVars,
   GUploadFile,
   GUserMode,
-  GfindLikeData,
-  GfindLikeData_FindLike,
-  GfindLikeReq,
-  GfindLikeVars,
+  GdeleteProductData,
+  GdeleteProductReq,
+  GdeleteProductVars,
+  GeditUserData,
+  GeditUserReq,
+  GeditUserVars,
+  GfavoriteProductsData,
+  GfavoriteProductsData_getFavoritesProducts,
+  GfavoriteProductsData_getFavoritesProducts_createdBy,
+  GfavoriteProductsReq,
+  GfavoriteProductsVars,
   GnewUserData,
   GnewUserData_Register,
   GnewUserData_Register_authToken,
   GnewUserData_Register_user,
   GnewUserReq,
   GnewUserVars,
+  GupdateProductData,
+  GupdateProductReq,
+  GupdateProductVars,
+  GusersLikesData,
+  GusersLikesData_getLikes,
+  GusersLikesReq,
+  GusersLikesVars,
 ])
 final Serializers serializers = _serializersBuilder.build();

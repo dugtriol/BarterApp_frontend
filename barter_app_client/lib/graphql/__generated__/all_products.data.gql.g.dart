@@ -95,9 +95,6 @@ class _$GAllProductsData_ProductsSerializer
       'description',
       serializers.serialize(object.description,
           specifiedType: const FullType(String)),
-      'category',
-      serializers.serialize(object.category,
-          specifiedType: const FullType(_i2.GProductCategory)),
       'createdBy',
       serializers.serialize(object.createdBy,
           specifiedType: const FullType(GAllProductsData_Products_createdBy)),
@@ -110,6 +107,9 @@ class _$GAllProductsData_ProductsSerializer
       'createdAt',
       serializers.serialize(object.createdAt,
           specifiedType: const FullType(_i2.GDateTime)),
+      'category',
+      serializers.serialize(object.category,
+          specifiedType: const FullType(_i2.GProductCategory)),
     ];
 
     return result;
@@ -143,11 +143,6 @@ class _$GAllProductsData_ProductsSerializer
           result.description = serializers.deserialize(value,
               specifiedType: const FullType(String))! as String;
           break;
-        case 'category':
-          result.category = serializers.deserialize(value,
-                  specifiedType: const FullType(_i2.GProductCategory))!
-              as _i2.GProductCategory;
-          break;
         case 'createdBy':
           result.createdBy.replace(serializers.deserialize(value,
                   specifiedType:
@@ -166,6 +161,11 @@ class _$GAllProductsData_ProductsSerializer
         case 'createdAt':
           result.createdAt.replace(serializers.deserialize(value,
               specifiedType: const FullType(_i2.GDateTime))! as _i2.GDateTime);
+          break;
+        case 'category':
+          result.category = serializers.deserialize(value,
+                  specifiedType: const FullType(_i2.GProductCategory))!
+              as _i2.GProductCategory;
           break;
       }
     }
@@ -357,8 +357,6 @@ class _$GAllProductsData_Products extends GAllProductsData_Products {
   @override
   final String description;
   @override
-  final _i2.GProductCategory category;
-  @override
   final GAllProductsData_Products_createdBy createdBy;
   @override
   final String image;
@@ -366,6 +364,8 @@ class _$GAllProductsData_Products extends GAllProductsData_Products {
   final _i2.GProductStatus status;
   @override
   final _i2.GDateTime createdAt;
+  @override
+  final _i2.GProductCategory category;
 
   factory _$GAllProductsData_Products(
           [void Function(GAllProductsData_ProductsBuilder)? updates]) =>
@@ -376,11 +376,11 @@ class _$GAllProductsData_Products extends GAllProductsData_Products {
       required this.id,
       required this.name,
       required this.description,
-      required this.category,
       required this.createdBy,
       required this.image,
       required this.status,
-      required this.createdAt})
+      required this.createdAt,
+      required this.category})
       : super._() {
     BuiltValueNullFieldError.checkNotNull(
         G__typename, r'GAllProductsData_Products', 'G__typename');
@@ -391,8 +391,6 @@ class _$GAllProductsData_Products extends GAllProductsData_Products {
     BuiltValueNullFieldError.checkNotNull(
         description, r'GAllProductsData_Products', 'description');
     BuiltValueNullFieldError.checkNotNull(
-        category, r'GAllProductsData_Products', 'category');
-    BuiltValueNullFieldError.checkNotNull(
         createdBy, r'GAllProductsData_Products', 'createdBy');
     BuiltValueNullFieldError.checkNotNull(
         image, r'GAllProductsData_Products', 'image');
@@ -400,6 +398,8 @@ class _$GAllProductsData_Products extends GAllProductsData_Products {
         status, r'GAllProductsData_Products', 'status');
     BuiltValueNullFieldError.checkNotNull(
         createdAt, r'GAllProductsData_Products', 'createdAt');
+    BuiltValueNullFieldError.checkNotNull(
+        category, r'GAllProductsData_Products', 'category');
   }
 
   @override
@@ -419,11 +419,11 @@ class _$GAllProductsData_Products extends GAllProductsData_Products {
         id == other.id &&
         name == other.name &&
         description == other.description &&
-        category == other.category &&
         createdBy == other.createdBy &&
         image == other.image &&
         status == other.status &&
-        createdAt == other.createdAt;
+        createdAt == other.createdAt &&
+        category == other.category;
   }
 
   @override
@@ -433,11 +433,11 @@ class _$GAllProductsData_Products extends GAllProductsData_Products {
     _$hash = $jc(_$hash, id.hashCode);
     _$hash = $jc(_$hash, name.hashCode);
     _$hash = $jc(_$hash, description.hashCode);
-    _$hash = $jc(_$hash, category.hashCode);
     _$hash = $jc(_$hash, createdBy.hashCode);
     _$hash = $jc(_$hash, image.hashCode);
     _$hash = $jc(_$hash, status.hashCode);
     _$hash = $jc(_$hash, createdAt.hashCode);
+    _$hash = $jc(_$hash, category.hashCode);
     _$hash = $jf(_$hash);
     return _$hash;
   }
@@ -449,11 +449,11 @@ class _$GAllProductsData_Products extends GAllProductsData_Products {
           ..add('id', id)
           ..add('name', name)
           ..add('description', description)
-          ..add('category', category)
           ..add('createdBy', createdBy)
           ..add('image', image)
           ..add('status', status)
-          ..add('createdAt', createdAt))
+          ..add('createdAt', createdAt)
+          ..add('category', category))
         .toString();
   }
 }
@@ -479,10 +479,6 @@ class GAllProductsData_ProductsBuilder
   String? get description => _$this._description;
   set description(String? description) => _$this._description = description;
 
-  _i2.GProductCategory? _category;
-  _i2.GProductCategory? get category => _$this._category;
-  set category(_i2.GProductCategory? category) => _$this._category = category;
-
   GAllProductsData_Products_createdByBuilder? _createdBy;
   GAllProductsData_Products_createdByBuilder get createdBy =>
       _$this._createdBy ??= new GAllProductsData_Products_createdByBuilder();
@@ -503,6 +499,10 @@ class GAllProductsData_ProductsBuilder
   set createdAt(_i2.GDateTimeBuilder? createdAt) =>
       _$this._createdAt = createdAt;
 
+  _i2.GProductCategory? _category;
+  _i2.GProductCategory? get category => _$this._category;
+  set category(_i2.GProductCategory? category) => _$this._category = category;
+
   GAllProductsData_ProductsBuilder() {
     GAllProductsData_Products._initializeBuilder(this);
   }
@@ -514,11 +514,11 @@ class GAllProductsData_ProductsBuilder
       _id = $v.id;
       _name = $v.name;
       _description = $v.description;
-      _category = $v.category;
       _createdBy = $v.createdBy.toBuilder();
       _image = $v.image;
       _status = $v.status;
       _createdAt = $v.createdAt.toBuilder();
+      _category = $v.category;
       _$v = null;
     }
     return this;
@@ -551,14 +551,14 @@ class GAllProductsData_ProductsBuilder
                   name, r'GAllProductsData_Products', 'name'),
               description: BuiltValueNullFieldError.checkNotNull(
                   description, r'GAllProductsData_Products', 'description'),
-              category: BuiltValueNullFieldError.checkNotNull(
-                  category, r'GAllProductsData_Products', 'category'),
               createdBy: createdBy.build(),
               image: BuiltValueNullFieldError.checkNotNull(
                   image, r'GAllProductsData_Products', 'image'),
               status: BuiltValueNullFieldError.checkNotNull(
                   status, r'GAllProductsData_Products', 'status'),
-              createdAt: createdAt.build());
+              createdAt: createdAt.build(),
+              category: BuiltValueNullFieldError.checkNotNull(
+                  category, r'GAllProductsData_Products', 'category'));
     } catch (_) {
       late String _$failedField;
       try {

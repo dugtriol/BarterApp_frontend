@@ -6,6 +6,8 @@ part of 'schema.schema.gql.dart';
 // BuiltValueGenerator
 // **************************************************************************
 
+const GProductCategory _$gProductCategoryDEFAULT =
+    const GProductCategory._('DEFAULT');
 const GProductCategory _$gProductCategoryHOME =
     const GProductCategory._('HOME');
 const GProductCategory _$gProductCategoryCLOTHES =
@@ -19,6 +21,8 @@ const GProductCategory _$gProductCategoryOTHER =
 
 GProductCategory _$gProductCategoryValueOf(String name) {
   switch (name) {
+    case 'DEFAULT':
+      return _$gProductCategoryDEFAULT;
     case 'HOME':
       return _$gProductCategoryHOME;
     case 'CLOTHES':
@@ -36,6 +40,7 @@ GProductCategory _$gProductCategoryValueOf(String name) {
 
 final BuiltSet<GProductCategory> _$gProductCategoryValues =
     new BuiltSet<GProductCategory>(const <GProductCategory>[
+  _$gProductCategoryDEFAULT,
   _$gProductCategoryHOME,
   _$gProductCategoryCLOTHES,
   _$gProductCategoryCHILDREN,
@@ -68,6 +73,30 @@ final BuiltSet<GProductStatus> _$gProductStatusValues =
   _$gProductStatusAVAILABLE,
   _$gProductStatusEXCHANGING,
   _$gProductStatusEXCHANGED,
+]);
+
+const GProductSort _$gProductSortDEFAULT = const GProductSort._('DEFAULT');
+const GProductSort _$gProductSortDATE = const GProductSort._('DATE');
+const GProductSort _$gProductSortDISTANCE = const GProductSort._('DISTANCE');
+
+GProductSort _$gProductSortValueOf(String name) {
+  switch (name) {
+    case 'DEFAULT':
+      return _$gProductSortDEFAULT;
+    case 'DATE':
+      return _$gProductSortDATE;
+    case 'DISTANCE':
+      return _$gProductSortDISTANCE;
+    default:
+      throw new ArgumentError(name);
+  }
+}
+
+final BuiltSet<GProductSort> _$gProductSortValues =
+    new BuiltSet<GProductSort>(const <GProductSort>[
+  _$gProductSortDEFAULT,
+  _$gProductSortDATE,
+  _$gProductSortDISTANCE,
 ]);
 
 const GTransactionShipping _$gTransactionShippingMEETUP =
@@ -156,6 +185,10 @@ Serializer<GProductCategory> _$gProductCategorySerializer =
     new _$GProductCategorySerializer();
 Serializer<GProductStatus> _$gProductStatusSerializer =
     new _$GProductStatusSerializer();
+Serializer<GEditProductInput> _$gEditProductInputSerializer =
+    new _$GEditProductInputSerializer();
+Serializer<GProductSort> _$gProductSortSerializer =
+    new _$GProductSortSerializer();
 Serializer<GTransactionShipping> _$gTransactionShippingSerializer =
     new _$GTransactionShippingSerializer();
 Serializer<GTransactionStatus> _$gTransactionStatusSerializer =
@@ -168,6 +201,8 @@ Serializer<GLoginInput> _$gLoginInputSerializer = new _$GLoginInputSerializer();
 Serializer<GCreateUserInput> _$gCreateUserInputSerializer =
     new _$GCreateUserInputSerializer();
 Serializer<GUserMode> _$gUserModeSerializer = new _$GUserModeSerializer();
+Serializer<GEditProfileInput> _$gEditProfileInputSerializer =
+    new _$GEditProfileInputSerializer();
 
 class _$GUploadFileSerializer implements StructuredSerializer<GUploadFile> {
   @override
@@ -318,6 +353,97 @@ class _$GProductStatusSerializer
   GProductStatus deserialize(Serializers serializers, Object serialized,
           {FullType specifiedType = FullType.unspecified}) =>
       GProductStatus.valueOf(serialized as String);
+}
+
+class _$GEditProductInputSerializer
+    implements StructuredSerializer<GEditProductInput> {
+  @override
+  final Iterable<Type> types = const [GEditProductInput, _$GEditProductInput];
+  @override
+  final String wireName = 'GEditProductInput';
+
+  @override
+  Iterable<Object?> serialize(Serializers serializers, GEditProductInput object,
+      {FullType specifiedType = FullType.unspecified}) {
+    final result = <Object?>[
+      'id',
+      serializers.serialize(object.id, specifiedType: const FullType(String)),
+      'category',
+      serializers.serialize(object.category,
+          specifiedType: const FullType(GProductCategory)),
+      'name',
+      serializers.serialize(object.name, specifiedType: const FullType(String)),
+      'description',
+      serializers.serialize(object.description,
+          specifiedType: const FullType(String)),
+    ];
+    Object? value;
+    value = object.image;
+    if (value != null) {
+      result
+        ..add('image')
+        ..add(serializers.serialize(value,
+            specifiedType: const FullType(_i1.MultipartFile)));
+    }
+    return result;
+  }
+
+  @override
+  GEditProductInput deserialize(
+      Serializers serializers, Iterable<Object?> serialized,
+      {FullType specifiedType = FullType.unspecified}) {
+    final result = new GEditProductInputBuilder();
+
+    final iterator = serialized.iterator;
+    while (iterator.moveNext()) {
+      final key = iterator.current! as String;
+      iterator.moveNext();
+      final Object? value = iterator.current;
+      switch (key) {
+        case 'id':
+          result.id = serializers.deserialize(value,
+              specifiedType: const FullType(String))! as String;
+          break;
+        case 'category':
+          result.category = serializers.deserialize(value,
+                  specifiedType: const FullType(GProductCategory))!
+              as GProductCategory;
+          break;
+        case 'name':
+          result.name = serializers.deserialize(value,
+              specifiedType: const FullType(String))! as String;
+          break;
+        case 'description':
+          result.description = serializers.deserialize(value,
+              specifiedType: const FullType(String))! as String;
+          break;
+        case 'image':
+          result.image = serializers.deserialize(value,
+                  specifiedType: const FullType(_i1.MultipartFile))
+              as _i1.MultipartFile?;
+          break;
+      }
+    }
+
+    return result.build();
+  }
+}
+
+class _$GProductSortSerializer implements PrimitiveSerializer<GProductSort> {
+  @override
+  final Iterable<Type> types = const <Type>[GProductSort];
+  @override
+  final String wireName = 'GProductSort';
+
+  @override
+  Object serialize(Serializers serializers, GProductSort object,
+          {FullType specifiedType = FullType.unspecified}) =>
+      object.name;
+
+  @override
+  GProductSort deserialize(Serializers serializers, Object serialized,
+          {FullType specifiedType = FullType.unspecified}) =>
+      GProductSort.valueOf(serialized as String);
 }
 
 class _$GTransactionShippingSerializer
@@ -620,6 +746,67 @@ class _$GUserModeSerializer implements PrimitiveSerializer<GUserMode> {
       GUserMode.valueOf(serialized as String);
 }
 
+class _$GEditProfileInputSerializer
+    implements StructuredSerializer<GEditProfileInput> {
+  @override
+  final Iterable<Type> types = const [GEditProfileInput, _$GEditProfileInput];
+  @override
+  final String wireName = 'GEditProfileInput';
+
+  @override
+  Iterable<Object?> serialize(Serializers serializers, GEditProfileInput object,
+      {FullType specifiedType = FullType.unspecified}) {
+    final result = <Object?>[
+      'name',
+      serializers.serialize(object.name, specifiedType: const FullType(String)),
+      'email',
+      serializers.serialize(object.email,
+          specifiedType: const FullType(String)),
+      'phone',
+      serializers.serialize(object.phone,
+          specifiedType: const FullType(String)),
+      'city',
+      serializers.serialize(object.city, specifiedType: const FullType(String)),
+    ];
+
+    return result;
+  }
+
+  @override
+  GEditProfileInput deserialize(
+      Serializers serializers, Iterable<Object?> serialized,
+      {FullType specifiedType = FullType.unspecified}) {
+    final result = new GEditProfileInputBuilder();
+
+    final iterator = serialized.iterator;
+    while (iterator.moveNext()) {
+      final key = iterator.current! as String;
+      iterator.moveNext();
+      final Object? value = iterator.current;
+      switch (key) {
+        case 'name':
+          result.name = serializers.deserialize(value,
+              specifiedType: const FullType(String))! as String;
+          break;
+        case 'email':
+          result.email = serializers.deserialize(value,
+              specifiedType: const FullType(String))! as String;
+          break;
+        case 'phone':
+          result.phone = serializers.deserialize(value,
+              specifiedType: const FullType(String))! as String;
+          break;
+        case 'city':
+          result.city = serializers.deserialize(value,
+              specifiedType: const FullType(String))! as String;
+          break;
+      }
+    }
+
+    return result.build();
+  }
+}
+
 class _$GUploadFile extends GUploadFile {
   @override
   final int id;
@@ -842,6 +1029,150 @@ class GCreateProductInputBuilder
                 description, r'GCreateProductInput', 'description'),
             image: BuiltValueNullFieldError.checkNotNull(
                 image, r'GCreateProductInput', 'image'));
+    replace(_$result);
+    return _$result;
+  }
+}
+
+class _$GEditProductInput extends GEditProductInput {
+  @override
+  final String id;
+  @override
+  final GProductCategory category;
+  @override
+  final String name;
+  @override
+  final String description;
+  @override
+  final _i1.MultipartFile? image;
+
+  factory _$GEditProductInput(
+          [void Function(GEditProductInputBuilder)? updates]) =>
+      (new GEditProductInputBuilder()..update(updates))._build();
+
+  _$GEditProductInput._(
+      {required this.id,
+      required this.category,
+      required this.name,
+      required this.description,
+      this.image})
+      : super._() {
+    BuiltValueNullFieldError.checkNotNull(id, r'GEditProductInput', 'id');
+    BuiltValueNullFieldError.checkNotNull(
+        category, r'GEditProductInput', 'category');
+    BuiltValueNullFieldError.checkNotNull(name, r'GEditProductInput', 'name');
+    BuiltValueNullFieldError.checkNotNull(
+        description, r'GEditProductInput', 'description');
+  }
+
+  @override
+  GEditProductInput rebuild(void Function(GEditProductInputBuilder) updates) =>
+      (toBuilder()..update(updates)).build();
+
+  @override
+  GEditProductInputBuilder toBuilder() =>
+      new GEditProductInputBuilder()..replace(this);
+
+  @override
+  bool operator ==(Object other) {
+    if (identical(other, this)) return true;
+    return other is GEditProductInput &&
+        id == other.id &&
+        category == other.category &&
+        name == other.name &&
+        description == other.description &&
+        image == other.image;
+  }
+
+  @override
+  int get hashCode {
+    var _$hash = 0;
+    _$hash = $jc(_$hash, id.hashCode);
+    _$hash = $jc(_$hash, category.hashCode);
+    _$hash = $jc(_$hash, name.hashCode);
+    _$hash = $jc(_$hash, description.hashCode);
+    _$hash = $jc(_$hash, image.hashCode);
+    _$hash = $jf(_$hash);
+    return _$hash;
+  }
+
+  @override
+  String toString() {
+    return (newBuiltValueToStringHelper(r'GEditProductInput')
+          ..add('id', id)
+          ..add('category', category)
+          ..add('name', name)
+          ..add('description', description)
+          ..add('image', image))
+        .toString();
+  }
+}
+
+class GEditProductInputBuilder
+    implements Builder<GEditProductInput, GEditProductInputBuilder> {
+  _$GEditProductInput? _$v;
+
+  String? _id;
+  String? get id => _$this._id;
+  set id(String? id) => _$this._id = id;
+
+  GProductCategory? _category;
+  GProductCategory? get category => _$this._category;
+  set category(GProductCategory? category) => _$this._category = category;
+
+  String? _name;
+  String? get name => _$this._name;
+  set name(String? name) => _$this._name = name;
+
+  String? _description;
+  String? get description => _$this._description;
+  set description(String? description) => _$this._description = description;
+
+  _i1.MultipartFile? _image;
+  _i1.MultipartFile? get image => _$this._image;
+  set image(_i1.MultipartFile? image) => _$this._image = image;
+
+  GEditProductInputBuilder();
+
+  GEditProductInputBuilder get _$this {
+    final $v = _$v;
+    if ($v != null) {
+      _id = $v.id;
+      _category = $v.category;
+      _name = $v.name;
+      _description = $v.description;
+      _image = $v.image;
+      _$v = null;
+    }
+    return this;
+  }
+
+  @override
+  void replace(GEditProductInput other) {
+    ArgumentError.checkNotNull(other, 'other');
+    _$v = other as _$GEditProductInput;
+  }
+
+  @override
+  void update(void Function(GEditProductInputBuilder)? updates) {
+    if (updates != null) updates(this);
+  }
+
+  @override
+  GEditProductInput build() => _build();
+
+  _$GEditProductInput _build() {
+    final _$result = _$v ??
+        new _$GEditProductInput._(
+            id: BuiltValueNullFieldError.checkNotNull(
+                id, r'GEditProductInput', 'id'),
+            category: BuiltValueNullFieldError.checkNotNull(
+                category, r'GEditProductInput', 'category'),
+            name: BuiltValueNullFieldError.checkNotNull(
+                name, r'GEditProductInput', 'name'),
+            description: BuiltValueNullFieldError.checkNotNull(
+                description, r'GEditProductInput', 'description'),
+            image: image);
     replace(_$result);
     return _$result;
   }
@@ -1436,6 +1767,136 @@ class GCreateUserInputBuilder
                 city, r'GCreateUserInput', 'city'),
             mode: BuiltValueNullFieldError.checkNotNull(
                 mode, r'GCreateUserInput', 'mode'));
+    replace(_$result);
+    return _$result;
+  }
+}
+
+class _$GEditProfileInput extends GEditProfileInput {
+  @override
+  final String name;
+  @override
+  final String email;
+  @override
+  final String phone;
+  @override
+  final String city;
+
+  factory _$GEditProfileInput(
+          [void Function(GEditProfileInputBuilder)? updates]) =>
+      (new GEditProfileInputBuilder()..update(updates))._build();
+
+  _$GEditProfileInput._(
+      {required this.name,
+      required this.email,
+      required this.phone,
+      required this.city})
+      : super._() {
+    BuiltValueNullFieldError.checkNotNull(name, r'GEditProfileInput', 'name');
+    BuiltValueNullFieldError.checkNotNull(email, r'GEditProfileInput', 'email');
+    BuiltValueNullFieldError.checkNotNull(phone, r'GEditProfileInput', 'phone');
+    BuiltValueNullFieldError.checkNotNull(city, r'GEditProfileInput', 'city');
+  }
+
+  @override
+  GEditProfileInput rebuild(void Function(GEditProfileInputBuilder) updates) =>
+      (toBuilder()..update(updates)).build();
+
+  @override
+  GEditProfileInputBuilder toBuilder() =>
+      new GEditProfileInputBuilder()..replace(this);
+
+  @override
+  bool operator ==(Object other) {
+    if (identical(other, this)) return true;
+    return other is GEditProfileInput &&
+        name == other.name &&
+        email == other.email &&
+        phone == other.phone &&
+        city == other.city;
+  }
+
+  @override
+  int get hashCode {
+    var _$hash = 0;
+    _$hash = $jc(_$hash, name.hashCode);
+    _$hash = $jc(_$hash, email.hashCode);
+    _$hash = $jc(_$hash, phone.hashCode);
+    _$hash = $jc(_$hash, city.hashCode);
+    _$hash = $jf(_$hash);
+    return _$hash;
+  }
+
+  @override
+  String toString() {
+    return (newBuiltValueToStringHelper(r'GEditProfileInput')
+          ..add('name', name)
+          ..add('email', email)
+          ..add('phone', phone)
+          ..add('city', city))
+        .toString();
+  }
+}
+
+class GEditProfileInputBuilder
+    implements Builder<GEditProfileInput, GEditProfileInputBuilder> {
+  _$GEditProfileInput? _$v;
+
+  String? _name;
+  String? get name => _$this._name;
+  set name(String? name) => _$this._name = name;
+
+  String? _email;
+  String? get email => _$this._email;
+  set email(String? email) => _$this._email = email;
+
+  String? _phone;
+  String? get phone => _$this._phone;
+  set phone(String? phone) => _$this._phone = phone;
+
+  String? _city;
+  String? get city => _$this._city;
+  set city(String? city) => _$this._city = city;
+
+  GEditProfileInputBuilder();
+
+  GEditProfileInputBuilder get _$this {
+    final $v = _$v;
+    if ($v != null) {
+      _name = $v.name;
+      _email = $v.email;
+      _phone = $v.phone;
+      _city = $v.city;
+      _$v = null;
+    }
+    return this;
+  }
+
+  @override
+  void replace(GEditProfileInput other) {
+    ArgumentError.checkNotNull(other, 'other');
+    _$v = other as _$GEditProfileInput;
+  }
+
+  @override
+  void update(void Function(GEditProfileInputBuilder)? updates) {
+    if (updates != null) updates(this);
+  }
+
+  @override
+  GEditProfileInput build() => _build();
+
+  _$GEditProfileInput _build() {
+    final _$result = _$v ??
+        new _$GEditProfileInput._(
+            name: BuiltValueNullFieldError.checkNotNull(
+                name, r'GEditProfileInput', 'name'),
+            email: BuiltValueNullFieldError.checkNotNull(
+                email, r'GEditProfileInput', 'email'),
+            phone: BuiltValueNullFieldError.checkNotNull(
+                phone, r'GEditProfileInput', 'phone'),
+            city: BuiltValueNullFieldError.checkNotNull(
+                city, r'GEditProfileInput', 'city'));
     replace(_$result);
     return _$result;
   }

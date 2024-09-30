@@ -1,0 +1,3 @@
+mutation updateProduct($input: EditProductInput!) {
+  editProduct(input: $input)
+}

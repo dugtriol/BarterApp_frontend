@@ -1,5 +1,5 @@
 import 'package:barter_app/client/api_client.dart';
-import 'package:barter_app_client/graphql/__generated__/find_like.data.gql.dart';
+import 'package:barter_app_client/graphql/__generated__/all_products.data.gql.dart';
 import 'package:barter_app_client/graphql/__generated__/get_by_category_available.data.gql.dart';
 import 'package:barter_app_client/graphql/__generated__/schema.schema.gql.dart';
 import 'package:flutter/widgets.dart';
@@ -8,30 +8,56 @@ import 'package:intl/intl.dart';
 class AllProductsModel extends ChangeNotifier {
   final api = ApiClient();
   var categories = GProductCategory.values.toList();
-  List<GByCategoryAvailableData_GetByCategoryAvailable>? _data;
+  var sorts = GProductSort.values.toList();
+  List<GAllProductsData_Products> data = [];
   final categoryController = TextEditingController();
+  final searchController = TextEditingController();
+  final sortController = TextEditingController();
 
-  Future<void> getByCategory() async {
-    _data = null;
-    if (categoryController.text.isEmpty) {
-      _data = await api.getByCategoryAvailable(category: GProductCategory.HOME);
-    } else {
-      var category = returnCategoryType(categoryController.text);
-      // var category = GProductCategory.HOME;
-      _data = await api.getByCategoryAvailable(category: category);
+  Future<List<GAllProductsData_Products>> findLike({
+    String search = '',
+    String category = 'По умолчанию',
+    String sort = 'По умолчанию',
+  }) async {
+    var categoryEnum = returnCategoryType(category);
+    var sortEnum = returnSortType(sort);
+
+    try {
+      data = await api.findLike(search, categoryEnum, sortEnum);
+      if (data != null && data!.isNotEmpty) {
+        print('allProducts - data - $data');
+        notifyListeners();
+      }
+    } catch (e) {
+      print("Error fetching data: $e");
     }
-    notifyListeners();
-    // print("AllProductsModel - getByCategory - ${_data}");
+    return data;
   }
 
-  Future<List<GfindLikeData_FindLike>> findLike(String search) async {
-    // Implement your findLike logic here
-    // Call the API and return the results
-    return await api.findLike(search);
-  }
+  get len => data.length ?? 0;
+}
 
-  get len => _data?.length ?? 0;
-  List<GByCategoryAvailableData_GetByCategoryAvailable>? get data => _data;
+// Перевод значений сортировки в строки и обратно
+String returnSortString(GProductSort sort) {
+  switch (sort) {
+    case GProductSort.DATE:
+      return 'По дате';
+    case GProductSort.DISTANCE:
+      return 'По расстоянию';
+    default:
+      return 'По умолчанию';
+  }
+}
+
+GProductSort returnSortType(String str) {
+  switch (str) {
+    case 'По дате':
+      return GProductSort.DATE;
+    case 'По расстоянию':
+      return GProductSort.DISTANCE;
+    default:
+      return GProductSort.DEFAULT;
+  }
 }
 
 String formatDate(GDateTime gDateTime) {
@@ -95,7 +121,7 @@ String returnCategoryString(GProductCategory str) {
     case GProductCategory.OTHER:
       return 'Другое';
     default:
-      return 'Другое';
+      return 'По умолчанию';
   }
 }
 
@@ -112,6 +138,6 @@ GProductCategory returnCategoryType(String str) {
     case 'Другое':
       return GProductCategory.OTHER;
     default:
-      return GProductCategory.OTHER;
+      return GProductCategory.DEFAULT;
   }
 }
